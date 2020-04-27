@@ -1,1 +1,3 @@
-"# verklegtnamskeid2" 
+Verklegt námskeið 2
+
+Eggert, Guðmundur og Rúnar
