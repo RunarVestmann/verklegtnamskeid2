@@ -2,11 +2,11 @@ Verklegt námskeið 2
 
 Eggert, Guðmundur og Rúnar
 
-#Captain Console, a retro gaming shop like none other!
+**Captain Console**, a retro gaming shop like none other!
 
 This repository contains the web solution for Captain Console's online shop.
 
-##Installation guide
+**Installation guide**
 
 ```bash
 git clone https://github.com/RunarVestmann/verklegtnamskeid2.git
@@ -28,14 +28,9 @@ cd captain_console
 virtualenv -p python venv
 ```
 
-Windows:
 ```bash
-source venv/Scripts/activate
-```
-
-Mac:
-```bash
-source venv/bin/activate
+Windows:                        Mac:
+source venv/Scripts/activate    source venv/bin/activate
 ```
 
 ```bash
