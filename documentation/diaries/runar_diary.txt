@@ -2,3 +2,7 @@
 Aðstoðaði við gerð kröfulistans, skapaði meirihluta notkunartilvikanna og ákvað útlit síðunnar með hópnum.
 
 28/04/2020
+Setti upp Django project skrárnar á Github og bætti við installation guide í README.md
+Einnig kom ég teikningum og listum yfir í skýrsluna ásamt því að skrifa inngang og lýsingar fyrir skýrsluna.
+
+29/04/2020
