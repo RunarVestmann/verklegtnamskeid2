@@ -4,3 +4,5 @@ Stöðufundir með hópnum kl 10:00 og 15:00
 
 28/04/2020
 Stöðufundur kl 9:00
+heinteiknaði wireframe fyrir greiðsluferlið
+ýmsar lagfærinar
