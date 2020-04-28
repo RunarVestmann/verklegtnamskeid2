@@ -1,7 +1,3 @@
-Verklegt námskeið 2
-
-Eggert, Guðmundur og Rúnar
-
 **Captain Console**, a retro gaming shop like none other!
 
 This repository contains the web solution for Captain Console's online shop.
@@ -34,7 +30,7 @@ source venv/Scripts/activate    source venv/bin/activate
 ```
 
 ```bash
-pip install -r ../requirements.txt
+pip install -r requirements.txt
 ```
 
 ```bash
