@@ -1,1 +1,11 @@
 27/04/2020
+Unnum saman að notendahópagreiningu og kröfulistanum, skiptum svo niður verkefnum fyrir daginn. 
+Tókum nokkra stöðufundi saman yfir daginn
+
+28/4/2020
+Funduðum nokkrum sinnum yfir daginn til að taka stöðuna á þeim verkefnum sem við höfðum skipt á milli okkar. 
+Unnum í wireframes, proto-viðtölum og 'öðru'.
+
+29/04/2020
+Kláruðum viðtölin og unnum úr niðurstöðum þeirra. Funduðum með aðstoðarkennara varðandi gang mála.
+Fullkláruðum fyrstu skýrsluna og skiluðum inn. Byrjuðum að vinna í klasariti.
