@@ -3,6 +3,12 @@ Setti upp fyrsta draft af kröfulista, ákvað útlit síðunnar með hópnum, h
 Stöðufundir með hópnum kl 10:00 og 15:00
 
 28/04/2020
-Stöðufundur kl 9:00
-heinteiknaði wireframe fyrir greiðsluferlið
+Stöðufundir kl 9:00 og 13:00
+hreinteiknaði wireframe fyrir greiðsluferlið
 ýmsar lagfærinar
+
+29/04/2020
+Yfirferð á Þarfagreiningarskýrslu. Funduðum með aðstoðarkennara varðandi gang mála.
+Fullkláruðum fyrstu skýrsluna og skiluðum inn.
+Samræður um hönnun og framhald 
+Byrjaði á útlitshönnun
