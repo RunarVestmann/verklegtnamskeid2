@@ -6,3 +6,4 @@ Setti upp Django project skrárnar á Github og bætti við installation guide �
 Einnig kom ég teikningum og listum yfir í skýrsluna ásamt því að skrifa inngang og lýsingar fyrir skýrsluna.
 
 29/04/2020
+Ritaði upp forritunarreglur, setti inn niðurstöður úr mínum prófunum í skýrsluna og byrjaði á klasaritinu.
