@@ -7,3 +7,7 @@ Einnig kom ég teikningum og listum yfir í skýrsluna ásamt því að skrifa i
 
 29/04/2020
 Ritaði upp forritunarreglur, setti inn niðurstöður úr mínum prófunum í skýrsluna og byrjaði á klasaritinu.
+
+30/04/2020
+Kláraði klasaritið, aðstoðaði við gerð stöðuritsins, skrifaði lýsingar og inngang í skýrsluna, 
+rannsakaði hvernig Django models fúnkera og ritaði niður forritunarreglur.
