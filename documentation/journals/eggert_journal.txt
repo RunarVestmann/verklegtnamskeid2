@@ -9,3 +9,12 @@ Unnum í wireframes, proto-viðtölum og 'öðru'.
 29/04/2020
 Kláruðum viðtölin og unnum úr niðurstöðum þeirra. Funduðum með aðstoðarkennara varðandi gang mála.
 Fullkláruðum fyrstu skýrsluna og skiluðum inn. Byrjuðum að vinna í klasariti.
+
+30/04/2020
+Unnum að klasariti og stöðuriti. Héldum áfram með vinnslu í prototypes. Kláruðum forritunarreglur.
+
+01/05/2020
+Kláruðum prototypes og framkvæmdum notendaprófanir. Funduðum með aðstoðarkennara.
+Bættum inn Næstu skref og þróun verkefnisins. Gerðum Happy path fyrir öll notkunartilvik. Skiluðum skýrslu.
+
+
