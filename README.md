@@ -26,7 +26,9 @@ virtualenv -p python venv
 
 ```bash
 Windows:                        Mac:
-source venv/Scripts/activate    source venv/bin/activate
+source venv/Scripts/activate source venv/bin/activate
+in pyCharme: venv\Scripts\activate
+put it does not hold next time open pyCharme
 ```
 
 ```bash
