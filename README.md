@@ -28,7 +28,9 @@ virtualenv -p python venv
 Windows:                        Mac:
 source venv/Scripts/activate source venv/bin/activate
 in pyCharme: venv\Scripts\activate
-put it does not hold next time open pyCharme
+to make it hold for reopen pyCharm open in pyCharm: 
+File:Settings:Project:captain_console:Python Interpreter 
+and chose in Poject Interpreter: Python 3.7 (captain_console)
 ```
 
 ```bash
