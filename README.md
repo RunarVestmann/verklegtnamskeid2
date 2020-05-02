@@ -25,12 +25,8 @@ virtualenv -p python venv
 ```
 
 ```bash
-Windows:                        Mac:
-source venv/Scripts/activate source venv/bin/activate
-in pyCharme: venv\Scripts\activate
-to make it hold for reopen pyCharm open in pyCharm: 
-File:Settings:Project:captain_console:Python Interpreter 
-and chose in Poject Interpreter: Python 3.7 (captain_console)
+Windows:                Mac/Linux:
+venv\Scripts\activate   source venv/bin/activate
 ```
 
 ```bash
@@ -42,3 +38,6 @@ python manage.py runserver
 ```
 
 Now the server should be responding to http://127.0.0.1:8000/
+
+Due note when using PyCharm make sure you have the Project Interpreter set under:
+File -> Settings -> Project:captain_console -> Python Interpreter
