@@ -11,3 +11,6 @@ Ritaði upp forritunarreglur, setti inn niðurstöður úr mínum prófunum í s
 30/04/2020
 Kláraði klasaritið, aðstoðaði við gerð stöðuritsins, skrifaði lýsingar og inngang í skýrsluna, 
 rannsakaði hvernig Django models fúnkera og bætti við fleiri tungumálum í forritunarreglurnar.
+
+01/05/2020
+Lagði lokahönd á hönnunarskýrsluna, fínpússaði ritin, tók saman viðtalspunkta og skrifaði lýsandi texta fyrir ritin í skýrslunni.
