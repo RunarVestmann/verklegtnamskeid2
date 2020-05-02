@@ -9,5 +9,6 @@ footer{
     position: absolute;
     bottom: 0;
     width:100%;
-    background-color: #05021F
+    background-color: #05021F;
+    padding: 1rem;
 }
