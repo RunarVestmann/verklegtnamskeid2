@@ -17,4 +17,9 @@ Unnum að klasariti og stöðuriti. Héldum áfram með vinnslu í prototypes. K
 Kláruðum prototypes og framkvæmdum notendaprófanir. Funduðum með aðstoðarkennara.
 Bættum inn Næstu skref og þróun verkefnisins. Gerðum Happy path fyrir öll notkunartilvik. Skiluðum skýrslu.
 
+02/05/2020
+Horfðum á kennslumyndbönd um django og settum allt tilheyrandi upp
 
+03/05/2020
+Héldum áfram frá deginum áður. Funduðum saman um kvöldið til að samstilla uppsetninguna hjá öllum áður
+en við byrjum að kóða.
