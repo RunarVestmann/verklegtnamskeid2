@@ -139,3 +139,5 @@ cython_debug/
 
 #Ignore thumbnail pre rendering
 Thumbs.db
+
+*/.idea/workspace.xml
