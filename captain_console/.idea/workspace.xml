@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cc4a8b66-042f-4542-b1b9-d7c9c551d22e" name="Default Changelist" comment="css tests">
+      <change afterPath="$PROJECT_DIR$/../.idea/mysite.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/captain_console.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/captain_console.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="Git.Settings">
+    <branch-grouping />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="InvalidFacetManager">
+    <ignored-facets>
+      <facet id="captain_console/invalid/Django" />
+    </ignored-facets>
+  </component>
+  <component name="ProjectId" id="1bLlEpp35FInEzLs4Yesv2z3y1P" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="postgresql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
+      <module name="captain_console" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="captain_console.settings" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Gudmundur\offsync\verklegtnamskeid2\captain_console\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="127.0.0.1" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="captain_console" type="Python.DjangoServer" factoryName="Django server">
+      <module name="captain_console" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="captain_console.settings" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Gudmundur\offsync\verklegtnamskeid2\captain_console\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="127.0.0.1" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cc4a8b66-042f-4542-b1b9-d7c9c551d22e" name="Default Changelist" comment="" />
+      <created>1588419145450</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1588419145450</updated>
+      <workItem from="1588519910251" duration="978000" />
+      <workItem from="1588525544347" duration="201000" />
+      <workItem from="1588525956325" duration="475000" />
+      <workItem from="1588526509048" duration="335000" />
+      <workItem from="1588526984053" duration="372000" />
+      <workItem from="1588527375704" duration="1537000" />
+      <workItem from="1588528930615" duration="797000" />
+      <workItem from="1588529781764" duration="5981000" />
+    </task>
+    <task id="LOCAL-00001" summary="css tests">
+      <created>1588507342939</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1588507342939</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="1">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="2">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="1" value="TOOL_WINDOW" />
+        <entry key="2" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/master" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="*" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="css tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="css tests" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1933" y="73" width="730" height="828" key="#CaptainConsole1" timestamp="1588528086001">
+      <screen x="-2560" y="0" width="1707" height="923" />
+    </state>
+    <state x="-1933" y="73" width="730" height="828" key="#CaptainConsole1/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588528086001" />
+    <state x="-2213" y="70" key="#Django" timestamp="1588528877160">
+      <screen x="-2560" y="0" width="1707" height="923" />
+    </state>
+    <state x="-2213" y="70" key="#Django/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588528877160" />
+    <state x="-1793" y="324" key="#Notifications" timestamp="1588503688777">
+      <screen x="-2560" y="0" width="1707" height="923" />
+    </state>
+    <state x="-1793" y="324" key="#Notifications/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588503688777" />
+    <state x="-2027" y="95" key="#Unnamed" timestamp="1588527938568">
+      <screen x="-2560" y="0" width="1707" height="923" />
+    </state>
+    <state x="-2027" y="95" key="#Unnamed/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588527938568" />
+    <state x="-1933" y="80" width="579" height="843" key="#captains" timestamp="1588528395183">
+      <screen x="-2560" y="0" width="1707" height="923" />
+    </state>
+    <state x="-1933" y="80" width="579" height="843" key="#captains/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588528395183" />
+    <state x="-1697" y="90" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588585507711">
+      <screen x="-2560" y="0" width="1707" height="923" />
+    </state>
+    <state x="-1697" y="90" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588585507711" />
+    <state x="-1964" y="279" key="#com.intellij.tools.ToolEditorDialog" timestamp="1588504247403">
+      <screen x="-2560" y="0" width="1707" height="923" />
+    </state>
+    <state x="-1964" y="279" key="#com.intellij.tools.ToolEditorDialog/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588504247403" />
+    <state x="-2149" y="178" width="699" height="490" key="EnvironmentVariablesDialog" timestamp="1588528752684">
+      <screen x="-2560" y="0" width="1707" height="923" />
+    </state>
+    <state x="-2149" y="178" width="699" height="490" key="EnvironmentVariablesDialog/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588528752684" />
+    <state x="-1619" y="158" key="FileChooserDialogImpl" timestamp="1588526594757">
+      <screen x="-2560" y="0" width="1707" height="923" />
+    </state>
+    <state x="-1619" y="158" key="FileChooserDialogImpl/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588526594757" />
+    <state width="1161" height="197" key="GridCell.Tab.0.bottom" timestamp="1588583371037">
+      <screen x="-2560" y="0" width="1707" height="923" />
+    </state>
+    <state width="1161" height="197" key="GridCell.Tab.0.bottom/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588583371037" />
+    <state width="1161" height="197" key="GridCell.Tab.0.center" timestamp="1588583371036">
+      <screen x="-2560" y="0" width="1707" height="923" />
+    </state>
+    <state width="1161" height="197" key="GridCell.Tab.0.center/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588583371036" />
+    <state width="1161" height="197" key="GridCell.Tab.0.left" timestamp="1588583371035">
+      <screen x="-2560" y="0" width="1707" height="923" />
+    </state>
+    <state width="1161" height="197" key="GridCell.Tab.0.left/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588583371035" />
+    <state width="1161" height="197" key="GridCell.Tab.0.right" timestamp="1588583371036">
+      <screen x="-2560" y="0" width="1707" height="923" />
+    </state>
+    <state width="1161" height="197" key="GridCell.Tab.0.right/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588583371036" />
+    <state x="-2229" y="81" key="SettingsEditor" timestamp="1588529252086">
+      <screen x="-2560" y="0" width="1707" height="923" />
+    </state>
+    <state x="-2229" y="81" key="SettingsEditor/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588529252086" />
+    <state x="-2297" y="221" key="Vcs.Push.Dialog.v2" timestamp="1588507362674">
+      <screen x="-2560" y="0" width="1707" height="923" />
+    </state>
+    <state x="-2297" y="221" key="Vcs.Push.Dialog.v2/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588507362674" />
+    <state x="-1897" y="375" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588507286557">
+      <screen x="-2560" y="0" width="1707" height="923" />
+    </state>
+    <state x="-1897" y="375" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588507286557" />
+    <state x="-2048" y="245" width="672" height="678" key="search.everywhere.popup" timestamp="1588504238179">
+      <screen x="-2560" y="0" width="1707" height="923" />
+    </state>
+    <state x="-2048" y="245" width="672" height="678" key="search.everywhere.popup/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588504238179" />
+  </component>
+</project>
