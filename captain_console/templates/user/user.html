@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    <spam>temper-stuff for testing</spam>
+    <div>
+    {% if user.is_authenticated %}
+        <li><a href={% url 'logout' %}>Logout</a></li>
+    {% else %}
+        <li><a href={% url 'login' %}>Innskrá </a></li>
+        <li><a href={% url 'registration' %}>Stofna aðgang</a></li>
+    {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+    <spam>Innskrá</spam>
+    <form class="form form-horizontal" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" class="btn btn-primary" value="Innskrá" />
+        <input type="reset" class="btn btn-primary" value="Hætta við" />
+    </form>
+{% endblock %}
