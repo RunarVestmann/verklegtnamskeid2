@@ -14,14 +14,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc4a8b66-042f-4542-b1b9-d7c9c551d22e" name="Default Changelist" comment="css tests">
-      <change afterPath="$PROJECT_DIR$/../.idea/mysite.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/captain_console.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/captain_console.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-    </list>
+    <list default="true" id="cc4a8b66-042f-4542-b1b9-d7c9c551d22e" name="Default Changelist" comment="css tests" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -127,7 +120,7 @@
       <workItem from="1588526984053" duration="372000" />
       <workItem from="1588527375704" duration="1537000" />
       <workItem from="1588528930615" duration="797000" />
-      <workItem from="1588529781764" duration="5981000" />
+      <workItem from="1588529781764" duration="6784000" />
     </task>
     <task id="LOCAL-00001" summary="css tests">
       <created>1588507342939</created>
@@ -263,22 +256,22 @@
       <screen x="-2560" y="0" width="1707" height="923" />
     </state>
     <state x="-1619" y="158" key="FileChooserDialogImpl/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588526594757" />
-    <state width="1161" height="197" key="GridCell.Tab.0.bottom" timestamp="1588583371037">
+    <state width="1663" height="332" key="GridCell.Tab.0.bottom" timestamp="1588588472098">
       <screen x="-2560" y="0" width="1707" height="923" />
     </state>
-    <state width="1161" height="197" key="GridCell.Tab.0.bottom/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588583371037" />
-    <state width="1161" height="197" key="GridCell.Tab.0.center" timestamp="1588583371036">
+    <state width="1663" height="332" key="GridCell.Tab.0.bottom/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588588472098" />
+    <state width="1663" height="332" key="GridCell.Tab.0.center" timestamp="1588588472098">
       <screen x="-2560" y="0" width="1707" height="923" />
     </state>
-    <state width="1161" height="197" key="GridCell.Tab.0.center/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588583371036" />
-    <state width="1161" height="197" key="GridCell.Tab.0.left" timestamp="1588583371035">
+    <state width="1663" height="332" key="GridCell.Tab.0.center/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588588472098" />
+    <state width="1663" height="332" key="GridCell.Tab.0.left" timestamp="1588588472098">
       <screen x="-2560" y="0" width="1707" height="923" />
     </state>
-    <state width="1161" height="197" key="GridCell.Tab.0.left/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588583371035" />
-    <state width="1161" height="197" key="GridCell.Tab.0.right" timestamp="1588583371036">
+    <state width="1663" height="332" key="GridCell.Tab.0.left/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588588472098" />
+    <state width="1663" height="332" key="GridCell.Tab.0.right" timestamp="1588588472098">
       <screen x="-2560" y="0" width="1707" height="923" />
     </state>
-    <state width="1161" height="197" key="GridCell.Tab.0.right/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588583371036" />
+    <state width="1663" height="332" key="GridCell.Tab.0.right/0.0.1920.1043/-2560.0.1707.923@-2560.0.1707.923" timestamp="1588588472098" />
     <state x="-2229" y="81" key="SettingsEditor" timestamp="1588529252086">
       <screen x="-2560" y="0" width="1707" height="923" />
     </state>
