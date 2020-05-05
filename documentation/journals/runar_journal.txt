@@ -14,3 +14,6 @@ rannsakaði hvernig Django models fúnkera og bætti við fleiri tungumálum í 
 
 01/05/2020
 Lagði lokahönd á hönnunarskýrsluna, fínpússaði ritin, tók saman viðtalspunkta og skrifaði lýsandi texta fyrir ritin í skýrslunni.
+
+04/05/2020
+Byrjaði á product app-inu, breytti klasaritinu til að það var í samræmi við model-in.
