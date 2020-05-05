@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, ProductImage, Manufacturer, System
+from .models import Product, ProductImage, Manufacturer, System, Type
 
 class ProductImageAdmin(admin.StackedInline):
     model = ProductImage
@@ -17,3 +17,4 @@ class ProductImageAdmin(admin.ModelAdmin):
 
 admin.site.register(Manufacturer)
 admin.site.register(System)
+admin.site.register(Type)
