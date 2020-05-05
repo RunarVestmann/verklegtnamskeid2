@@ -21,6 +21,7 @@ def registration(request):
         'form': UserCreationForm()
     })
 
+
 def signup_view(request):
     form = SignUpForm(request.POST)
     if form.is_valid():
@@ -30,8 +31,9 @@ def signup_view(request):
         user = authenticate(username=username, password=password)
         login(request, user)
         return redirect('home')
-    else:
-        form = SignUpForm()
+    # else:
+    #      form = SignUpForm()
+
     return render(request, 'user/signup.html', {'form': form})
 
 

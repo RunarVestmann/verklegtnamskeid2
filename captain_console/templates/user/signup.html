@@ -1,36 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>Sign up Form</h2>
-<form method="post">
-  {% csrf_token %}
-  {% for field in form %}
-        <div class="container-fluid p-0">
-    <div class="row">
-
-        <div class="col-3 text-right" > <small>{{ field.label_tag }}</small></div>
-        <div class="col-9">{{ field }}</div>
-
-    </div>
-  </div>
+    {% include 'user/signup_compo.html' %}
 
 
-{#      {% if field.help_text %}<br/>#}
-{#        <small style="color: grey">{{ field.help_text }}</small>#}
-{#      {% endif %}#}
-      <br/>
-      {% for error in field.errors %}
-        <p style="color: red">{{ error }}</p>
-      {% endfor %}
-  {% endfor %}
-    <div class="container-fluid p-0">
-    <div class="row">
-    <div class="col-6 text-center">
-        <input type="submit" class="btn btn-primary" value="Nýskrá" />
-        <input type="reset" class="btn btn-primary" value="Hætta við" />
-    </div>
-
-    </div>
-  </div>
-</form>
 
 {% endblock %}

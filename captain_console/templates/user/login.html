@@ -1,12 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-    <spam><strong>Innskrá</strong></spam>
-    <form class="form form-horizontal" method="post">
-        {% csrf_token %}
-       <!-- -->
-        {{ form.username.label_tag }} : {{ form.username }}
-        {{ form.password.label_tag }} : {{ form.password }}
-        <input type="submit" class="btn btn-primary" value="Innskrá" />
-        <input type="reset" class="btn btn-primary" value="Hætta við" />
-    </form>
+    <h1>Innskrá</h1>
+    {% include 'user/login_compo.html' %}
+
 {% endblock %}
