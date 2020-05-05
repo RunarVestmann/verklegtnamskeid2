@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Project Apps
     'product.apps.ProductConfig',
     'user.apps.UserConfig',
+    'contact.apps.ContactConfig',
 
 ]
 

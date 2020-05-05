@@ -1,33 +1,59 @@
 <header>
-    <div class="container-fluid">
+    <div class="container-fluid pt-2 pb-2">
         <div class="row">
             <div class="col-4"></div>
             <div class="col-4">
-                <nav class="navbar navbar-expand-lg">
-                <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control-sm mr-sm-2 search-icon" type="search" placeholder="Leit að vöru..." aria-label="Search">
-                        <button class="btn btn-default my-2 my-sm-0 btn-sm" type="submit">Leit</button>
-                    </form>
-                </div>
-                </nav>
+                    <a href="#">
+                <img class="search-icon" src="../static/nav_img/magnifying_glass_2.svg">
+                </a>
+                <input class="form-control pl-3" type="text" placeholder="Leit að vöru...">
             </div>
-             <div class="col-1">
-                 <nav class="navbar navbar-expand-lg">
-                 <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-                     <input type="image" class="shopping-cart-img" src="../static/nav_img/shopping_cart_img.jpg" alt="Submit">
-                 </div>
-                 </nav>
+             <div class="col-1 d-flex flex-wrap justify-content-center">
+                     <input type="image" class="shopping-cart-img" src="../static/nav_img/shopping_cart.svg" alt="Submit">
              </div>
             <div class="col-3">
-                <nav class="navbar navbar-expand-lg">
-                    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-                        <button class="btn btn-default btn-sm" type="submit">Innskrá</button>
-                     <button class="btn btn-default btn-sm" type="submit">Stofna Aðgang</button>
-                    </div>
-                 </nav>
+                <button class="btn btn-default btn-sm font-weight-bold" type="button">Innskrá</button>
+                <button class="btn btn-default btn-sm font-weight-bold" type="button">Stofna Aðgang</button>
             </div>
         </div>
     </div>
-
+    <div class="container-fluid p-3 nav-icons-color">
+        <div class="row">
+          <div class="col-2 d-flex flex-wrap">
+              <a href="#">
+                <img class="logo-img"  href="#" src="../static/nav_img/captainconsole.svg">
+              </a>
+          </div>
+            <div class="col-2 text-body text-center font-weight-bold smaller-font">
+                <a class="text-dark" href="#">
+                <img class ="nav-img" src="../static/nav_img/navicon_nintendo.svg">
+                <br>Nintendo
+                </a>
+            </div>
+            <div class="col-2 text-body text-center font-weight-bold smaller-font">
+                <a class="text-dark" href="#">
+                <img class ="nav-img" src="../static/nav_img/navicon_sony.svg">
+                <br>Sony
+                </a>
+            </div>
+            <div class="col-2 text-body text-center font-weight-bold smaller-font">
+                <a class="text-dark" href="#">
+                <img class ="nav-img" src="../static/nav_img/navicon_sega.svg">
+                <br>Sega
+                </a>
+            </div>
+            <div class="col-2 text-body text-center font-weight-bold smaller-font">
+                <a class="text-dark" href="#">
+                <img class ="nav-img" src="../static/nav_img/navicon_microsoft.svg">
+                <br>Microsoft
+                </a>
+            </div>
+            <div class="col-2 text-body text-center font-weight-bold smaller-font">
+                <a class="text-dark" href="#">
+                <img class ="nav-img" src="../static/nav_img/navicon_other.svg">
+                <br>Annað
+                </a>
+            </div>
+    </div>
+  </div>
 </header>
