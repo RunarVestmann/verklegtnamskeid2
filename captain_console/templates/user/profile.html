@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1 class="display-4">Notandi</h1>
+    <p>
+    <spam>þessi síða er bara sýnileg fyrir: <strong> {{ user.username }}</strong>  / {{ user.email }}</spam></p>
+    <spam>{{ user.first_name }}  {{ user.last_name }}</spam>
+
+    <li><a href={% url 'logout' %}>Logout</a></li>
+{% endblock %}
