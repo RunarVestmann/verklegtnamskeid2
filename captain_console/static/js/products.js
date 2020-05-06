@@ -12,7 +12,7 @@ $(document).ready(function(){
                                 <div class="card-body">
                                     <h5 class="card-title">${ p.name }</h5>
                                     <p class="card-text">${ p.system.manufacturer } / ${ p.system.abbreviation } / ${ p.type }</p>
-                                    <p>Verð: <strong>${ p.price }</strong> ISK</p>
+                                    <p>Verð: <strong>${ p.price.toLocaleString('is') }</strong> ISK</p>
                                     <a href="/products/${p.id}" class="btn btn-primary">Sjá nánar</a>
                                     <a href="#" class="btn btn-success">Setja í körfu</a>
                                 </div>

@@ -1,4 +1,3 @@
-from django.db.models import QuerySet
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import ProductForm
@@ -8,7 +7,7 @@ def index(request):
     if 'search' in request.GET:
         search = request.GET['search'].strip().split()
 
-        if search:
+        if len(search) > 0:
             search_results = Product.objects.filter(name__icontains=search[0]) \
                            | Product.objects.filter(system__name__icontains=search[0]) \
                            | Product.objects.filter(system__manufacturer__name__icontains=search[0]) \
@@ -23,24 +22,24 @@ def index(request):
                                | Product.objects.filter(system__abbreviation__icontains=word) \
                                | Product.objects.filter(type__name__icontains=word)
 
-                products = [{
-                    'id': p.id,
-                    'name': p.name,
-                    'quantity': p.quantity,
-                    'description': p.description,
-                    'price': p.price,
-                    'system': {
-                        'manufacturer': p.system.manufacturer.name,
-                        'abbreviation': p.system.abbreviation,
-                        'name': p.system.name
-                    },
-                    'release_date': p.release_date,
-                    'shop_arrival_date': p.shop_arrival_date,
-                    'type': p.type.name,
-                    'first_image': p.productimage_set.first().image.url
-                } for p in search_results]
+            products = [{
+                'id': p.id,
+                'name': p.name,
+                'quantity': p.quantity,
+                'description': p.description,
+                'price': p.price,
+                'system': {
+                    'manufacturer': p.system.manufacturer.name,
+                    'abbreviation': p.system.abbreviation,
+                    'name': p.system.name
+                },
+                'release_date': p.release_date,
+                'shop_arrival_date': p.shop_arrival_date,
+                'type': p.type.name,
+                'first_image': p.productimage_set.first().image.url
+            } for p in search_results]
 
-                return JsonResponse({'data': products})
+            return JsonResponse({'data': products})
 
         else:
             products = [{
