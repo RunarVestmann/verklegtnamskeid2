@@ -26,3 +26,13 @@ Farið yfir myndbönd og ýmsan undirbúing.
 03/05/2020
 Héldum áfram frá deginum áður. Dágóður tíma fór í uppfærslur til að vera með sömu útgáfur og hinir hópmeðlimir.
 Funduðum saman um kvöldið til að samstilla uppsetninguna hjá öllum.
+
+04/05/2020
+Vann að sign-up og login hlutanum - stillti flest öllu upp
+
+05/05/2020
+Vann að sign-up og login hlutanum - skinnaði og glímdi við að reyna láta þetta birtast ofan á síðu (tókst ekki)
+
+06/05/2020
+Vann að sign-up og login hlutanum - aframhaldandi glíma við að reyna fá til að virka betur - sett á ís.
+
