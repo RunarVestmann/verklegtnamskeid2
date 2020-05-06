@@ -17,25 +17,28 @@
                          <a href={% url 'logout' %}>Logout</a> </div>
 
           {% else %}
-{#      <a href={% url 'login' %}>Innskrá </a> / <a href={% url 'signup' %}>Stofna aðgang</a>#}
-        <nav>
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-login-tab" data-toggle="tab" href="#nav-login" role="tab" aria-controls="nav-login" aria-selected="true">Innskrá</a>
-    <a class="nav-item nav-link" id="nav-signup-tab" data-toggle="tab" href="#nav-signup" role="tab" aria-controls="nav-signup" aria-selected="false">Stofna aðgang</a>
-    </div>
-    </nav>
-<div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab">
-      <a href={% url 'login' %}>Innskrá </a>
-      <p>---</p>
-{#      {% include 'user/login_compo.html' %}#}
-
-  </div>
-  <div class="tab-pane fade" id="nav-signup" role="tabpanel" aria-labelledby="nav-signup-tab">
-      <a href={% url 'signup' %}>Stofna aðgang</a>
-      <p>---</p>
+      <a href={% url 'login' %}>Innskrá </a> / <a href={% url 'signup' %}>Stofna aðgang</a>
+{#        <nav>#}
+{#  <div class="nav nav-tabs" id="nav-tab" role="tablist">#}
+{#    <a class="nav-item nav-link active" id="nav-login-tab" data-toggle="tab" href="#nav-login" role="tab" aria-controls="nav-login" aria-selected="true">Innskrá</a>#}
+{#    <a class="nav-item nav-link" id="nav-signup-tab" data-toggle="tab" href="#nav-signup" role="tab" aria-controls="nav-signup" aria-selected="false">Stofna aðgang</a>#}
+{#    </div>#}
+{#    </nav>#}
+{#<div class="tab-content" id="nav-tabContent">#}
+{#  <div class="tab-pane fade show active" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab">#}
+{#      <a href={% url 'login' %}>Innskrá </a>#}
+{#      <p>---</p>#}
+{##}
+{#<span class="d-block p-2 w-50 bg-primary text-white">d-block</span>#}
+{#<span class="d-block p-2 bg-dark text-white">d-block</span>#}
+{#     {% include 'user/login_compo.html' %}#}
+{##}
+{#  </div>#}
+{#  <div class="tab-pane fade" id="nav-signup" role="tabpanel" aria-labelledby="nav-signup-tab">#}
+{#      <a href={% url 'signup' %}>Stofna aðgang</a>#}
+{#      <p>---</p>#}
 {#      {% include 'user/signup_compo.html' %}#}
-  </div>
+{#  </div>#}
  </div>
 
 

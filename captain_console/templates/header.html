@@ -12,8 +12,24 @@
                      <input type="image" class="shopping-cart-img" src="../static/nav_img/shopping_cart.svg" alt="Submit">
              </div>
             <div class="col-3">
-                <button class="btn btn-default btn-sm font-weight-bold" type="button">Innskrá</button>
-                <button class="btn btn-default btn-sm font-weight-bold" type="button">Stofna Aðgang</button>
+                {% if user.is_authenticated %}
+                        <div class="">
+                         <svg class="bi bi-person-fill" width="1.25em" height="1.25em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                         </svg>
+                         {% if user.first_name or user.last_name%}
+                            {{ user.first_name }}  {{ user.last_name }}
+                             {% else %}
+                             {{ user.username }}
+                         {% endif %}
+                         <a class="btn btn-default btn-sm font-weight-bold" href={% url 'logout' %} role="button">Logout</a>
+                        </div>
+
+          {% else %}
+
+                <a class="btn btn-default btn-sm font-weight-bold" href="/user/login" role="button">Innskrá</a>
+                <a class="btn btn-default btn-sm font-weight-bold" href="/user/signup" role="button">Stofna Aðgang</a>
+          {% endif %}
             </div>
         </div>
     </div>
