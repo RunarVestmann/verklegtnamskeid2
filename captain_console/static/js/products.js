@@ -68,10 +68,9 @@ function displayChanges(){
                         </div>`
             });
 
+            window.name = newHTML.join('');
             if(window.location.pathname === '/products/')
                 $('#products').html(newHTML.join(''));
-            else
-                window.name = newHTML.join('');
         },
         error: function(xhr, status, error){
             // TODO: Display error message (using toastr?)
