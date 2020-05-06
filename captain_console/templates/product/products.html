@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% load humanize %}
+{% block background-color %}#63899c{% endblock background-color  %}
 {% block content %}
-    <div class="row" style="background-color: #63899c">
-        <div class="col-4">
+    <div class="row">
+        <div class="col-2">
 
         <div class="filter-block">
             <div>
@@ -77,7 +78,7 @@
 
     </div>
 
-        <div class="col-8">
+        <div class="col-10">
             <div id="products" class="row">
             {% for product in products %}
                 <div class="card" style="width: 18rem; background-color: #38b8c3">
