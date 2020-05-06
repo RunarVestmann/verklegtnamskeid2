@@ -1,6 +1,6 @@
 {% load humanize %}
-<div class="card" style="width: 18rem; background-color: #38b8c3; margin:1rem;">
-    <img class="card-img-top" src="{{ product.productimage_set.first }}" alt="Product image" style="height: 60%">
+<div class="card" style="width: 18rem; background-color: #38b8c3;">
+    <img class="card-img-top product-img m-2" src="{{ product.productimage_set.first }}" alt="Product image">
     <div class="card-body">
         <h5 class="card-title">{{ product.name }}</h5>
         <p class="card-text">{{ product.system.manufacturer }} / {{ product.system.abbreviation }} / {{ product.type }}</p>
