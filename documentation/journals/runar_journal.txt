@@ -17,3 +17,7 @@ Lagði lokahönd á hönnunarskýrsluna, fínpússaði ritin, tók saman viðtal
 
 04/05/2020
 Byrjaði á product app-inu, breytti klasaritinu til að það var í samræmi við model-in.
+
+05/06/2020
+Kom upp routes innan Product app-sins, lagfærði klasarit enn og aftur því ég bætti við model 
+og núna er kominn dynamic filter list ásamt cards á /products síðunni

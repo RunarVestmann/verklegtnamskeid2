@@ -1,4 +1,100 @@
 {% extends "base.html" %}
+{% load humanize %}
 {% block content %}
+    <div class="row" style="background-color: #63899c">
+        <div class="col-4">
+
+        <div class="filter-block">
+            <div>
+                <p class="symbol text-white border rounded">+</p>
+                <a href="#microsoft" class="text-white">Microsoft</a>
+                <ul class="child-filter">
+                {% for system in systems %}
+                    {% if system.manufacturer.name == 'Microsoft' %}
+                    <li><a href="#{{ system.name }}" class="text-white">{{ system.name }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            </div>
+
+            <div>
+                <p class="symbol text-white border rounded">+</p>
+                <a href="#nintendo" class="text-white">Nintendo</a>
+                <ul class="child-filter">
+                {% for system in systems %}
+                    {% if system.manufacturer.name == 'Nintendo' %}
+                    <li><a href="#{{ system.name }}" class="text-white">{{ system.name }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            </div>
+
+            <div>
+                <p class="symbol text-white border rounded">+</p>
+                <a href="#sega" class="text-white">Sega</a>
+                <ul id="sega-filter" class="child-filter">
+                {% for system in systems %}
+                    {% if system.manufacturer.name == 'Sega' %}
+                    <li><a href="#{{ system.name }}" class="text-white">{{ system.name }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            </div>
+
+            <div>
+                <p class="symbol text-white border rounded">+</p>
+                <a href="#sony" class="text-white">Sony</a>
+                <ul class="child-filter">
+                {% for system in systems %}
+                    {% if system.manufacturer.name == 'Sony' %}
+                    <li><a href="#{{ system.name }}" class="text-white">{{ system.name }}</a></li>
+                {% endif %}
+                {% endfor %}
+                </ul>
+            </div>
+
+            <div>
+                <p class="symbol text-white border rounded">+</p>
+                <a href="#annad" class="text-white">Annað</a>
+                <ul class="child-filter">
+                {% for system in systems %}
+                    {% if system.manufacturer.name == 'Annað' %}
+                    <li><a href="#{{ system.name }}" class="text-white">{{ system.name }}</a></li>
+                {% endif %}
+                {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="filter-block">
+            <ul style="padding-left: 1rem">
+            {% for type in types %}
+                <li><a href="#" class="text-white">{{ type }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+        <div class="col-8">
+            <div id="products" class="row">
+            {% for product in products %}
+                <div class="card" style="width: 18rem; background-color: #38b8c3">
+                    <img class="card-img-top" src="{{ product.productimage_set.first }}" alt="Product image" style="height: 60%">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.system.manufacturer }} / {{ product.system.abbreviation }} / {{ product.type }}</p>
+                        <p>Verð: <strong>{{ product.price | intcomma }}</strong> ISK</p>
+                        <a href="{% url 'product_details' id=product.id %}" class="btn btn-primary">Sjá nánar</a>
+                        <a href="#" class="btn btn-success">Setja í körfu</a>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+
+
+    </div>
 
 {% endblock content %}
