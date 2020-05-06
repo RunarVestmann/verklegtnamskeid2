@@ -4,7 +4,7 @@ html{
 }
 header{
     color:white;
-    background-color: rgb(194, 175, 55);
+    background-color: #C2AF37;
     margin-top: 0px;
 }
 
@@ -21,7 +21,7 @@ header{
 }
 
 .shopping-cart-img{
-    background-color: rgb(194, 175, 55);
+    background-color: #C2AF37;
     height:28px;
     width:auto;
 
@@ -85,6 +85,34 @@ footer{
    font-size:1.25rem;
    font-weight: 700;
 
+}
+
+
+.user-tab-nav{
+    font-size:0.75rem;
+    text-align: center;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+
+}
+
+.user-tab-overborder{
+    border: #C2AF37;
+    border-style: solid;
+    border-width: thick;
+    padding: 0 0 3rem 0;
+
+}
+.user-tab-active{
+    color: #C2AF37;
+    font-weight: 700;
+}
+.user-tab-link{
+    color: #62899C;
+    font-weight: 400;
+    border: #C2AF37;
+    border-style: solid;
+    border-width: thin;
 }
 
 
