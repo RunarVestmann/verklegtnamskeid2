@@ -3,74 +3,73 @@
 {% block content %}
     <div class="row">
         <div class="col-2">
+            <div class="filter-block">
+                <div>
+                    <p class="symbol text-white border rounded">+</p>
+                    <a class="filter-btn text-white">Microsoft</a>
+                    <ul class="child-filter">
+                    {% for system in systems %}
+                        {% if system.manufacturer.name == 'Microsoft' %}
+                        <li><a role="button" class="filter-btn text-white">{{ system.name }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    </ul>
+                </div>
 
-        <div class="filter-block">
-            <div>
-                <p class="symbol text-white border rounded">+</p>
-                <a href="#microsoft" class="text-white">Microsoft</a>
-                <ul class="child-filter">
-                {% for system in systems %}
-                    {% if system.manufacturer.name == 'Microsoft' %}
-                    <li><a href="#{{ system.name }}" class="text-white">{{ system.name }}</a></li>
+                <div>
+                    <p class="symbol text-white border rounded">+</p>
+                    <a class="filter-btn text-white">Nintendo</a>
+                    <ul class="child-filter">
+                    {% for system in systems %}
+                        {% if system.manufacturer.name == 'Nintendo' %}
+                        <li><a role="button" class=" filter-btntext-white">{{ system.name }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    </ul>
+                </div>
+
+                <div>
+                    <p class="symbol text-white border rounded">+</p>
+                    <a class="filter-btn text-white">Sega</a>
+                    <ul id="sega-filter" class="child-filter">
+                    {% for system in systems %}
+                        {% if system.manufacturer.name == 'Sega' %}
+                        <li><a role="button" class="filter-btn text-white">{{ system.name }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    </ul>
+                </div>
+
+                <div>
+                    <p class="symbol text-white border rounded">+</p>
+                    <a class="filter-btn text-white">Sony</a>
+                    <ul class="child-filter">
+                    {% for system in systems %}
+                        {% if system.manufacturer.name == 'Sony' %}
+                        <li><a href="" class="filter-btn text-white">{{ system.name }}</a></li>
                     {% endif %}
-                {% endfor %}
-                </ul>
-            </div>
+                    {% endfor %}
+                    </ul>
+                </div>
 
-            <div>
-                <p class="symbol text-white border rounded">+</p>
-                <a href="#nintendo" class="text-white">Nintendo</a>
-                <ul class="child-filter">
-                {% for system in systems %}
-                    {% if system.manufacturer.name == 'Nintendo' %}
-                    <li><a href="#{{ system.name }}" class="text-white">{{ system.name }}</a></li>
+                <div>
+                    <p class="symbol text-white border rounded">+</p>
+                    <a class="filter-btn text-white">Annað</a>
+                    <ul class="child-filter">
+                    {% for system in systems %}
+                        {% if system.manufacturer.name == 'Annað' %}
+                        <li><a role="button" class="filter-btn text-white">{{ system.name }}</a></li>
                     {% endif %}
-                {% endfor %}
-                </ul>
-            </div>
+                    {% endfor %}
+                    </ul>
+                </div>
 
-            <div>
-                <p class="symbol text-white border rounded">+</p>
-                <a href="#sega" class="text-white">Sega</a>
-                <ul id="sega-filter" class="child-filter">
-                {% for system in systems %}
-                    {% if system.manufacturer.name == 'Sega' %}
-                    <li><a href="#{{ system.name }}" class="text-white">{{ system.name }}</a></li>
-                    {% endif %}
-                {% endfor %}
-                </ul>
             </div>
-
-            <div>
-                <p class="symbol text-white border rounded">+</p>
-                <a href="#sony" class="text-white">Sony</a>
-                <ul class="child-filter">
-                {% for system in systems %}
-                    {% if system.manufacturer.name == 'Sony' %}
-                    <li><a href="#{{ system.name }}" class="text-white">{{ system.name }}</a></li>
-                {% endif %}
-                {% endfor %}
-                </ul>
-            </div>
-
-            <div>
-                <p class="symbol text-white border rounded">+</p>
-                <a href="#annad" class="text-white">Annað</a>
-                <ul class="child-filter">
-                {% for system in systems %}
-                    {% if system.manufacturer.name == 'Annað' %}
-                    <li><a href="#{{ system.name }}" class="text-white">{{ system.name }}</a></li>
-                {% endif %}
-                {% endfor %}
-                </ul>
-            </div>
-
-        </div>
 
         <div class="filter-block">
             <ul style="padding-left: 1rem">
             {% for type in types %}
-                <li><a href="#" class="text-white">{{ type }}</a></li>
+                <li><a role="button" class="filter-btn text-white">{{ type }}</a></li>
             {% endfor %}
             </ul>
         </div>

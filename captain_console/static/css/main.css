@@ -54,6 +54,13 @@ header{
     margin-top: 1rem;
 }
 
+.filter-block a{
+    cursor: pointer;
+}
+.filter-block a:hover{
+    text-decoration: underline;
+}
+
 .child-filter{
     padding-left: 1.4rem;
     display: none;
