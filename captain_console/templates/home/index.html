@@ -1,4 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div class="row home-bg-color-1">
+        <div class="col pt-2 pb-2 ml-1 mr-1 mt-2 mb-2 text-center d-flex align-self-center">
+            <div class="div p-2" id="pointer">
+                <h5>Vinsælustu vörurnar</h5>
+            </div>
+        </div>
+        <div class="col pt-2 pb-2 ml-1 mr-1 mt-2 mb-2 text-center products-div">
+            {% for product in products %}
+                {% include 'product/product.html' %}
+            {% endfor %}
+        </div>
+        <div class="col pt-2 pb-2 ml-1 mr-1 mt-2 mb-2 text-center products-div">
+        </div>
+        <div class="col pt-2 pb-2 ml-1 mr-1 mt-2 mb-2 text-center products-div">
+        </div>
+    </div>
+
 {% endblock content %}
