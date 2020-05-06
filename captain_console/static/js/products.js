@@ -2,10 +2,8 @@ $(document).ready(function(){
     $('#search-btn').on('click', function(e){
         e.preventDefault();
 
-        console.log(window.location.href)
-
-        if(window.location.href !== '/products/'){
-            window.location.href = '/products/'
+        if(window.location.pathname !== '/products/'){
+            window.location.href = '/products'
         }
 
         const searchText = $('#search-box').val();

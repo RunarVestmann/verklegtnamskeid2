@@ -14,13 +14,14 @@ def index(request):
                            | Product.objects.filter(system__abbreviation__icontains=search[0]) \
                            | Product.objects.filter(type__name__icontains=search[0])
 
-            for word in search[1:]:
-                search_results = search_results \
-                               | Product.objects.filter(name__icontains=word) \
-                               | Product.objects.filter(system__name__icontains=word) \
-                               | Product.objects.filter(system__manufacturer__name__icontains=word) \
-                               | Product.objects.filter(system__abbreviation__icontains=word) \
-                               | Product.objects.filter(type__name__icontains=word)
+            if len(search) > 1:
+                for word in search[1:]:
+                    search_results = search_results \
+                                   | Product.objects.filter(name__icontains=word) \
+                                   | Product.objects.filter(system__name__icontains=word) \
+                                   | Product.objects.filter(system__manufacturer__name__icontains=word) \
+                                   | Product.objects.filter(system__abbreviation__icontains=word) \
+                                   | Product.objects.filter(type__name__icontains=word)
 
             products = [{
                 'id': p.id,
