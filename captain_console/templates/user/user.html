@@ -4,8 +4,22 @@
         <div class="row">
           <div class="col-2"> </div>
             <div class="col-8">
+                <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown button
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+</div>
+
+
                  {% if user.is_authenticated %}
-                     <div class="h6">
+
+
+                     <a class="btn btn-light" href={% url 'logout' %}>
                          <svg class="bi bi-person-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
                          </svg>
@@ -13,37 +27,52 @@
                             {{ user.first_name }}  {{ user.last_name }}
                              {% else %}
                              {{ user.username }}
-                         {% endif %}
-                         <a href={% url 'logout' %}>Logout</a> </div>
+                         {% endif %}</a>
+                         <a href={% url 'logout' %}>Logout</a>
 
           {% else %}
       <a href={% url 'login' %}>Innskrá </a> / <a href={% url 'signup' %}>Stofna aðgang</a>
-{#        <nav>#}
-{#  <div class="nav nav-tabs" id="nav-tab" role="tablist">#}
-{#    <a class="nav-item nav-link active" id="nav-login-tab" data-toggle="tab" href="#nav-login" role="tab" aria-controls="nav-login" aria-selected="true">Innskrá</a>#}
-{#    <a class="nav-item nav-link" id="nav-signup-tab" data-toggle="tab" href="#nav-signup" role="tab" aria-controls="nav-signup" aria-selected="false">Stofna aðgang</a>#}
-{#    </div>#}
-{#    </nav>#}
-{#<div class="tab-content" id="nav-tabContent">#}
-{#  <div class="tab-pane fade show active" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab">#}
-{#      <a href={% url 'login' %}>Innskrá </a>#}
-{#      <p>---</p>#}
-{##}
-{#<span class="d-block p-2 w-50 bg-primary text-white">d-block</span>#}
-{#<span class="d-block p-2 bg-dark text-white">d-block</span>#}
-{#     {% include 'user/login_compo.html' %}#}
-{##}
-{#  </div>#}
-{#  <div class="tab-pane fade" id="nav-signup" role="tabpanel" aria-labelledby="nav-signup-tab">#}
-{#      <a href={% url 'signup' %}>Stofna aðgang</a>#}
-{#      <p>---</p>#}
-{#      {% include 'user/signup_compo.html' %}#}
-{#  </div>#}
+      <p> {{ request.path }}</p>
+          {% if request.path == '/product/' %}
+                <button type="button" class="btn btn-primary" >search something</button>
+              {% else %}
+                <button type="button" class="btn btn-dark" >search something else</button>
+          {% endif %} 
+                     
+
+
+        <p>
+        <!-- Large modal -->
+        <button type="button" class="btn" data-toggle="modal" data-target=".bd-example-modal-lg">opna - Large modal</button>
+
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              ... er eittn vða hédfr a-skmemmitleglt
+               {% include 'user/signup.html' %}
+            </div>
+          </div>
+        </div>
+
+      </p>
+
+
+
+
+{#endmodal#}
  </div>
 
 
 
     {% endif %}
+
+        <svg
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ width="437.5px" height="427.5px">
+<path fill-rule="evenodd" stroke="#FFF" stroke-width="7px" stroke-linecap="butt" stroke-linejoin="miter" fill="#bf6979"
+ d="M396.758,324.923 L307.225,309.010 L314.860,397.574 L245.469,340.072 L206.739,420.500 L176.084,336.817 L101.367,387.557 L117.661,300.115 L26.978,307.572 L85.855,239.802 L3.504,201.977 L89.189,172.037 L37.235,99.067 L126.769,114.980 L119.134,26.415 L188.525,83.917 L227.254,3.490 L257.910,87.173 L332.627,36.433 L316.333,123.875 L407.016,116.418 L348.138,184.188 L430.490,222.013 L344.805,251.952 L396.758,324.923 Z"/>
+</svg>
 
             </div>
             <div class="col-2"></div>

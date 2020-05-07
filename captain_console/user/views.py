@@ -1,7 +1,7 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm
+from .forms import SignUpForm, LoginForm
 from django.shortcuts import render, redirect
 
 
@@ -25,19 +25,6 @@ def index(request):
 
 
 
-def registration(request):
-    if request.method == 'POST':
-        form = UserCreationForm(data=request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('login')
-
-    return render(request, 'user/registration.html', {
-        # included django form
-        'form': UserCreationForm()
-    })
-
-
 def signup_view(request):
     form = SignUpForm(request.POST)
     if form.is_valid():
@@ -47,11 +34,21 @@ def signup_view(request):
         user = authenticate(username=username, password=password)
         login(request, user)
         return redirect('home')
-    # else:
-    #      form = SignUpForm()
 
     return render(request, 'user/signup.html', {'form': form})
 
+
+# def login_view(request):
+#     form = LoginForm(request, data=request.POST)
+#
+#     if form.is_valid():
+#         username = form.cleaned_data.get('username')
+#         password = form.cleaned_data.get('password')
+#         user = authenticate(username=username, password=password)
+#         login(request, user)
+#         return redirect('home')
+#
+#     return render(request, 'user/login.html', {'form': form})
 
 @login_required
 def profile(request):
