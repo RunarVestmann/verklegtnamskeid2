@@ -1,11 +1,52 @@
 {% load humanize %}
-<div class="card" style="background-color: #38b8c3;">
-    <img class="card-img-top product-img m-2" src="{{ product.productimage_set.first }}" alt="Product image">
-    <div class="card-body">
-        <h5 class="card-title">{{ product.name }}</h5>
-        <p class="card-text">{{ product.system.manufacturer }} / {{ product.system.abbreviation }} / {{ product.type }}</p>
-        <p>Verð: <strong>{{ product.price | intcomma }}</strong> ISK</p>
-        <a href="{% url 'product_details' id=product.id %}" class="btn btn-primary">Sjá nánar</a>
-        <a href="#" class="btn btn-success">Setja í körfu</a>
+<div class="products-box">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 p-0">
+                <div class="products-img-frame"><img class="product-img" src="{{ product.productimage_set.first }}" alt={{ product.name }}></div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-12 p-0">
+                <div class="products-name">{{ product.name }}</div>
+            </div>
+        </div>
+         <div class="row my-2">
+            <div class="col-7 p-0">
+                <div class="products-type">{{ product.system.manufacturer }} / {{ product.system.abbreviation }} / {{ product.type }}</div>
+
+            </div>
+            <div class="col-5 p-0">
+                 <div class="products-price">Verð: <strong>{{ product.price | intcomma }}</strong> ISK</div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-6 p-1">
+                <a href="{% url 'product_details' id=product.id %}" class="btn btn-warning btn-block">Nánar</a>
+
+            </div>
+            <div class="col-6 p-1">
+                <div role="button" onclick="addToCart({{ product.id }})" class="btn btn-success btn-block">Setja í körfu</div>
+
+            </div>
+        </div>
+
     </div>
+{#end conteainer#}
+
+
+
+
 </div>
+
+{#<div class="card p-2" style="background-color: #37b8c2;">#}
+{#    <img class="card-img-top product-img m-2" src="{{ product.productimage_set.first }}" alt="Product image">#}
+{#    <div class="card-body">#}
+{#        <h5 class="card-title">{{ product.name }}</h5>#}
+{#        <p class="card-text">{{ product.system.manufacturer }} / {{ product.system.abbreviation }} / {{ product.type }}</p>#}
+{#        <p>Verð: <strong>{{ product.price | intcomma }}</strong> ISK</p>#}
+{#        <a href="{% url 'product_details' id=product.id %}" class="btn btn-primary">Sjá nánar</a>#}
+{#        <a href="#" class="btn btn-success">Setja í körfu</a>#}
+{#    </div>#}
+{#</div>#}
