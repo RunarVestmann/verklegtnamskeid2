@@ -50,22 +50,7 @@ def index(request):
             search_results = all_products
 
         # Make a list of dictionaries that contain each products data
-        products = [{
-            'id': p.id,
-            'name': p.name,
-            'quantity': p.quantity,
-            'description': p.description,
-            'price': p.price,
-            'system': {
-                'manufacturer': p.system.manufacturer.name,
-                'abbreviation': p.system.abbreviation,
-                'name': p.system.name
-            },
-            'release_date': p.release_date,
-            'shop_arrival_date': p.shop_arrival_date,
-            'type': p.type.name,
-            'first_image': p.productimage_set.first().image.url
-        } for p in search_results]
+        products = [product.to_dict() for product in search_results]
 
         return JsonResponse({'data': products})
 
@@ -91,6 +76,15 @@ def get_product_by_id(request, id):
         'product': product,
         'images': images
     })
+
+def get_product_json_by_id(request, id):
+    try:
+        product = Product.objects.prefetch_related('system', 'type').get(pk=id)
+        return JsonResponse({
+            'data': product.to_dict()
+        })
+    except Product.DoesNotExist:
+        return JsonResponse({'data': {}})
 
 def create_product(request):
     if request.method == 'POST':

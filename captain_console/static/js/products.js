@@ -101,13 +101,10 @@ function displayChanges(){
                                     </div>
                                     <div class="col-6 p-1">
                                         <div role="button" onclick="addToCart(${p.id}")" class="btn btn-success btn-block">Setja í körfu</div>
-                                        
                                     </div>
                                 </div>
                             </div>
                         </div>`;
-
-
             });
 
             const joinedHTML = newHTML.join('');

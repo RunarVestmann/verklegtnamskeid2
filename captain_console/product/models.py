@@ -31,6 +31,24 @@ class Product(models.Model):
     shop_arrival_date = models.DateField(default=date.today, blank=True)
     type = models.ForeignKey(Type, on_delete=models.DO_NOTHING)
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'quantity': self.quantity,
+            'description': self.description,
+            'price': self.price,
+            'system': {
+                'name': self.system.name,
+                'abbreviation': self.system.abbreviation,
+                'manufacturer': self.system.manufacturer.name
+            },
+            'release_date': self.release_date,
+            'shop_arrival_date': self.shop_arrival_date,
+            'type': self.type.name,
+            'first_image': self.productimage_set.first().image.url
+        }
+
     def __str__(self):
         return self.name
 
