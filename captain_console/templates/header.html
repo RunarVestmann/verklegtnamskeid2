@@ -11,7 +11,11 @@
              </div>
             <div class="col-3">
                 {% if user.is_authenticated %}
-                        <div class="">
+
+                        <div class="dropdown text-right">
+                          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+
                          <svg class="bi bi-person-fill" width="1.25em" height="1.25em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
                          </svg>
@@ -19,8 +23,20 @@
                             {{ user.first_name }}  {{ user.last_name }}
                              {% else %}
                              {{ user.username }}
-                         {% endif %}
-                         <a class="btn btn-default btn-sm font-weight-bold" href={% url 'logout' %} role="button">Logout</a>
+                         {% endif %}   </button>
+
+                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                             <span class="dropdown-item-text user-dropdown"><strong> {{ user.username }}</strong> </span>
+                             <span class="dropdown-item-text user-dropdown"><small> {{ user.first_name }} {{ user.last_name }}</small></span>
+                             <span class="dropdown-item-text user-dropdown"><small> {{ user.email }}</small></span>
+                             <div class="dropdown-divider mb-2"></div>
+
+
+                            <a class="dropdown-item" href={% url 'profile' %}>Breyta skráningu</a>
+                            <a class="dropdown-item" href={% url 'logout' %}>Útskrá</a>
+
+  </div>
+
                         </div>
 
           {% else %}
@@ -71,3 +87,9 @@
     </div>
   </div>
 </header>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>

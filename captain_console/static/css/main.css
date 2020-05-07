@@ -242,5 +242,11 @@ footer{
     border: thin solid #C2AF37;
 }
 
+.user-dropdown{
+    min-width: 16rem;
+    color: #C2AF37;
+    line-height: 0.6rem;
+}
+
 
 
