@@ -15,6 +15,9 @@ $(document).ready(function(){
         };
         filter.addEventListener('click', function(event){
             const searchText = filter.textContent;
+            if(searchText){
+
+            }
             if(searchList.includes(searchText))
                 searchList = searchList.filter(s => s !== searchText);
             else
@@ -26,10 +29,8 @@ $(document).ready(function(){
     // When the search button gets clicked
     searchButton.on('click', function(event){
         searchList = [];
-        const value = searchBox.val();
 
-        if(value)
-            searchList.push(searchBox.val());
+        searchList.push(searchBox.val());
 
         // Clear out all the underlines for the filters
         for(let i = 0; i < filterButtons.length; i++)
@@ -38,21 +39,32 @@ $(document).ready(function(){
         HandleSearch(event);
     });
 
-    if(window.location.pathname === '/products/')
-        $('#products').html(window.name);
+    // When on the products site change the html to reflect the search and also change the searchText to be whatever the person searched
+    if(window.location.pathname === '/products/'){
+        const searchText = window.sessionStorage.getItem('searchText');
+        if(searchText !== null && searchText !== undefined){
+             searchBox.val(searchText);
+             window.sessionStorage.removeItem('searchText');
+        }
+
+        const newHTML = window.sessionStorage.getItem('newHTML');
+        if(newHTML !== null && newHTML !== undefined){
+            $('#products').html(newHTML);
+            window.sessionStorage.removeItem('newHTML');
+        }
+    }
 });
 
 function HandleSearch(event){
     event.preventDefault();
-
     displayChanges();
-    if(window.location.pathname !== '/products/')
-        window.location.href = '/products/';
 }
 
 function displayChanges(){
+    const searchText = searchList.join(' ');
+
     $.ajax({
-        url: '/products?search=' + searchList.join(' '),
+        url: '/products?search=' + searchText,
         type: 'GET',
         success: function(response){
             const newHTML = response.data.map(p => {
@@ -68,9 +80,17 @@ function displayChanges(){
                         </div>`
             });
 
-            window.name = newHTML.join('');
+            const joinedHTML = newHTML.join('');
+
+            // Store data so that we can use it during a redirect
+            window.sessionStorage.setItem('searchText', searchText);
+            window .sessionStorage.setItem('newHTML', joinedHTML);
+
+            // Change the html if we're at /products, else redirect to /products
             if(window.location.pathname === '/products/')
-                $('#products').html(newHTML.join(''));
+                $('#products').html(joinedHTML);
+            else
+                window.location.href = '/products/';
         },
         error: function(xhr, status, error){
             // TODO: Display error message (using toastr?)

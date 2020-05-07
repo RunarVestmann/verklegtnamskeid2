@@ -53,7 +53,7 @@ def index(request):
     return render(request, 'product/products.html', {
         'products': Product.objects.all(),
         'types': types,
-        'systems': System.objects.all()
+        'systems': System.objects.prefetch_related('manufacturer').all()
     })
 
 def __get_search_results(query_set, word):
