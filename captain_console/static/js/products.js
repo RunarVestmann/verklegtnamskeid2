@@ -75,16 +75,39 @@ function displayChanges(){
         type: 'GET',
         success: function(response){
             const newHTML = response.data.map(p => {
-                return `<div class="card" style="background-color: #38b8c3;">
-                            <img class="card-img-top product-img m-2" src="${ p.first_image }" alt="Product image">
-                            <div class="card-body">
-                                <h5 class="card-title">${ p.name }</h5>
-                                <p class="card-text">${ p.system.manufacturer } / ${ p.system.abbreviation } / ${ p.type }</p>
-                                <p>Verð: <strong>${ p.price.toLocaleString('is').replace(',', '.') }</strong> ISK</p>
-                                <a href="/products/${p.id}" class="btn btn-primary">Sjá nánar</a>
-                                <a href="#" class="btn btn-success">Setja í körfu</a>
+                return `<div class="products-box">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12 p-0">
+                                        <div class="products-img-frame"><img class="product-img" src="${ p.first_image }" alt=${ p.name }></div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-12 p-0">
+                                        <div class="products-name">${ p.name }</div>
+                                    </div>
+                                </div>
+                                 <div class="row my-2">
+                                    <div class="col-7 p-0">
+                                        <div class="products-type">${ p.system.manufacturer } / ${ p.system.abbreviation } / ${ p.type }</div>
+                                    </div>
+                                    <div class="col-5 p-0">
+                                         <div class="products-price">Verð: <strong>${ p.price.toLocaleString('is').replace(',', '.') }</strong> ISK</div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-6 p-1">
+                                        <a href="/products/${p.id}" class="btn btn-warning btn-block">Nánar</a>
+                                    </div>
+                                    <div class="col-6 p-1">
+                                        <div role="button" onclick="addToCart(${p.id}")" class="btn btn-success btn-block">Setja í körfu</div>
+                                        
+                                    </div>
+                                </div>
                             </div>
                         </div>`;
+
+
             });
 
             const joinedHTML = newHTML.join('');

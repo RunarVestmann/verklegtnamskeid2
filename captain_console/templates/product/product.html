@@ -14,30 +14,20 @@
          <div class="row my-2">
             <div class="col-7 p-0">
                 <div class="products-type">{{ product.system.manufacturer }} / {{ product.system.abbreviation }} / {{ product.type }}</div>
-
             </div>
             <div class="col-5 p-0">
                  <div class="products-price">Verð: <strong>{{ product.price | intcomma }}</strong> ISK</div>
             </div>
         </div>
-
         <div class="row mt-3">
             <div class="col-6 p-1">
                 <a href="{% url 'product_details' id=product.id %}" class="btn btn-warning btn-block">Nánar</a>
-
             </div>
             <div class="col-6 p-1">
                 <div role="button" onclick="addToCart({{ product.id }})" class="btn btn-success btn-block">Setja í körfu</div>
-
             </div>
         </div>
-
     </div>
-{#end conteainer#}
-
-
-
-
 </div>
 
 {#<div class="card p-2" style="background-color: #37b8c2;">#}
