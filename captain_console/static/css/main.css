@@ -41,6 +41,14 @@ header{
     width: auto;
 }
 
+.nav-btn{
+    cursor: pointer;
+}
+
+.nav-btn:hover{
+    text-decoration: underline;
+}
+
 .nav-icons-color{
     background-color: rgb(245, 239, 191);
 }
