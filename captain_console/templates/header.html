@@ -4,10 +4,10 @@
             <div class="col-4"></div>
             <div class="col-4">
                 <input id="search-box" class="form-control pl-3" type="search" placeholder="Leit að vöru...">
-                <img id="search-btn" class="search-icon" type="submit" src="../static/nav_img/magnifying_glass_2.svg">
+                <img id="search-btn" class="search-icon" type="submit" src="/static/nav_img/magnifying_glass_2.svg">
             </div>
              <div class="col-1 d-flex flex-wrap justify-content-center">
-                     <input type="image" class="shopping-cart-img" src="../static/nav_img/shopping_cart.svg" alt="Submit">
+                     <input type="image" class="shopping-cart-img" src="/static/nav_img/shopping_cart.svg" alt="Submit">
              </div>
             <div class="col-3">
                 {% if user.is_authenticated %}
@@ -35,36 +35,36 @@
         <div class="row">
           <div class="col-2 d-flex flex-wrap">
               <a href="{% url 'home' %}">
-                <img class="logo-img" src="../static/nav_img/captainconsole.svg">
+                <img class="logo-img" src="/static/nav_img/captainconsole.svg">
               </a>
           </div>
             <div class="col-2 text-body text-center font-weight-bold smaller-font">
-                <a class="text-dark" href="#">
-                <img class ="nav-img" src="../static/nav_img/navicon_nintendo.svg">
+                <a class="text-dark" href="#" onclick="navigationClick('Nintendo')">
+                <img class ="nav-img" src="/static/nav_img/navicon_nintendo.svg">
                 <br>Nintendo
                 </a>
             </div>
             <div class="col-2 text-body text-center font-weight-bold smaller-font">
-                <a class="text-dark" href="#">
-                <img class ="nav-img" src="../static/nav_img/navicon_sony.svg">
+                <a class="text-dark" href="#" onclick="navigationClick('Sony')">
+                <img class ="nav-img" src="/static/nav_img/navicon_sony.svg">
                 <br>Sony
                 </a>
             </div>
             <div class="col-2 text-body text-center font-weight-bold smaller-font">
-                <a class="text-dark" href="#">
-                <img class ="nav-img" src="../static/nav_img/navicon_sega.svg">
+                <a class="text-dark" href="#" onclick="navigationClick('Sega')">
+                <img class ="nav-img" src="/static/nav_img/navicon_sega.svg">
                 <br>Sega
                 </a>
             </div>
             <div class="col-2 text-body text-center font-weight-bold smaller-font">
-                <a class="text-dark" href="#">
-                <img class ="nav-img" src="../static/nav_img/navicon_microsoft.svg">
+                <a class="text-dark" href="#" onclick="navigationClick('Microsoft')">
+                <img class ="nav-img" src="/static/nav_img/navicon_microsoft.svg">
                 <br>Microsoft
                 </a>
             </div>
             <div class="col-2 text-body text-center font-weight-bold smaller-font">
-                <a class="text-dark" href="#">
-                <img class ="nav-img" src="../static/nav_img/navicon_other.svg">
+                <a class="text-dark" href="#" onclick="navigationClick('Annað')">
+                <img class ="nav-img" src="/static/nav_img/navicon_other.svg">
                 <br>Annað
                 </a>
             </div>

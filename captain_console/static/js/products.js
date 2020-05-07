@@ -65,6 +65,11 @@ function HandleSearch(event){
 function displayChanges(){
     const searchText = searchList.join(' ');
 
+    if(!searchText && window.location.href !== '/products/'){
+        window.location.href = '/products/';
+        return;
+    }
+
     $.ajax({
         url: '/products?search=' + searchText,
         type: 'GET',

@@ -1,7 +1,14 @@
-const input = document.getElementById("search-box");
-input.addEventListener("keyup", function(event) {
+const inputBox = document.getElementById('search-box');
+const searchBtn = document.getElementById('search-btn');
+
+inputBox.addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
         event.preventDefault();
-        document.getElementById("search-btn").click();
+        searchBtn.click();
     }
 });
+
+function navigationClick(searchText){
+    inputBox.value = searchText;
+    searchBtn.click();
+}
