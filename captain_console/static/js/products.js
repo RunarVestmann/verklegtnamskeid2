@@ -14,10 +14,13 @@ $(document).ready(function(){
               filter.style.textDecoration = 'none';
         };
         filter.addEventListener('click', function(event){
-            const searchText = filter.textContent;
-            if(searchText){
+            const searchBoxValue = searchBox.val();
 
-            }
+            if(searchBoxValue && searchList.length === 1 && searchList.includes(searchBoxValue))
+                searchList = [];
+
+            const searchText = filter.textContent;
+
             if(searchList.includes(searchText))
                 searchList = searchList.filter(s => s !== searchText);
             else
@@ -29,7 +32,6 @@ $(document).ready(function(){
     // When the search button gets clicked
     searchButton.on('click', function(event){
         searchList = [];
-
         searchList.push(searchBox.val());
 
         // Clear out all the underlines for the filters
@@ -82,15 +84,17 @@ function displayChanges(){
 
             const joinedHTML = newHTML.join('');
 
-            // Store data so that we can use it during a redirect
-            window.sessionStorage.setItem('searchText', searchText);
-            window .sessionStorage.setItem('newHTML', joinedHTML);
-
-            // Change the html if we're at /products, else redirect to /products
             if(window.location.pathname === '/products/')
                 $('#products').html(joinedHTML);
-            else
+            else{
+                // Store data so that we can use it during a redirect
+                window.sessionStorage.setItem('searchText', searchText);
+                window .sessionStorage.setItem('newHTML', joinedHTML);
+
+                // Redirect to /products
                 window.location.href = '/products/';
+            }
+
         },
         error: function(xhr, status, error){
             // TODO: Display error message (using toastr?)
