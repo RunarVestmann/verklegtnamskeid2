@@ -2,11 +2,13 @@
 
 {% block content %}
     <div class="row home-bg-color-1">
-        <div class="col pt-2 pb-2 mt-2 mb-2 text-center d-flex align-self-center">
-            <div class="div p-2 pl-5 pt-3" id="pointer">
-                <h4>Vinsælustu</h4>
-                <h5>Vörurnar</h5>
-            </div>
+        <div class="col text-center d-flex align-self-center">
+            <div class="star star-color-1">VINSÆLUSTU <br/> <small> vörurnar</small></div>
+
+{#            <div class="div p-2 pl-5 pt-3" id="pointer">#}
+{#                <h4>Vinsælustu</h4>#}
+{#                <h5>Vörurnar</h5>#}
+{#            </div>#}
         </div>
         <div class="col pt-2 pb-2 mt-2 mb-2 text-center">
             {% for product in products %}
@@ -30,12 +32,13 @@
             {% endfor %}
         </div>
     </div>
-        <div class="row home-bg-color-1">
+        <div class="row home-bg-color-2">
             <div class="col pt-2 pb-2 mb-2 text-center d-flex align-self-center">
-                    <div class="div p-2 pl-5 pt-3" id="pointer">
-                        <h4>Nýjustu</h4>
-                        <h5>Vörurnar</h5>
-                    </div>
+                <div class="star star-color-2"> VAR AÐ KOMA <br/> <small> til okkar</small></div>
+{#                    <div class="div p-2 pl-5 pt-3" id="pointer">#}
+{#                        <h4>Nýjustu</h4>#}
+{#                        <h5>Vörurnar</h5>#}
+{#                    </div>#}
             </div>
             <div class="col pt-2 pb-2 mt-2 mb-2 text-center">
                 {% for product in products %}

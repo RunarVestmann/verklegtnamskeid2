@@ -38,17 +38,18 @@ def signup_view(request):
     return render(request, 'user/signup.html', {'form': form})
 
 
-# def login_view(request):
-#     form = LoginForm(request, data=request.POST)
-#
-#     if form.is_valid():
-#         username = form.cleaned_data.get('username')
-#         password = form.cleaned_data.get('password')
-#         user = authenticate(username=username, password=password)
-#         login(request, user)
-#         return redirect('home')
-#
-#     return render(request, 'user/login.html', {'form': form})
+    # def login_view(request):
+    #     form = LoginForm(request, data=request.POST)
+    #
+    #     if form.is_valid():
+    #         username = form.cleaned_data.get('username')
+    #         password = form.cleaned_data.get('password')
+    #         user = authenticate(username=username, password=password)
+    #         login(request, user)
+    #         return redirect('home')
+    #
+    #     return render(request, 'user/login.html', {'form': form})
+
 
 @login_required
 def profile(request):

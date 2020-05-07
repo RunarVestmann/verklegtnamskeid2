@@ -100,17 +100,19 @@ body{
     background-color: #63899c;
 }
 
-
+.home-bg-color-2{
+    background-color: #bf6979;
+}
 
 
 .star {
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     color: #FFF;
     text-align: center;
     font-weight: 600;
     line-height: 12px;
-    padding-top: 80px;
+    padding-top: 130px;
     background-size: contain;
     background-repeat: no-repeat;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='437.5px' height='427.5px'%3E%3Cpath fill-rule='evenodd' stroke='rgb(255, 255, 255)' stroke-width='7px' stroke-linecap='butt' stroke-linejoin='miter' fill='rgb(0, 0, 0)' d='M396.758,324.923 L307.225,309.010 L314.860,397.574 L245.469,340.072 L206.739,420.500 L176.084,336.817 L101.367,387.557 L117.661,300.115 L26.978,307.572 L85.855,239.802 L3.504,201.977 L89.189,172.037 L37.235,99.067 L126.769,114.980 L119.134,26.415 L188.525,83.917 L227.254,3.490 L257.910,87.173 L332.627,36.433 L316.333,123.875 L407.016,116.418 L348.138,184.188 L430.490,222.013 L344.805,251.952 L396.758,324.923 Z'/%3E%3C/svg%3E");
