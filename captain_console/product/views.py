@@ -4,33 +4,39 @@ from .forms import ProductForm
 from .models import Product, ProductImage, Type, System
 
 def index(request):
-    types = Type.objects.all()
+    # Store at the top what we'll be using no matter what
+    all_types = Type.objects.all()
+    all_products = Product.objects.prefetch_related('system', 'type').all()
 
+    # If the user entered a search string we find the results
     if 'search' in request.GET:
         search = request.GET['search'].strip().split()
 
         search_results = None
         if search:
-            query_set = Product.objects.prefetch_related('system', 'type').all()
+            query_set = all_products
+
+            # For every word in the search string get results from searching for that word
             search_results = __get_search_results(query_set, search[0])
             for i in range(1, len(search)):
                 search_results |= __get_search_results(query_set, search[i])
 
             # Count how many filter types are active
             count = 0
-            for t in types:
+            for t in all_types:
                 if t.name in search:
                     count += 1
 
             # Only filter out unwanted types if there are 1 to n-1 filters active
-            if not (count == 0 or count == len(types)):
-                for t in types:
+            if not (count == 0 or count == len(all_types)):
+                for t in all_types:
                     if t.name not in search:
                         search_results = search_results.exclude(type__name=t.name)
 
         else:
-            search_results = Product.objects.all()
+            search_results = all_products
 
+        # Make a list of dictionaries that contain each products data
         products = [{
             'id': p.id,
             'name': p.name,
@@ -50,9 +56,10 @@ def index(request):
 
         return JsonResponse({'data': products})
 
+    # If the user did not enter a search string we simply return all products in an html
     return render(request, 'product/products.html', {
-        'products': Product.objects.all(),
-        'types': types,
+        'products': all_products,
+        'types': all_types,
         'systems': System.objects.prefetch_related('manufacturer').all()
     })
 
