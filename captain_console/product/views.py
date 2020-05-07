@@ -1,12 +1,13 @@
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import ProductForm
-from .models import Product, ProductImage, Type, System
+from .models import Product, ProductImage, Type, System, Manufacturer
 
 def index(request):
     # Store at the top what we'll be using no matter what
     all_types = Type.objects.all()
     all_products = Product.objects.prefetch_related('system', 'type').all()
+    all_manufacturers = Manufacturer.objects.all()
 
     # If the user entered a search string we find the results
     if 'search' in request.GET:
@@ -22,16 +23,28 @@ def index(request):
                 search_results |= __get_search_results(query_set, search[i])
 
             # Count how many filter types are active
-            count = 0
+            type_count = 0
             for t in all_types:
                 if t.name in search:
-                    count += 1
+                    type_count += 1
 
             # Only filter out unwanted types if there are 1 to n-1 filters active
-            if not (count == 0 or count == len(all_types)):
+            if not (type_count == 0 or type_count == len(all_types)):
                 for t in all_types:
                     if t.name not in search:
                         search_results = search_results.exclude(type__name=t.name)
+
+            # Count how many filter types are active
+            man_count = 0
+            for manufacturer in all_manufacturers:
+                if manufacturer.name in search:
+                    man_count += 1
+
+            # Only filter out unwanted types if there are 1 to n-1 filters active
+            if not (man_count == 0 or man_count == len(all_manufacturers)):
+                for manufacturer in all_manufacturers:
+                    if manufacturer.name not in search:
+                        search_results = search_results.exclude(system__manufacturer__name=manufacturer.name)
 
         else:
             search_results = all_products
@@ -60,14 +73,16 @@ def index(request):
     return render(request, 'product/products.html', {
         'products': all_products,
         'types': all_types,
-        'systems': System.objects.prefetch_related('manufacturer').all()
+        'systems': System.objects.prefetch_related('manufacturer').all(),
+        'manufacturers': all_manufacturers
     })
 
 def __get_search_results(query_set, word):
     return query_set.filter(name__icontains=word) \
          | query_set.filter(system__name__icontains=word) \
          | query_set.filter(system__manufacturer__name__icontains=word) \
-         | query_set.filter(system__abbreviation__icontains=word)
+         | query_set.filter(system__abbreviation__icontains=word) \
+         | query_set.filter(type__name__icontains=word)
 
 def get_product_by_id(request, id):
     product = get_object_or_404(Product, pk=id)
