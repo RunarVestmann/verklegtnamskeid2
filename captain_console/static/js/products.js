@@ -1,5 +1,6 @@
 const searchBox = $('#search-box');
 const searchButton = $('#search-btn');
+const products = $('#products');
 let searchList = [];
 
 $(document).ready(function(){
@@ -51,7 +52,7 @@ $(document).ready(function(){
 
         const newHTML = window.sessionStorage.getItem('newHTML');
         if(newHTML !== null && newHTML !== undefined){
-            $('#products').html(newHTML);
+            products.html(newHTML);
             window.sessionStorage.removeItem('newHTML');
         }
     }
@@ -110,7 +111,7 @@ function displayChanges(){
             const joinedHTML = newHTML.join('');
 
             if(window.location.pathname === '/products/')
-                $('#products').html(joinedHTML);
+                products.html(joinedHTML);
             else{
                 // Store data so that we can use it during a redirect
                 window.sessionStorage.setItem('searchText', searchText);
