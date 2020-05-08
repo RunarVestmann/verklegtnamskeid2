@@ -1,10 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="container-fluid p-3">
-        <div class="row">
-          <div class="col-2"> </div>
-            <div class="col-8">
-                <div class="dropdown">
+    <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Dropdown button
   </button>
@@ -16,72 +12,34 @@
 </div>
 
 
-                 {% if user.is_authenticated %}
+{% if user.is_authenticated %}
+
+    <style>
+        .test{
+
+            display: inline-block;
+            width: 4rem;
+            height: 3rem;
+            color: #000;
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+            padding-top: 0.4rem;
+
+            background-image: url("/static/nav_img/shopping_bach.svg");
+            background-size: contain;
+            background-repeat: no-repeat;
 
 
-                     <a class="btn btn-light" href={% url 'logout' %}>
-                         <svg class="bi bi-person-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
-                         </svg>
-                         {% if user.first_name or user.last_name%}
-                            {{ user.first_name }}  {{ user.last_name }}
-                             {% else %}
-                             {{ user.username }}
-                         {% endif %}</a>
-                         <a href={% url 'logout' %}>Logout</a>
+        }
 
-          {% else %}
-      <a href={% url 'login' %}>Innskrá </a> / <a href={% url 'signup' %}>Stofna aðgang</a>
-      <p> {{ request.path }}</p>
-          {% if request.path == '/product/' %}
-                <button type="button" class="btn btn-primary" >search something</button>
-              {% else %}
-                <button type="button" class="btn btn-dark" >search something else</button>
-          {% endif %} 
-                     
+    </style>
+
+    <a class="test" href="#">0</a> <a class="test" href="#">0</a>
 
 
-        <p>
-        <!-- Large modal -->
-        <button type="button" class="btn" data-toggle="modal" data-target=".bd-example-modal-lg">opna - Large modal</button>
+{% endif %}
 
-        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-              ... er eittn vða hédfr a-skmemmitleglt
-               {% include 'user/signup.html' %}
-            </div>
-          </div>
-        </div>
-
-      </p>
-
-
-
-
-{#endmodal#}
- </div>
-
-
-
-    {% endif %}
-
-
-            </div>
-            <div class="col-2"></div>
-
-    </div>
-
-    <div class="star star-color-1">VINSÆLUSTU <br/> <small> vörurnar</small></div>
-     <div class="star star-color-2"> VAR AÐ KOMA <br/> <small> til okkar</small></div>
-    <div class="star"> some test</small></div>
-
-
-  </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 
 {% endblock %}

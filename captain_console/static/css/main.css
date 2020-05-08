@@ -2,11 +2,12 @@ html{
     /* Footer configuration */
     height: 100%;
 }
-header{
-    color:white;
-    background-color: #C2AF37;
+
+.header-nav{
     margin-top: 0px;
+    background-color: #C2AF37;
 }
+
 
 .search-wrapper{
     position: relative;
@@ -21,23 +22,49 @@ header{
 }
 
 .shopping-cart-img{
-    background-color: #C2AF37;
-    height:28px;
+    height:1.8rem;
     width:auto;
 
 }
 
+.shopping-cart-btn{
+    display: inline-block;
+    width: 6rem;
+    height: 6rem;
+    color: #000;
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-align: center;
+    padding-top: 0.9rem;
+
+    background-image: url("/static/nav_img/shopping_bach.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 0.5rem;
+    top: -0.8rem;
+}
+.shopping-cart-btn:hover{
+    text-decoration: none;
+    font-weight: 700;
+    top: -1rem;
+    color: #6d2821;
+}
+
+
+
 .logo-img{
     position: absolute;
     width: auto;
-    height: 142px;
-    overflow: auto;
-    top: -60px;
-    right: 35px;
+    height: auto;
+    max-height: 9rem;
+    min-height: 6rem;
+    top: -4rem;
+
 }
 
 .nav-img{
-    height: 55px;
+    height: 4rem;
     width: auto;
 }
 
@@ -47,6 +74,7 @@ header{
 
 .nav-btn:hover{
     text-decoration: underline;
+
 }
 
 .nav-icons-color{

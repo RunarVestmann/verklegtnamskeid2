@@ -1,18 +1,20 @@
 <header>
-    <div class="container-fluid pt-2 pb-2">
-        <div class="row">
-            <div class="col-4"></div>
-            <div class="col-4">
+    <div class="container-fluid">
+        <div class="row header-nav pt-2 pb-2">
+            <div class="col-1 col-sm-2 col-lg-4"></div>
+            <div class="col-8 col-sm-5 col-lg-4">
                 <input id="search-box" class="form-control pl-3" type="search" placeholder="Leit að vöru...">
                 <img id="search-btn" class="search-icon" type="submit" src="/static/nav_img/magnifying_glass_2.svg">
             </div>
-             <div class="col-1 d-flex flex-wrap justify-content-center">
-                 <a href="/cart"><input type="image" class="shopping-cart-img" src="/static/nav_img/shopping_cart.svg" alt="Submit"></a>
+             <div class="col-3 col-sm-1 text-right mt-1" >
+                    <a class="shopping-cart-btn" href="/cart">0</a>
              </div>
-            <div class="col-3">
+            <div class="col-9 col-sm-4 col-lg-3 text-right">
+
+
                 {% if user.is_authenticated %}
 
-                        <div class="dropdown text-right">
+                        <div class="dropdown">
                           <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
 
@@ -41,44 +43,43 @@
 
           {% else %}
 
-                <a class="btn btn-default btn-sm font-weight-bold" href="/user/login" role="button">Innskrá</a>
-                <a class="btn btn-default btn-sm font-weight-bold" href="/user/signup" role="button">Stofna Aðgang</a>
+                <a class="btn btn-sm font-weight-bold" href="/user/login" role="button">Innskrá</a>
+                <a class="btn btn-sm font-weight-bold" href="/user/signup" role="button">Stofna Aðgang</a>
           {% endif %}
             </div>
         </div>
-    </div>
-    <div class="container-fluid p-3 nav-icons-color">
-        <div class="row">
-          <div class="col-2 d-flex flex-wrap">
+
+        <div class="row pt-3 nav-icons-color">
+          <div class="col-2 col-xl-4">
               <a href="{% url 'home' %}">
                 <img class="logo-img" src="/static/nav_img/captainconsole.svg">
               </a>
           </div>
-            <div class="col-2 text-body text-center font-weight-bold smaller-font">
+            <div class="col-2 col-xl-1 text-body text-center font-weight-bold smaller-font">
                 <div class="text-dark nav-btn" role="button" onclick="navigationClick('Nintendo')">
                     <img class ="nav-img" src="/static/nav_img/navicon_nintendo.svg">
                     <p>Nintendo</p>
                 </div>
             </div>
-            <div class="col-2 text-body text-center font-weight-bold smaller-font">
+            <div class="col-2 col-xl-1 text-body text-center font-weight-bold smaller-font">
                 <div class="text-dark nav-btn" role="button" onclick="navigationClick('Sony')">
                     <img class ="nav-img" src="/static/nav_img/navicon_sony.svg">
                     <p>Sony</p>
                 </div>
             </div>
-            <div class="col-2 text-body text-center font-weight-bold smaller-font">
+            <div class="col-2 col-xl-1 text-body text-center font-weight-bold smaller-font">
                 <div class="text-dark nav-btn" role="button" onclick="navigationClick('Sega')">
                     <img class ="nav-img" src="/static/nav_img/navicon_sega.svg">
                     <p>Sega</p>
                 </div>
             </div>
-            <div class="col-2 text-body text-center font-weight-bold smaller-font">
+            <div class="col-2 col-xl-1 text-body text-center font-weight-bold smaller-font">
                 <div class="text-dark nav-btn" role="button" onclick="navigationClick('Microsoft')">
                     <img class ="nav-img" src="/static/nav_img/navicon_microsoft.svg">
                     <p>Microsoft</p>
                 </div>
             </div>
-            <div class="col-2 text-body text-center font-weight-bold smaller-font">
+            <div class="col-2 col-xl-1 ext-body text-center font-weight-bold smaller-font">
                 <div class="text-dark nav-btn" role="button" onclick="navigationClick('Annað')">
                     <img class ="nav-img" src="/static/nav_img/navicon_other.svg">
                     <p>Annað</p>
