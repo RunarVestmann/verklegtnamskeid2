@@ -24,3 +24,6 @@ og núna er kominn dynamic filter list ásamt cards á /products síðunni
 
 06/05/2020
 Græjaði search virkni í gegnum ajax og jQuery ásamt því að implement-a filtering fyrir /products síðuna.
+
+07/05/2020
+Byrjaði á local storage fyrir shopping cart, lagfærði filters, betrumbætti queries fyrir /products og tengdi nav takkana.
