@@ -1,3 +1,11 @@
+.product-order-bar{
+    background: #26343b;
+    font-size: 0.8rem;
+    color: #FFF;
+    text-align: right;
+    padding: 0.5rem 2rem 0.5rem 0.5rem;
+}
+
 
 .products-box{
     margin: 0.5rem;

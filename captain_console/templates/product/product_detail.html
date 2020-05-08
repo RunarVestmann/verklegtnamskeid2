@@ -4,7 +4,7 @@
 {% block content %}
 
     <div class="row p-3">
-         <div class="col-5">
+         <div class="col-sm-12 col-md-5 mb-4">
             <div id="carouselIndicators" class="carousel slide products-detail-img-frame" data-ride="carousel">
                 <ol class="carousel-indicators">
                 {% for image in images %}
@@ -29,7 +29,7 @@
             </div>
         </div>
         <!-- Descripton colom -->
-        <div class="col-5">
+        <div class="col-sm-12 col-md-7 col-lg-6 col-xl-5">
              <div class="container-fluid">
             <div class="row">
                 <div class="col-12 p-0">
@@ -62,7 +62,7 @@
                     <div class="col-7 p-0">
                         <div class="products-detail-price">Verð: <strong>{{ product.price|intcomma }}</strong> ISK</div>
                     </div>
-                    <div class="col-5 p-0">
+                    <div class="col-5 pr-2">
                         <button class="btn btn-success btn-block">Setja í körfu</button>
                     </div>
                 </div>

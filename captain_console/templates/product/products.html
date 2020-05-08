@@ -1,8 +1,15 @@
 {% extends "base.html" %}
 {% block background-color %}#63899c{% endblock background-color  %}
 {% block content %}
+        <div class="row ">
+            <div class="col-12 product-order-bar" >
+                Raða eftir: Nafn Verði Vinsælast
+            </div>
+        </div>
+
+
     <div class="row">
-        <div class="col-2">
+        <div class="col-sm-12 col-lg-2">
             <div class="filter-block">
 
                 {% for manufacturer in manufacturers %}
@@ -28,7 +35,7 @@
 
     </div>
 
-        <div class="col-10">
+        <div class="col-sm-12 col-lg-10">
             <div id="products" class="row">
             {% for product in products %}
                 {% include 'product/product.html' %}
