@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="div pt-3 pb-3">
+        <h3>Skilaboðin hafa verið móttekin!</h3>
+        <br>
+        <h6>Við munum hafa samband við þig eins fljótt og hægt er.</h6>
+        <h6>Smelltu á takkann hér fyrir neðan til að fara aftur á forsíðuna.</h6>
+        <div class="div pt-4">
+            <a href="{% url 'home' %}">
+                <button class="btn btn-secondary">Aftur á forsíðu</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,31 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container-fluid p-3">
-    <div class="row">
-        <div class="col-6">
-            <h4>Hvernig getum við aðstoðað?</h4>
-            <form>
-                <div class="form-group">
-                    <label for="input-name">Nafn</label>
-                    <input class="form-control" id="input-name">
-                </div>
-                <div class="form-group">
-                    <label for="input-email">Netfang</label>
-                    <input class="form-control" id="input-email">
-                </div>
-                <div class="form-group">
-                    <label for="input-message">Fyrirspurn</label>
-                    <textarea class="form-control" id="input-message" rows="3">
-                    </textarea>
-                </div>
-                <button type="submit" class="btn btn-secondary mb-2">
-                    Senda fyrirspurn
-                </button>
-            </form>
+    <div class="container-fluid p-3">
+        <div class="row">
+            <div class="col-6">
+                <h4>Hvernig getum við aðstoðað?</h4>
+                <form method="post">
+                    {%  csrf_token %}
+                    {% for field in form %}
+                        <label class="pt-3">{{ field.label_tag }}</label>
+                        {{ field }}
+                    {% endfor %}
+                    <button type="submit" class="btn btn-secondary mt-3 mb-3">Senda fyrirspurn</button>
+                </form>
+            </div>
+            <div class="col-6">
+            </div>
         </div>
-        <div class="col-6">
-        </div>
-
     </div>
-</div>
-{% endblock content %}
+{% endblock %}
+
