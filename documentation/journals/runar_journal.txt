@@ -27,3 +27,6 @@ Græjaði search virkni í gegnum ajax og jQuery ásamt því að implement-a fi
 
 07/05/2020
 Byrjaði á local storage fyrir shopping cart, lagfærði filters, betrumbætti queries fyrir /products og tengdi nav takkana.
+
+08/05/2020
+Vann meira í local storage fyrir cart-ið. Núna virðist þetta byrja að virka. Gærjaði einnig json tengingu fyrir hverja vöru /products/{id}/json
