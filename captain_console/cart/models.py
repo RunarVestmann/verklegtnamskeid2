@@ -1,8 +1,9 @@
 from django.db import models
+from product.models import Product
 
 # Create your models here.
 class ShoppingCart(models.Model):
-    name = models.CharField(max_length=100)
+    products = models.ManyToManyField(Product)
 
     def __str__(self):
-        return self.name
+        return self.products

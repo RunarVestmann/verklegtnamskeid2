@@ -98,7 +98,7 @@ function displayChanges(){
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-6 p-1">
-                                        <a href="/products/${p.id}" class="btn btn-warning btn-block">Nánar</a>
+                                        <a href="/products/${p.id}" onclick="onDetailClick(${p.id})" class="btn btn-warning btn-block">Nánar</a>
                                     </div>
                                     <div class="col-6 p-1">
                                         <div role="button" onclick="addToCart(${p.id}")" class="btn btn-success btn-block">Setja í körfu</div>
@@ -128,3 +128,8 @@ function displayChanges(){
         }
     });
 }
+
+//function onDetailClick(){
+   //onclick="onDetailClick({{ product.id }})
+
+//}

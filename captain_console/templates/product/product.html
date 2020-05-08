@@ -21,7 +21,7 @@
         </div>
         <div class="row mt-3">
             <div class="col-6 p-1">
-                <a href="{% url 'product_details' id=product.id %}" class="btn btn-warning btn-block">Nánar</a>
+                <a href="{% url 'product_details' id=product.id %}" onclick="onDetailClick({{ product.id }})" class="btn btn-warning btn-block">Nánar</a>
             </div>
             <div class="col-6 p-1">
                 <div role="button" onclick="addToCart({{ product.id }})" class="btn btn-success btn-block">Setja í körfu</div>
