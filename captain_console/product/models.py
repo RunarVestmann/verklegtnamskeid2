@@ -28,7 +28,7 @@ class Product(models.Model):
     price = models.IntegerField()
     system = models.ForeignKey(System, on_delete=models.DO_NOTHING)
     release_date = models.DateField()
-    shop_arrival_date = models.DateField(default=date.today, blank=True)
+    shop_arrival_date = models.DateField(default=date.today)
     type = models.ForeignKey(Type, on_delete=models.DO_NOTHING)
 
     def to_dict(self):
