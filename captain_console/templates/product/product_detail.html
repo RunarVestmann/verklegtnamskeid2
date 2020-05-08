@@ -2,26 +2,19 @@
 {% block background-color %}#37b8c2{% endblock background-color  %}
 {% load humanize %}
 {% block content %}
-    <style>
-        .carousel-control-prev-icon {
-            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f73' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
-        }
-        .carousel-control-next-icon {
-            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f73' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
-        }
-    </style>
+
     <div class="row p-3">
          <div class="col-5">
-            <div id="carouselIndicators" class="carousel slide" data-ride="carousel">
+            <div id="carouselIndicators" class="carousel slide products-detail-img-frame" data-ride="carousel">
                 <ol class="carousel-indicators">
                 {% for image in images %}
-                    <li data-target="#carouselIndicators" style="background-color:rgb(255,128,48)" data-slide-to="{{forloop.counter0}}" class="{% if forloop.first %}active{% endif %}"></li>
+                    <li data-target="#carouselIndicators" style="background-color:#63899c" data-slide-to="{{forloop.counter0}}" class="{% if forloop.first %}active{% endif %}"></li>
                 {% endfor %}
                 </ol>
                 <div class="carousel-inner">
                 {% for image in images %}
                     <div class="carousel-item{% if forloop.first %} active{% endif %}">
-                        <img class="d-block w-100" src="{{ image }}" alt="Product image" style="height:60vh">
+                        <img class="d-block w-100" src="{{ image }}" alt="{{ product.name }}" style="height:60vh">
                     </div>
                 {% endfor %}
                 </div>
@@ -35,12 +28,52 @@
                 </a>
             </div>
         </div>
+        <!-- Descripton colom -->
         <div class="col-5">
-            <h2>{{ product.name }}</h2>
-            <p>{{ product.system.manufacturer }} / {{ product.system }} / {{ product.type }}</p>
-            <p>{{ product.description }}</p>
-            <p>Verð: <strong>{{ product.price|intcomma }}</strong> ISK</p>
-            <button class="btn btn-success">Setja í körfu</button>
+             <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 p-0">
+                    <div class="product-detail-name">{{ product.name }}</div>
+                </div>
+            </div>
+
+             <div class="row">
+                <div class="col-12 p-0">
+                    <div class="product-detail-type">{{ product.system.manufacturer }}<span class="slash-space"> / </span>{{ product.system }}<span class="slash-space"> / </span>{{ product.type }}</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 p-0">
+                    <div class="product-detail-description">{{ product.description }}</div>
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-12 p-0">
+                   <!-- spacer it to fix that last line dont go over the text if the text is longer then grid-->
+                   <!-- othervise the last line sits on the bottom of the grid usin bottom-row-position-->
+                    <div class="spacer-for-brp"></div>
+                </div>
+            </div>
+
         </div>
+            <div class="container-fluid bottom-row-positon">
+                <div class="row">
+                    <div class="col-7 p-0">
+                        <div class="products-detail-price">Verð: <strong>{{ product.price|intcomma }}</strong> ISK</div>
+                    </div>
+                    <div class="col-5 p-0">
+                        <button class="btn btn-success btn-block">Setja í körfu</button>
+                    </div>
+                </div>
+                </div>
+
+
+{#            <h2>{{ product.name }}</h2>#}
+{#            <p>{{ product.system.manufacturer }} / {{ product.system }} / {{ product.type }}</p>#}
+{#            <p>{{ product.description }}</p>#}
+{#            <p>Verð: <strong>{{ product.price|intcomma }}</strong> ISK</p>#}
+{#            <button class="btn btn-success">Setja í körfu</button>#}
+
     </div>
 {% endblock content %}
