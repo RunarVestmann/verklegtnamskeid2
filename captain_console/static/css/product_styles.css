@@ -26,14 +26,12 @@
     padding-top: 0.3rem ;
     font-size: 0.8rem;
     font-weight: 400;
-
 }
 
 .products-price{
     font-size: 1rem;
     font-weight: 400;
     text-align: right;
-
 
 }
 
@@ -50,6 +48,63 @@
 
 }
 
-.product-descr-div{
-    width: 165px;
+/*.product-descr-div{*/
+/*    width: 165px;*/
+/*}*/
+
+
+.product-detail-name{
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #26343b;
+}
+
+.product-detail-type{
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: #fff;
+    letter-spacing: 0.1rem;
+}
+
+.product-detail-description{
+    margin-top: 4rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+    line-height: 1.6rem;
+    color: #26343b;
+}
+
+.products-detail-price{
+    font-size: 1.2em;
+    color: #26343b;
+
+}
+
+
+.bottom-row-positon{
+    position: absolute;
+    top: 90%;
+
+}
+
+.spacer-for-brp{
+    height: 5rem;
+}
+
+.slash-space{
+
+    letter-spacing: 0.4rem;
+}
+
+.products-detail-img-frame{
+   border: #63899c solid 0.2rem;
+
+
+}
+
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2363899c' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2363899c' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
 }
