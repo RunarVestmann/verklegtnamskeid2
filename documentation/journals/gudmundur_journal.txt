@@ -34,5 +34,12 @@ Vann að sign-up og login hlutanum - stillti flest öllu upp
 Vann að sign-up og login hlutanum - skinnaði og glímdi við að reyna láta þetta birtast ofan á síðu (tókst ekki)
 
 06/05/2020
-Vann að sign-up og login hlutanum - aframhaldandi glíma við að reyna fá til að virka betur - sett á ís.
+Vann að sign-up og login hlutanum - áframhaldandi glíma við að reyna fá til að virka betur - sett á ís.
+
+07/05/2020
+css styling products list view
+
+08/05/2020
+css styling product view. Header og annað í 12 colum grid responsive layout
+hönnun á körfu hnapp 
 
