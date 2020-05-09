@@ -6,17 +6,32 @@
         <div class="col-2">
         </div>
         <div class="col-md-8 col-sm-12">
-            <div class="container">
-              <ul class="progressbar">
+              <ul class="progressbar mb-2">
                 <li class="active">Karfan</li>
                 <li>Sendingarupplýsingar</li>
                 <li>Greiðsluupplýsingar</li>
                 <li>Yfirlit greiðslu</li>
                 <li>Kvittun</li>
               </ul>
+            <div class="mt-5">
+                <div class="column-labels">
+                <label class="product-image">Mynd</label>
+                <label class="product-details">Vara</label>
+                <label class="product-price">Vöruverð</label>
+                <label class="product-quantity">Magn</label>
+                <label class="product-removal">Eyða</label>
+                <label class="product-line-price">Heildarverð</label>
             </div>
-            <div id="products">
+                <div id="products"></div>
+                <div class="totals">
+                    <div class="totals-item totals-item-total">
+                      <label>Samtals</label>
+                      <div class="totals-value" id="cart-total">0</div>
+                    </div>
+                </div>
+                <a href="/cart/shipping" class="checkout btn btn-success">Ganga frá pöntun</a>
             </div>
+
         </div>
     </div>
 {% endblock %}

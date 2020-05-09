@@ -1,5 +1,4 @@
 const shoppingCartBtn = document.getElementsByClassName('shopping-cart-btn')[0];
-let cartProducts = [];
 
 const cart = {
     key: 'cart',
@@ -66,7 +65,7 @@ const cart = {
     changeQuantity(id, quantity){
         const product = cart.find(id);
         if(product){
-            product.quantity = quantity;
+            product.quantity = Number(quantity);
             cart.save();
         }
     },
@@ -95,7 +94,7 @@ const cart = {
     count(){
         let counter = 0;
         for(let i = 0; i < cart.products.length; i++)
-            counter += cart.products[i].quantity;
+            counter += Number(cart.products[i].quantity);
         return counter;
     },
 
@@ -114,29 +113,31 @@ function removeItemFromArray(array, item){
 $(document).ready(function(){
     cart.init();
     shoppingCartBtn.textContent = cart.count();
-    if(window.location.pathname === '/cart/')
+    if(window.location.pathname === '/cart/'){
         renderProductsInCart();
+        recalculateCart();
+    }
 });
 
 function renderProductsInCart(){
     const newHTML = cart.products.map(p => {
-        return `<div class="product-cart-view">
-                    <div class="product-cart-image">
+        return `<div class="cart-product">
+                    <div class="cart-product-image">
                       <img src="${p.first_image}">
                     </div>
-                    <div class="product-details">
-                      <div class="product-title">${p.name}</div>
+                    <div class="cart-product-details">
+                      <div class="cart-product-title">${p.name}</div>
                     </div>
-                    <div class="product-price">${p.price.toLocaleString('is').replace(',', '.')}</div>
-                    <div class="product-quantity">
+                    <div class="cart-product-price">${p.price.toLocaleString('is').replace(',', '.')}</div>
+                    <div class="cart-product-quantity">
                       <input type="number" value="${p.quantity}" min="1" onchange="updateQuantity(this , ${p.id})">
                     </div>
-                    <div class="product-removal" >
-                      <button class="remove-product" onclick="removeItem(this, ${p.id});">
-                        Remove
+                    <div class="cart-product-removal" >
+                      <button class="remove-cart-product" onclick="removeItem(this, ${p.id});">
+                        Eyða
                       </button>
                     </div>
-                    <div class="product-line-price">${(p.price * p.quantity).toLocaleString('is').replace(',', '.')}</div>
+                    <div class="cart-product-line-price">${(p.price * p.quantity).toLocaleString('is').replace(',', '.')}</div>
                     </div>`;
     });
     $('#products').html(newHTML.join(''));
@@ -147,9 +148,7 @@ function addToCart(productID){
 }
 
 // Credit goes to https://bootsnipp.com/snippets/qrOrg
-/* Set rates + misc */
-let shippingRate = 1500;
-let fadeTime = 300;
+const fadeTime = 300;
 
 /* Remove item from cart */
 function removeItem(removeButton, id)
@@ -167,21 +166,15 @@ function removeItem(removeButton, id)
 /* Recalculate cart */
 function recalculateCart()
 {
-  let subtotal = 0;
+  let total = 0;
 
   /* Sum up row totals */
-  $('.product').each(function () {
-    subtotal += $(this).children('.product-line-price').text();
+  $('.cart-product').each(function () {
+    total += Number($(this).children('.cart-product-line-price').text());
   });
-
-  /* Calculate totals */
-  let shipping = (subtotal > 0 ? shippingRate : 0);
-  let total = subtotal;// + shipping;
 
   /* Update totals display */
   $('.totals-value').fadeOut(fadeTime, function() {
-    $('#cart-subtotal').html(subtotal);
-    //$('#cart-shipping').html(shipping);
     $('#cart-total').html(total);
     if(total == 0){
       $('.checkout').fadeOut(fadeTime);
@@ -201,14 +194,14 @@ function updateQuantity(quantityInput, id)
 
   /* Calculate line price */
   let productRow = $(quantityInput).parent().parent();
-  let price = Number(productRow.children('.product-price').text().replace('.', ''));
+  let price = Number(productRow.children('.cart-product-price').text().replace('.', ''));
   let linePrice = price * quantity;
 
   cart.changeQuantity(id, quantity);
   shoppingCartBtn.textContent = cart.count();
 
   /* Update line price display and recalc cart totals */
-  productRow.children('.product-line-price').each(function () {
+  productRow.children('.cart-product-line-price').each(function () {
     $(this).fadeOut(fadeTime, function() {
       $(this).text(linePrice.toLocaleString('is').replace(',', '.'));
       recalculateCart();

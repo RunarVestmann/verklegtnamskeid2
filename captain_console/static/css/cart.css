@@ -1,0 +1,211 @@
+/* Global settings */
+
+.cart-product-image {
+  float: left;
+  width: 20%;
+}
+
+.cart-product-details {
+  float: left;
+  width: 37%;
+}
+
+.cart-product-price {
+  float: left;
+  width: 12%;
+}
+
+.cart-product-quantity {
+  float: left;
+  width: 10%;
+}
+
+.cart-product-removal {
+  float: left;
+  width: 9%;
+}
+
+.cart-product-line-price {
+  float: left;
+  width: 12%;
+  text-align: right;
+}
+
+/* This is used as the traditional .clearfix class */
+.group:before, .column-labels:before, .cart-product:before, .totals-item:before,
+.group:after,
+.column-labels:after,
+.cart-product:after,
+.totals-item:after {
+  content: '';
+  display: table;
+}
+
+.group:after, .shopping-cart:after, .column-labels:after, .cart-product:after, .totals-item:after {
+  clear: both;
+}
+
+.group, .shopping-cart, .column-labels, .cart-product, .totals-item {
+  zoom: 1;
+}
+
+/* Apply ISK */
+.cart-product .cart-product-price:after, .cart-product .cart-product-line-price:after, .totals-value:after {
+  content: ' ISK';
+}
+
+label {
+  color: #aaa;
+}
+
+/* Column headers */
+.column-labels label {
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+.column-labels .cart-product-image, .column-labels .cart-product-details, .column-labels .cart-product-removal {
+  text-indent: -9999px;
+}
+
+/* cart-product entries */
+.cart-product {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+.cart-product .cart-product-image {
+  text-align: center;
+}
+.cart-product .cart-product-image img {
+  width: 100px;
+}
+
+.cart-product .cart-product-details .cart-product-description {
+  margin: 5px 20px 5px 0;
+  line-height: 1.4em;
+}
+.cart-product .cart-product-quantity input {
+  width: 40px;
+}
+.cart-product .remove-cart-product {
+  border: 0;
+  padding: 4px 8px;
+  background-color: #c66;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 3px;
+}
+.cart-product .remove-cart-product:hover {
+  background-color: #a44;
+}
+
+/* Totals section */
+.totals .totals-item {
+  float: right;
+  clear: both;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.totals .totals-item label {
+  float: left;
+  clear: both;
+  width: 79%;
+  text-align: right;
+}
+.totals .totals-item .totals-value {
+  float: right;
+  width: 21%;
+  text-align: right;
+}
+
+.checkout {
+  float: right;
+  border: 0;
+  margin-top: 20px;
+  padding: 6px 25px;
+  background-color: #6b6;
+  color: #fff;
+  font-size: 25px;
+  border-radius: 3px;
+}
+
+.checkout:hover {
+  background-color: #494;
+}
+
+/* Make adjustments for tablet */
+@media screen and (max-width: 650px) {
+  .shopping-cart {
+    margin: 0;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+  }
+
+  .column-labels {
+    display: none;
+  }
+
+  .cart-product-image {
+    float: right;
+    width: auto;
+  }
+  .cart-product-image img {
+    margin: 0 0 10px 10px;
+  }
+
+  .cart-product-details {
+    float: none;
+    margin-bottom: 10px;
+    width: auto;
+  }
+
+  .cart-product-price {
+    clear: both;
+    width: 70px;
+  }
+
+  .cart-product-quantity {
+    width: 100px;
+  }
+  .cart-product-quantity input {
+    margin-left: 20px;
+  }
+
+  .cart-product-quantity:before {
+    content: 'x';
+  }
+
+  .cart-product-removal {
+    width: auto;
+  }
+
+  .cart-product-line-price {
+    float: right;
+    width: 70px;
+  }
+}
+/* Make more adjustments for phone */
+@media screen and (max-width: 350px) {
+  .cart-product-removal {
+    float: right;
+  }
+
+  .cart-product-line-price {
+    float: right;
+    clear: left;
+    width: auto;
+    margin-top: 10px;
+  }
+
+  .cart-product .cart-product-line-price:before {
+    content: 'Item Total: $';
+  }
+
+  .totals .totals-item label {
+    width: 60%;
+  }
+  .totals .totals-item .totals-value {
+    width: 40%;
+  }
+}
