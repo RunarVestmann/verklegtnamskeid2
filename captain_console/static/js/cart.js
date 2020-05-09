@@ -147,10 +147,8 @@ function addToCart(productID){
     cart.add(productID);
 }
 
-// Credit goes to https://bootsnipp.com/snippets/qrOrg
 const fadeTime = 300;
 
-/* Remove item from cart */
 function removeItem(removeButton, id)
 {
     /* Remove row from DOM and recalc cart total */
@@ -163,49 +161,55 @@ function removeItem(removeButton, id)
     });
 }
 
-/* Recalculate cart */
 function recalculateCart()
 {
-  let total = 0;
+    let total = 0;
 
-  /* Sum up row totals */
-  $('.cart-product').each(function () {
-    total += Number($(this).children('.cart-product-line-price').text());
-  });
+    /* Sum up row totals */
+    $('.cart-product').each(function () {
+        total += Number($(this).children('.cart-product-line-price').text());
+    });
 
-  /* Update totals display */
-  $('.totals-value').fadeOut(fadeTime, function() {
-    $('#cart-total').html(total);
-    if(total == 0){
-      $('.checkout').fadeOut(fadeTime);
-    }else{
-      $('.checkout').fadeIn(fadeTime);
-    }
-    $('.totals-value').fadeIn(fadeTime);
-  });
+    updateTotalsDisplay(total);
 }
 
-/* Update quantity */
+function updateTotalsDisplay(total){
+    $('.totals-value').fadeOut(fadeTime, function() {
+        $('#cart-total').html(total);
+        if(total == 0){
+            $('.checkout').addClass('disabled');
+            $('.checkout').attr('aria-disabled', 'true').css('opacity', 0.3);
+        }
+
+        else{
+            $('.checkout').removeClass('disabled');
+            $('.checkout').attr('aria-disabled', 'false').css('opacity', 1);
+        }
+        
+        $('.totals-value').fadeIn(fadeTime);
+    });
+}
+
 function updateQuantity(quantityInput, id)
 {
-  let quantity = $(quantityInput).val();
-  if(quantity <= 0)
-      return removeItem(quantityInput, id);
+    let quantity = $(quantityInput).val();
+    if(quantity <= 0)
+        return removeItem(quantityInput, id);
 
-  /* Calculate line price */
-  let productRow = $(quantityInput).parent().parent();
-  let price = Number(productRow.children('.cart-product-price').text().replace('.', ''));
-  let linePrice = price * quantity;
+    /* Calculate line price */
+    let productRow = $(quantityInput).parent().parent();
+    let price = Number(productRow.children('.cart-product-price').text().replace('.', ''));
+    let linePrice = price * quantity;
 
-  cart.changeQuantity(id, quantity);
-  shoppingCartBtn.textContent = cart.count();
+    cart.changeQuantity(id, quantity);
+    shoppingCartBtn.textContent = cart.count();
 
   /* Update line price display and recalc cart totals */
-  productRow.children('.cart-product-line-price').each(function () {
-    $(this).fadeOut(fadeTime, function() {
-      $(this).text(linePrice.toLocaleString('is').replace(',', '.'));
-      recalculateCart();
-      $(this).fadeIn(fadeTime);
+    productRow.children('.cart-product-line-price').each(function () {
+        $(this).fadeOut(fadeTime, function() {
+            $(this).text(linePrice.toLocaleString('is').replace(',', '.'));
+            recalculateCart();
+            $(this).fadeIn(fadeTime);
+        });
     });
-  });
 }
