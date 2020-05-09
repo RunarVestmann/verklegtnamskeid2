@@ -1,3 +1,4 @@
+const shoppingCartBtn = document.getElementsByClassName('shopping-cart-btn')[0];
 let cartProducts = [];
 
 const cart = {
@@ -26,6 +27,7 @@ const cart = {
         if(productInStorage){
             productInStorage.quantity += amount;
             cart.save();
+            shoppingCartBtn.textContent = cart.count();
         }
         else{
             $.ajax({
@@ -37,6 +39,7 @@ const cart = {
                         productInStorage.quantity = Number(productInStorage.quantity);
                         productInStorage.quantity += amount;
                         cart.save();
+                        shoppingCartBtn.textContent = cart.count();
                         return;
                     }
 
@@ -45,6 +48,7 @@ const cart = {
                         productFromServer.quantity = 1;
                         cart.products.push(productFromServer);
                         cart.save();
+                        shoppingCartBtn.textContent = cart.count();
                     }
                     else{
                         // TODO: Show a message that says that the product id was not found
@@ -88,6 +92,13 @@ const cart = {
         }
     },
 
+    count(){
+        let counter = 0;
+        for(let i = 0; i < cart.products.length; i++)
+            counter += cart.products[i].quantity;
+        return counter;
+    },
+
     clear(){
         cart.products = [];
         cart.save();
@@ -102,6 +113,7 @@ function removeItemFromArray(array, item){
 
 $(document).ready(function(){
     cart.init();
+    shoppingCartBtn.textContent = cart.count();
     if(window.location.pathname === '/cart/')
         renderProductsInCart();
 });
@@ -148,6 +160,7 @@ function removeItem(removeButton, id)
         productRow.remove();
         recalculateCart();
         cart.removeAll(id);
+        shoppingCartBtn.textContent = cart.count();
     });
 }
 
@@ -192,6 +205,7 @@ function updateQuantity(quantityInput, id)
   let linePrice = price * quantity;
 
   cart.changeQuantity(id, quantity);
+  shoppingCartBtn.textContent = cart.count();
 
   /* Update line price display and recalc cart totals */
   productRow.children('.product-line-price').each(function () {
