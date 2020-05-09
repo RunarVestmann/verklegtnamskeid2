@@ -140,7 +140,7 @@ function renderProductsInCart(){
                     <div class="cart-product-line-price">${(p.price * p.quantity).toLocaleString('is').replace(',', '.')}</div>
                     </div>`;
     });
-    $('#products').html(newHTML.join(''));
+    $('#cart-products').html(newHTML.join(''));
 }
 
 function addToCart(productID){
