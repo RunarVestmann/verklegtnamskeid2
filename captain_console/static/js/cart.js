@@ -128,16 +128,16 @@ function renderProductsInCart(){
                     <div class="cart-product-details">
                       <div class="cart-product-title">${p.name}</div>
                     </div>
-                    <div class="cart-product-price">${p.price.toLocaleString('is').replace(',', '.')}</div>
+                    <div class="cart-product-price">${p.price.toLocaleString('it')}</div>
                     <div class="cart-product-quantity">
-                      <input type="number" value="${p.quantity}" min="1" onchange="updateQuantity(this , ${p.id})">
+                      <input type="number" value="${p.quantity}" min="1" max="99" onchange="updateQuantity(this , ${p.id})">
                     </div>
                     <div class="cart-product-removal" >
                       <button class="remove-cart-product" onclick="removeItem(this, ${p.id});">
                         Eyða
                       </button>
                     </div>
-                    <div class="cart-product-line-price">${(p.price * p.quantity).toLocaleString('is').replace(',', '.')}</div>
+                    <div class="cart-product-line-price">${(p.price * p.quantity).toLocaleString('it')}</div>
                     </div>`;
     });
     $('#cart-products').html(newHTML.join(''));
@@ -164,18 +164,16 @@ function removeItem(removeButton, id)
 function recalculateCart()
 {
     let total = 0;
-
     /* Sum up row totals */
     $('.cart-product').each(function () {
-        total += Number($(this).children('.cart-product-line-price').text());
+        total += Number($(this).children('.cart-product-line-price').text().split('.').join(''));
     });
-
     updateTotalsDisplay(total);
 }
 
 function updateTotalsDisplay(total){
     $('.totals-value').fadeOut(fadeTime, function() {
-        $('#cart-total').html(total);
+        $('#cart-total').html(total.toLocaleString('it'));
         if(total == 0){
             $('.checkout').addClass('disabled');
             $('.checkout').attr('aria-disabled', 'true').css('opacity', 0.3);
@@ -198,7 +196,7 @@ function updateQuantity(quantityInput, id)
 
     /* Calculate line price */
     let productRow = $(quantityInput).parent().parent();
-    let price = Number(productRow.children('.cart-product-price').text().replace('.', ''));
+    let price = Number(productRow.children('.cart-product-price').text().split('.').join(''));
     let linePrice = price * quantity;
 
     cart.changeQuantity(id, quantity);
@@ -207,7 +205,7 @@ function updateQuantity(quantityInput, id)
   /* Update line price display and recalc cart totals */
     productRow.children('.cart-product-line-price').each(function () {
         $(this).fadeOut(fadeTime, function() {
-            $(this).text(linePrice.toLocaleString('is').replace(',', '.'));
+            $(this).text(linePrice.toLocaleString('it'));
             recalculateCart();
             $(this).fadeIn(fadeTime);
         });
