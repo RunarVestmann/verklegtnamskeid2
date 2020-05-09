@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from .forms import SignUpForm, LoginForm
 from django.shortcuts import render, redirect
 from .models import Profile, Search
+from product.models import Product
 import json
 
 # Create your views here.
@@ -68,20 +69,48 @@ def viewed_products(request):
         'search': Search.objects.filter(profile=request.user.id)
     })
 
-
+search_list = []
 def add_to_search(request):
     if request.method == 'POST':
         if request.user.is_authenticated:
-            profile = Profile.objects.filter(user=request.user)
+            try:
+                user_profile = Profile.objects.get(user__id=request.user.id)
+            # The user has no profile so we create one
+            except Profile.DoesNotExist:
+                user_profile = Profile()
+                user_profile.user = request.user
+                user_profile.save()
+
             search = Search()
-            search.profile = profile
-            data = json.loads(request.body)
-            search.product = data.productId
+            search.profile = user_profile
+
+            try:
+                product_id = json.loads(request.body)
+            except json.JSONDecodeError:
+                return send_json('JSON was invalid', 400)
+
+            if (user_profile.id, product_id) in search_list:
+                return send_json('The search already exists', 409)
+            elif Search.objects.filter(profile__id=user_profile.id, product__id=product_id).exists():
+                search_list.remove((user_profile.id, product_id))
+                return send_json('The search already exists', 409)
+            else:
+                search_list.append((user_profile.id, product_id))
+            try:
+                product = Product.objects.get(id=product_id)
+            except Product.DoesNotExist:
+                return send_json('The viewed product was not found', 404)
+
+            search.product = product
             search.save()
+            return send_json('', 201, product_id)
     else:
-        response = JsonResponse({
-            'data': {},
-            'message': 'Request method not supported'
-        })
-        response.status_code = 400
-        return response
+        return send_json('Request method not supported', 400)
+
+def send_json(message, status_code, data={}):
+    response = JsonResponse({
+        'data': data,
+        'message': message
+    })
+    response.status_code = status_code
+    return response

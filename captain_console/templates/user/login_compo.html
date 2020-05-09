@@ -1,31 +1,28 @@
+<form class="form" method="post">
 
-    <form class="form" method="post">
+    {% csrf_token %}
 
-        {% csrf_token %}
-
-        <div class="form-group row p-0 m-0">
-            <label for="username" class="col-2 col-form-label text-right"><small> {{ form.username.label_tag }}</small></label>
-            <div class="col-9">
-                <input class="form-control" {{ form.username }}
-            </div>
-            <div class="col-1"> </div>
-         </div>
-
-        <div class="form-group row p-0 m-0">
-            <label for="username" class="col-2 col-form-label text-right"><small> {{ form.password.label_tag }}</small></label>
+    <div class="form-group row p-0 m-0">
+        <label for="username" class="col-2 col-form-label text-right"><small> {{ form.username.label_tag }}</small></label>
         <div class="col-9">
-            <input class="form-control" {{ form.password }}
+            <input class="form-control" {{ form.username }}
         </div>
         <div class="col-1"> </div>
+     </div>
 
-
-        </div>
+    <div class="form-group row p-0 m-0">
+        <label for="username" class="col-2 col-form-label text-right"><small> {{ form.password.label_tag }}</small></label>
+    <div class="col-9">
+        <input class="form-control" {{ form.password }}
+    </div>
+    <div class="col-1"> </div>
+    </div>
 
   <div class="form-group row row p-0 m-0">
 {#      buttons line       #}
     <div class="col-2"> </div>
     <div class="col-4">
-        <button type="submit" class="btn btn-success btn-lg btn-block">Nýskrá</button>
+        <button type="submit" class="btn btn-success btn-lg btn-block">{% if request.path == '/user/signup/' %}Nýskrá{% else %}Innskrá{% endif %}</button>
     </div>
       <div class="col-4">
         <button type="reset" class="btn btn-secondary btn-lg btn-block">Hætta við</button>

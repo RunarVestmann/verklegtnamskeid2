@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 from product.models import Product
-from datetime import datetime
+from django.utils import timezone
+import pytz
 
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -19,4 +20,4 @@ class Profile(models.Model):
 class Search(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    date_of_search = models.DateTimeField(default=datetime.now)
+    date_of_search = models.DateTimeField(default=timezone.now)
