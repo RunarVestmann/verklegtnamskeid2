@@ -37,7 +37,7 @@ Vann að sign-up og login hlutanum - skinnaði og glímdi við að reyna láta �
 Vann að sign-up og login hlutanum - áframhaldandi glíma við að reyna fá til að virka betur - sett á ís.
 
 07/05/2020
-css styling products list view
+css styling products list view. Dropdown user element í head.
 
 08/05/2020
 css styling product view. Header og annað í 12 colum grid responsive layout
