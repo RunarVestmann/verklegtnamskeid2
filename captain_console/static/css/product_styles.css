@@ -2,9 +2,24 @@
 
     background: #26343b;
     font-size: 0.8rem;
-    color: #FFF;
+    color: #ccc;
     text-align: right;
     padding: 0.5rem 2rem 0.5rem 0.5rem;
+}
+
+.product-order-bar-link {
+    padding: 0 1rem 0 1rem;
+
+}
+
+.product-order-bar a {
+     color: #FFF;
+}
+
+
+.product-order-bar-active{
+ font-weight: 700;
+    padding: 0 0.2rem 0 0.9rem;
 }
 
 .products-box{
@@ -28,12 +43,18 @@
 .products-name{
     font-size: 1.2rem;
     font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .products-type{
     padding-top: 0.3rem ;
     font-size: 0.8rem;
     font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .products-price{
