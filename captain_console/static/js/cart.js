@@ -185,7 +185,7 @@ function updateTotalsDisplay(total){
             $('.checkout').removeClass('disabled');
             $('.checkout').attr('aria-disabled', 'false').css('opacity', 1);
         }
-        
+
         $('.totals-value').fadeIn(fadeTime);
     });
 }

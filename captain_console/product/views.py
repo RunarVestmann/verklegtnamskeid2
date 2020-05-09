@@ -86,6 +86,7 @@ def get_product_json_by_id(request, id):
     except Product.DoesNotExist:
         return JsonResponse({'data': {}})
 
+# Not currently being used
 def create_product(request):
     if request.method == 'POST':
         form = ProductForm(data=request.POST)

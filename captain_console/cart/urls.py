@@ -15,8 +15,5 @@ urlpatterns = [
     path('overview', views.payment_overview, name='overview'),
 
     # http://localhost:8000/cart/receipt
-    path('receipt', views.receipt, name='receipt'),
-
-    # http://localhost:8000/cart/user
-    path('user', views.user_cart, name='user_cart')
+    path('receipt', views.receipt, name='receipt')
 ]

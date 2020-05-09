@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, LoginForm
 from django.shortcuts import render, redirect
-
+from .models import Profile
 
 # Create your views here.
 def index(request):
@@ -33,6 +33,9 @@ def signup_view(request):
         password = form.cleaned_data.get('password1')
         user = authenticate(username=username, password=password)
         login(request, user)
+        profile = Profile()
+        profile.user = request.user
+        profile.save()
         return redirect('home')
 
     return render(request, 'user/signup.html', {'form': form})

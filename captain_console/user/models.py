@@ -1,13 +1,11 @@
 from django.contrib.auth.models import User
 from django.db import models
 from product.models import Product
-from cart.models import ShoppingCart
 from datetime import datetime
 
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='images/')
-    shopping_cart = models.ForeignKey(ShoppingCart, on_delete=models.DO_NOTHING)
+    image = models.ImageField(upload_to='images/', default='/static/nav_img/default_profile_image.svg')
 
     def save(self, *args, **kwargs):
         try:
