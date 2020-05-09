@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block background-color %}#63899c{% endblock background-color %}
+{% block content %}
+    <div class="row home-bg-color-1"></div>
+        <div class="col p-4 text-center">
+            <h4>Vörur sem þú hefur skoðað nýlega</h4>
+                {% for product in search %}
+
+                    {% if forloop.counter <= 6 %}
+                    {% include 'product/product.html' %}
+                    {% endif %}
+
+                {% endfor %}
+        </div>
+    <!--
+    <div class="row home-bg-color-1 pl-4" >
+        <div class="col">
+
+        </div>
+        <div class="col">
+
+        </div>
+        <div class="col">
+
+        </div>
+    </div> -->
+
+{% endblock %}

@@ -1,9 +1,12 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+
 from .forms import SignUpForm, LoginForm
 from django.shortcuts import render, redirect
-from .models import Profile
+from .models import Profile, Search
+import json
 
 # Create your views here.
 def index(request):
@@ -58,3 +61,27 @@ def signup_view(request):
 def profile(request):
     #mostly to test login_requried decorator
     return render(request, 'user/profile.html')
+
+@login_required
+def viewed_products(request):
+    return render(request, 'user/viewed_products.html', {
+        'search': Search.objects.filter(profile=request.user.id)
+    })
+
+
+def add_to_search(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            profile = Profile.objects.filter(user=request.user)
+            search = Search()
+            search.profile = profile
+            data = json.loads(request.body)
+            search.product = data.productId
+            search.save()
+    else:
+        response = JsonResponse({
+            'data': {},
+            'message': 'Request method not supported'
+        })
+        response.status_code = 400
+        return response

@@ -129,7 +129,15 @@ function displayChanges(){
     });
 }
 
-//function onDetailClick(){
-   //onclick="onDetailClick({{ product.id }})
+function onDetailClick(productId){
+   $.ajax({
+       url: '/user/add_to_search',
+       method: 'POST',
+       error: function(xhr, status, error) {
+           // TODO: Display error message (using toastr?)
+           console.error(error);
+       },
+       data: productId
+   })
 
-//}
+}
