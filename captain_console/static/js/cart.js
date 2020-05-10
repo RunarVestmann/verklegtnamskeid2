@@ -130,14 +130,12 @@ function renderProductsInCart(){
                     </div>
                     <div class="cart-product-price">${p.price.toLocaleString('it')}</div>
                     <div class="cart-product-quantity">
-                      <input type="number" value="${p.quantity}" min="1" max="99" onchange="updateQuantity(this , ${p.id})">
+                        <input type="number" value="${p.quantity}" min="1" max="99" onchange="updateQuantity(this , ${p.id})">
                     </div>
                     <div class="cart-product-removal" >
-                      <button class="remove-cart-product" onclick="removeItem(this, ${p.id});">
-                        Eyða
-                      </button>
+                        <button class="remove-cart-product" onclick="removeItem(this, ${p.id});">Eyða</button>
                     </div>
-                    <div class="cart-product-line-price">${(p.price * p.quantity).toLocaleString('it')}</div>
+                        <div class="cart-product-line-price">${(p.price * p.quantity).toLocaleString('it')}</div>
                     </div>`;
     });
     $('#cart-products').html(newHTML.join(''));
@@ -193,6 +191,10 @@ function updateQuantity(quantityInput, id)
     let quantity = $(quantityInput).val();
     if(quantity <= 0)
         return removeItem(quantityInput, id);
+    else if(quantity > 99){
+        $(quantityInput).val(99);
+        quantity = 99;
+    }
 
     /* Calculate line price */
     let productRow = $(quantityInput).parent().parent();
