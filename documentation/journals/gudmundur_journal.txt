@@ -44,4 +44,4 @@ css styling product view. Header og annað í 12 colum grid responsive layout
 hönnun á körfu hnapp 
 
 09/05/2020
-Order by virkni - vann í og setti upp (langur django-learning prosses).
+Order by virkni - vann í (langur django-learning prosses) og setti upp (CSS og SVG)
