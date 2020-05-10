@@ -24,7 +24,9 @@
                                 <a class="filter-btn">{{ manufacturer.name }}</a>
                                 <ul class="child-filter">
                                 {% for system in systems %}
+                                    {% if system.manufacturer.name == manufacturer.name %}
                                     <li><a role="button" class="filter-btn">{{ system.name }}</a></li>
+                                    {% endif %}
                                 {% endfor %}
                                 </ul>
                             </div>

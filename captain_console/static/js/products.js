@@ -2,10 +2,35 @@ const searchBox = $('#search-box');
 const searchButton = $('#search-btn');
 const products = $('#products');
 let productList = [];
-let ascending = true;
+let ascendingOrder = true;
 let searchList = [];
 
 $(document).ready(function(){
+    // Set up all the onclick events for the buttons
+    setupOrderByButtons();
+    const filterButtons = setupFilterButtons();
+    setupSearchButton(filterButtons);
+
+    // Set the correct settings for the AJAX connection
+    setupAjax();
+
+    // When the site gets refreshed or the user was redirected do the following:
+    if(window.location.pathname === '/products/'){
+
+        // Set the search box text to be what the user searched for
+        const searchText = window.sessionStorage.getItem('searchText');
+        if(searchText !== null && searchText !== undefined){
+             searchBox.val(searchText);
+             window.sessionStorage.removeItem('searchText');
+        }
+
+        // Store behind the scenes all the products being displayed if they aren't already being stored
+        else if(productList.length === 0)
+             getAndStoreAllProducts();
+    }
+});
+
+function setupOrderByButtons(){
     const orderByButtons = $('.order-by-btn');
     for(let i = 0; i < orderByButtons.length; i++) {
         const button = orderByButtons[i];
@@ -18,22 +43,24 @@ $(document).ready(function(){
                     $(this).toggleClass('product-order-bar-active');
                 });
             }
-            else
-                flipArrow();
+            else flipArrow();
         }
     };
+}
 
-    // When a filter gets clicked
+function setupFilterButtons(){
     const filterButtons = $('.filter-btn');
     for(let i = 0; i < filterButtons.length; i++){
         const filter = filterButtons[i];
         filter.onmousedown = function(){
-          if(filter.style.textDecoration !== 'underline')
-              filter.style.textDecoration = 'underline',
-                filter.style.fontWeight = 'bold';
-          else
-              filter.style.textDecoration = 'none',
-              filter.style.fontWeight = 'normal';
+          if(filter.style.textDecoration !== 'underline'){
+            filter.style.textDecoration = 'underline';
+            filter.style.fontWeight = 'bold';
+          }
+          else{
+            filter.style.textDecoration = 'none';
+            filter.style.fontWeight = 'normal';
+          }           
         };
         filter.addEventListener('click', function(event){
             const searchBoxValue = searchBox.val();
@@ -47,66 +74,84 @@ $(document).ready(function(){
                 searchList = searchList.filter(s => s !== searchText);
             else
                 searchList.push(searchText);
-            HandleSearch(event);
+            handleSearch(event);
         });
     }
+    return filterButtons;
+}
 
+function setupSearchButton(filterButtons){
     // When the search button gets clicked
     searchButton.on('click', function(event){
         searchList = [];
         searchList.push(searchBox.val());
 
         // Clear out all the underlines for the filters
-        for(let i = 0; i < filterButtons.length; i++)
-            filterButtons[i].style.textDecoration = 'none',
+        for(let i = 0; i < filterButtons.length; i++){
+            filterButtons[i].style.textDecoration = 'none';
             filterButtons[i].style.fontWeight = 'normal';
-
-        HandleSearch(event);
+        }
+        handleSearch(event);
     });
+}
 
-    // When on the products site change the html to reflect the search and also change the searchText to be whatever the person searched
-    if(window.location.pathname === '/products/'){
-        const searchText = window.sessionStorage.getItem('searchText');
-        if(searchText !== null && searchText !== undefined){
-             searchBox.val(searchText);
-             window.sessionStorage.removeItem('searchText');
-        }
-        else if(productList.length === 0){
-             $.ajax({
-                url: '/products?search=',
-                type: 'GET',
-                success: function(response){
-                    productList = [];
-                    response.data.forEach(product => {
-                        const productHTML = getProductHTML(product);
-
-                        //Store all the products in a list for further use
-                        productList.push({
-                            product: product,
-                            html: productHTML
-                        });
-                    });
-                }
-            });
-        }
-
-        const newHTML = window.sessionStorage.getItem('newHTML');
-        if(newHTML !== null && newHTML !== undefined){
-            products.html(newHTML);
-            window.sessionStorage.removeItem('newHTML');
-        }
-    }
-    setupAjax();
+function setupAjax(){
+    $.ajaxSetup({
+     beforeSend: function(xhr, settings) {
+         function getCookie(name) {
+             var cookieValue = null;
+             if (document.cookie && document.cookie != '') {
+                 var cookies = document.cookie.split(';');
+                 for (var i = 0; i < cookies.length; i++) {
+                     var cookie = jQuery.trim(cookies[i]);
+                     // Does this cookie string begin with the name we want?
+                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                         break;
+                     }
+                 }
+             }
+             return cookieValue;
+         }
+         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+             // Only send the token to relative URLs i.e. locally.
+             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+         }
+     }
 });
+}
 
-function HandleSearch(event){
+function handleSearch(event){
     event.preventDefault();
     displayChanges();
 }
 
+function getAndStoreAllProducts(){
+    $.ajax({
+        url: '/products?search=',
+        type: 'GET',
+        success: function(response){
+            productList = [];
+            response.data.forEach(product => {
+                const productHTML = getProductHTML(product);
+
+                //Store all the products in a list for further use
+                productList.push({
+                    product: product,
+                    html: productHTML
+                });
+            });
+            if($('.product-order-bar-active').text() === 'Nafni')
+                orderByName();
+            else
+                orderByPrice();
+        }
+    });
+}
+
 function displayChanges(){
     const searchText = searchList.join(' ');
-    
+
     if(!searchText && window.location.href !== '/products/'){
         window.location.href = '/products/';
         return;
@@ -127,14 +172,12 @@ function displayChanges(){
                 });
                 return productHTML;
             });
-            const joinedHTML = newHTML.join('');
 
             if(window.location.pathname === '/products/')
-                products.html(joinedHTML);
+                products.html(newHTML.join(''));
             else{
-                // Store data so that we can use it during a redirect
+                // Store data so that we can use it on the redirect page
                 window.sessionStorage.setItem('searchText', searchText);
-                window.sessionStorage.setItem('newHTML', joinedHTML);
 
                 // Redirect to /products
                 window.location.href = '/products/';
@@ -181,32 +224,6 @@ function getProductHTML(product){
                         </div>`;
 }
 
-function setupAjax(){
-    $.ajaxSetup({
-     beforeSend: function(xhr, settings) {
-         function getCookie(name) {
-             var cookieValue = null;
-             if (document.cookie && document.cookie != '') {
-                 var cookies = document.cookie.split(';');
-                 for (var i = 0; i < cookies.length; i++) {
-                     var cookie = jQuery.trim(cookies[i]);
-                     // Does this cookie string begin with the name we want?
-                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                         break;
-                     }
-                 }
-             }
-             return cookieValue;
-         }
-         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-             // Only send the token to relative URLs i.e. locally.
-             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-         }
-     }
-});
-}
-
 function onDetailClick(productId){
     const clickedProducts = localStorage.getItem('clickedProducts');
 
@@ -236,8 +253,8 @@ function onDetailClick(productId){
 
 function flipArrow(){
     const arrow = $('#arrow');
-    ascending = !ascending;
-    if(ascending)
+    ascendingOrder = !ascendingOrder;
+    if(ascendingOrder)
         arrow.attr('transform', '');
     else
         arrow.attr('transform', 'rotate(180)');
@@ -249,9 +266,9 @@ function orderByName(){
         const bName = b.product.name.toUpperCase();
 
         if(aName > bName)
-            return ascending ? 1 : -1;
+            return ascendingOrder ? 1 : -1;
         if(aName < bName)
-            return ascending ? -1 : 1;
+            return ascendingOrder ? -1 : 1;
         return 0;
     });
 
@@ -266,7 +283,7 @@ function orderByPrice(){
         const aPrice = Number(String(a.product.price).split('.').join(''));
         const bPrice = Number(String(b.product.price).split('.').join(''));
 
-        return ascending ? aPrice -bPrice : bPrice - aPrice;
+        return ascendingOrder ? aPrice -bPrice : bPrice - aPrice;
     });
 
     const newHTML = productList.map(product => {
