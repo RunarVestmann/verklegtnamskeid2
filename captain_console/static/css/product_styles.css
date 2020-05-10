@@ -20,10 +20,6 @@
     /*text-overflow: ellipsis;*/
 }
 
-.child-filter-container:hover{
-    font-weight: bold !important;
-}
-
 .filter-btn:hover{
     font-weight: bold !important;
 }
@@ -65,26 +61,6 @@
     border-radius: 0.2rem;
     padding: 0rem 0.3rem 0.2rem 0.3rem;
     text-align: center;
-}
-
-
-.check-symbol{
-    cursor: pointer;
-    display: inline;
-    border: 0.1rem solid #3e5763;
-    border-radius: 0.2rem;
-    color:white;
-    background-color: white;
-    padding: 0rem 0.3rem 0.2rem 0.3rem;
-    text-align: center;
-}
-
-.child-filter-container{
-    cursor: pointer;
-}
-
-.child-filter-container:hover{
-    font-weight: bold !important;
 }
 
 .product-order-bar{
