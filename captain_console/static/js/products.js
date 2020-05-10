@@ -53,12 +53,10 @@ function setupFilterButtons(){
     for(let i = 0; i < filterButtons.length; i++){
         const filter = filterButtons[i];
         filter.onmousedown = function(){
-          if(filter.style.textDecoration !== 'underline'){
-            filter.style.textDecoration = 'underline';
+          if(filter.style.fontWeight !== 'bold'){
             filter.style.fontWeight = 'bold';
           }
           else{
-            filter.style.textDecoration = 'none';
             filter.style.fontWeight = 'normal';
           }           
         };
