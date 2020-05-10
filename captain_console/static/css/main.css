@@ -85,32 +85,12 @@ html{
     font-size: 0.8rem;
 }
 
-.filter-block{
-    margin-left: 1rem;
-    margin-top: 1rem;
-}
-
-.filter-block a{
-    cursor: pointer;
-}
-.filter-block a:hover{
-    text-decoration: underline;
-}
-
-.child-filter{
-    padding-left: 1.4rem;
-    display: none;
-    margin:0;
-}
 
 ul{
     list-style-type: none;
 }
 
-.symbol{
-    cursor: pointer;
-    display: inline;
-}
+
 
 body{
     /* Footer configuration */

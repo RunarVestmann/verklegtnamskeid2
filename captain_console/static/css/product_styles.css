@@ -1,3 +1,64 @@
+.filter-block{
+    margin: 0.5rem;
+    color: #26343b;
+ }
+
+.filter-level1{
+    color: #FFF;
+    background: #537585;
+    padding-left: 0.5rem;
+    margin-bottom: 0.2rem;
+}
+
+.filter-btn{
+    /*this name is use is javascript for idendication*/
+    display: inline-block;
+    padding: 0.5rem;
+    width: 78%;
+    /*white-space: nowrap;*/
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+}
+
+.filter-block a{
+    cursor: pointer;
+}
+.filter-block a:hover{
+    text-decoration: underline;
+}
+
+.child-filter{
+    padding: 0 0.2rem 0.1rem 1.4rem;
+    display: none;
+}
+
+.child-filter li{
+    background: #3e5763;
+    margin-bottom: 0.2rem;
+
+}
+.child-filter li:nth-child(even){
+    background: #8099a5;
+    margin-bottom: 0.2rem;
+}
+
+.filter-level2{
+    padding-left: 1.5rem
+}
+
+.symbol{
+    /*this name is use is javascript for idendication*/
+    cursor: pointer;
+    display: inline;
+
+    color: #FFF;
+    font-weight: 700;
+    border: 0.1rem solid #3e5763;
+    border-radius: 0.2rem;
+    padding: 0rem 0.3rem 0.2rem 0.3rem;
+    text-align: center;
+}
+
 .product-order-bar{
 
     background: #26343b;
@@ -15,7 +76,6 @@
 .product-order-bar a {
      color: #FFF;
 }
-
 
 .product-order-bar-active{
  font-weight: 700;

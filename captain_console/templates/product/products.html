@@ -13,29 +13,62 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-12 col-lg-2">
-            <div class="filter-block">
+        <div class="col-sm-12 col-lg-2 p-0">
+            <div class="container-fluid p-0 m-0">
+                <div class="row">
+                    <div class="col-6 col-lg-12">
+                         <div class="filter-block">
+                            {% for manufacturer in manufacturers %}
+                            <div class="filter-level1  ">
+                                <div class="symbol">+</div>
+                                <a class="filter-btn">{{ manufacturer.name }}</a>
+                                <ul class="child-filter">
+                                {% for system in systems %}
+                                    <li><a role="button" class="filter-btn">{{ system.name }}</a></li>
+                                {% endfor %}
+                                </ul>
+                            </div>
+                            {% endfor %}
+                        </div>
 
-                {% for manufacturer in manufacturers %}
-                <div>
-                    <p class="symbol text-white border rounded">+</p>
-                    <a class="filter-btn text-white">{{ manufacturer.name }}</a>
-                    <ul class="child-filter">
-                    {% for system in systems %}
-                        <li><a role="button" class="filter-btn text-white">{{ system.name }}</a></li>
-                    {% endfor %}
-                    </ul>
+                    </div>
+                    <div class="col-6 col-lg-12">
+                        <div class="filter-block">
+                            <ul class="filter-level2">
+                            {% for type in types %}
+                                <li><a role="button" class="filter-btn"> {{ type }}</a></li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                {% endfor %}
             </div>
 
-        <div class="filter-block">
-            <ul style="padding-left: 1rem">
-            {% for type in types %}
-                <li><a role="button" class="filter-btn text-white">{{ type }}</a></li>
-            {% endfor %}
-            </ul>
-        </div>
+
+
+
+
+{#            <div class="filter-block">#}
+{#                {% for manufacturer in manufacturers %}#}
+{#                <div class="filter-level1">#}
+{#                    <p class="symbol text-white border rounded">+</p>#}
+{#                    <a class="filter-btn">{{ manufacturer.name }}</a>#}
+{#                    <ul class="child-filter">#}
+{#                    {% for system in systems %}#}
+{#                        <li><a role="button" class="filter-btn text-white">{{ system.name }}</a></li>#}
+{#                    {% endfor %}#}
+{#                    </ul>#}
+{#                </div>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{##}
+{#        <div class="filter-block">#}
+{#            <ul class="filter-level2">#}
+{#            {% for type in types %}#}
+{#                <li><a role="button" class="filter-btn">{{ type }}</a></li>#}
+{#            {% endfor %}#}
+{#            </ul>#}
+{#        </div>#}
 
     </div>
 

@@ -29,9 +29,11 @@ $(document).ready(function(){
         const filter = filterButtons[i];
         filter.onmousedown = function(){
           if(filter.style.textDecoration !== 'underline')
-              filter.style.textDecoration = 'underline';
+              filter.style.textDecoration = 'underline',
+                filter.style.fontWeight = 'bold';
           else
-              filter.style.textDecoration = 'none';
+              filter.style.textDecoration = 'none',
+              filter.style.fontWeight = 'normal';
         };
         filter.addEventListener('click', function(event){
             const searchBoxValue = searchBox.val();
@@ -56,7 +58,8 @@ $(document).ready(function(){
 
         // Clear out all the underlines for the filters
         for(let i = 0; i < filterButtons.length; i++)
-            filterButtons[i].style.textDecoration = 'none';
+            filterButtons[i].style.textDecoration = 'none',
+            filterButtons[i].style.fontWeight = 'normal';
 
         HandleSearch(event);
     });
