@@ -25,7 +25,12 @@
                                 <ul class="child-filter">
                                 {% for system in systems %}
                                     {% if system.manufacturer.name == manufacturer.name %}
-                                    <li><a role="button" class="filter-btn">{{ system.name }}</a></li>
+                                    <li>
+                                        <div class="child-filter-container filter-btn">
+                                            <div class="check-symbol">&#x2713</div>
+                                            <span style="cursor:pointer">{{ system.abbreviation }}</span>
+                                        </div>
+                                    </li>
                                     {% endif %}
                                 {% endfor %}
                                 </ul>

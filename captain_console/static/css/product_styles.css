@@ -10,8 +10,8 @@
     margin-bottom: 0.2rem;
 }
 
+/* Due note that this class is also styled in the static js files */
 .filter-btn{
-    /*this name is use is javascript for idendication*/
     display: inline-block;
     padding: 0.5rem;
     width: 78%;
@@ -20,11 +20,19 @@
     /*text-overflow: ellipsis;*/
 }
 
+.child-filter-container:hover{
+    font-weight: bold !important;
+}
+
+.filter-btn:hover{
+    font-weight: bold !important;
+}
+
 .filter-block a{
     cursor: pointer;
 }
 .filter-block a:hover{
-    font-weight: bold;
+    font-weight: bold !important;
 }
 
 .child-filter{
@@ -57,6 +65,26 @@
     border-radius: 0.2rem;
     padding: 0rem 0.3rem 0.2rem 0.3rem;
     text-align: center;
+}
+
+
+.check-symbol{
+    cursor: pointer;
+    display: inline;
+    border: 0.1rem solid #3e5763;
+    border-radius: 0.2rem;
+    color:white;
+    background-color: white;
+    padding: 0rem 0.3rem 0.2rem 0.3rem;
+    text-align: center;
+}
+
+.child-filter-container{
+    cursor: pointer;
+}
+
+.child-filter-container:hover{
+    font-weight: bold !important;
 }
 
 .product-order-bar{

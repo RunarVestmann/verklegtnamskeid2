@@ -52,15 +52,13 @@ function setupFilterButtons(){
     const filterButtons = $('.filter-btn');
     for(let i = 0; i < filterButtons.length; i++){
         const filter = filterButtons[i];
-        filter.onmousedown = function(){
-          if(filter.style.fontWeight !== 'bold'){
-            filter.style.fontWeight = 'bold';
-          }
-          else{
-            filter.style.fontWeight = 'normal';
-          }           
-        };
         filter.addEventListener('click', function(event){
+            if(filter.style.fontWeight !== 'bold'){
+                filter.style.fontWeight = 'bold';
+            }
+            else{
+                filter.style.fontWeight = 'normal';
+            }
             const searchBoxValue = searchBox.val();
 
             if(searchBoxValue && searchList.length === 1 && searchList.includes(searchBoxValue))
@@ -75,6 +73,34 @@ function setupFilterButtons(){
             handleSearch(event);
         });
     }
+
+    const childFilters = $('.child-filter-container');
+
+    for(let i = 0; i < childFilters.length; i++){
+        const childFilter = childFilters[i];
+
+        const children = childFilter.children;
+
+        childFilter.addEventListener('click', function(event){
+            for(let j = 0; j < children.length; j++){
+                if(children[j].classList.contains('check-symbol')){
+                    if(children[j].style.color === 'white' || children[j].style.color === '')
+                        children[j].style.color = 'black';
+                    else
+                        children[j].style.color = 'white';
+                }
+                else{
+                    if(children[j].style.fontWeight == 'bold'){
+                        children[j].style.fontWeight == 'normal';
+                    }
+                    else{
+                        children[j].style.fontWeight == 'bold';
+                    }
+                }
+            }
+        });
+    }
+
     return filterButtons;
 }
 
@@ -150,7 +176,7 @@ function getAndStoreAllProducts(){
 function displayChanges(){
     const searchText = searchList.join(' ');
 
-    if(!searchText && window.location.href !== '/products/'){
+    if(!searchText && window.location.pathname !== '/products/'){
         window.location.href = '/products/';
         return;
     }
