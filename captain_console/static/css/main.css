@@ -4,7 +4,7 @@ html{
 }
 
 .header-nav{
-    margin-top: 0px;
+    margin-top: 0;
     background-color: #C2AF37;
 }
 
@@ -55,12 +55,14 @@ html{
 
 .logo-img{
     position: absolute;
+    top: -4rem;
+    text-align: left;
     width: auto;
     height: auto;
     max-height: 9rem;
     min-height: 6rem;
-    top: -4rem;
-
+    max-width: 9rem;
+    min-width: 6rem;
 }
 
 .nav-img{
