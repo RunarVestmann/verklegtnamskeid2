@@ -27,6 +27,13 @@ $(document).ready(function(){
         // Store behind the scenes all the products being displayed if they aren't already being stored
         else if(productList.length === 0)
              getAndStoreAllProducts();
+
+        // Set the html up correctly
+        const newHTML = window.sessionStorage.getItem('newHTML');
+        if(newHTML !== null && newHTML !== undefined){
+            products.html(newHTML);
+            window.sessionStorage.removeItem('newHTML');
+        }
     }
 });
 
@@ -175,11 +182,14 @@ function displayChanges(){
                 return productHTML;
             });
 
+            const joinedHTML = newHTML.join('');
+
             if(window.location.pathname === '/products/')
-                products.html(newHTML.join(''));
+                products.html(joinedHTML);
             else{
                 // Store data so that we can use it on the redirect page
                 window.sessionStorage.setItem('searchText', searchText);
+                window.sessionStorage.setItem('newHTML', joinedHTML);
 
                 // Redirect to /products
                 window.location.href = '/products/';
