@@ -13,13 +13,11 @@
 /* Due note that this class is also styled in the static js files */
 .filter-btn{
     display: inline-block;
-    padding: 0.5rem;
-    width: 78%;
+    margin: 0.2rem 0rem 0.2rem 0.2rem;
+    padding: 0.2rem 0rem 0.2rem 0.6rem;
+    width: 77%;
     font-weight: bold;
     border-radius: 1.3rem;
-    /*white-space: nowrap;*/
-    /*overflow: hidden;*/
-    /*text-overflow: ellipsis;*/
 }
 
 .filter-btn:hover{
