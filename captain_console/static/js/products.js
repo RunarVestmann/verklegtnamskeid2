@@ -54,18 +54,17 @@ function setupFilterButtons(){
         const filter = filterButtons[i];
 
         const startingColor = filter.style.backgroundColor;
+        let toggle = false;
 
         filter.addEventListener('click', function(event){
-            if(filter.style.fontWeight !== 'bold'){
-                filter.style.fontWeight = 'bold';
+            if(!toggle){
                 filter.style.backgroundColor = '#99a6ac';
-                filter.style.borderRadius = '1.3rem';
             }
             else{
-                filter.style.fontWeight = 'normal';
                 filter.style.backgroundColor = startingColor;
-                filter.style.borderRadius = '0rem';
             }
+            toggle = !toggle;
+
             const searchBoxValue = searchBox.val();
 
             if(searchBoxValue && searchList.length === 1 && searchList.includes(searchBoxValue))

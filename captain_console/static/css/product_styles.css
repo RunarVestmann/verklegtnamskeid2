@@ -15,20 +15,19 @@
     display: inline-block;
     padding: 0.5rem;
     width: 78%;
+    font-weight: bold;
+    border-radius: 1.3rem;
     /*white-space: nowrap;*/
     /*overflow: hidden;*/
     /*text-overflow: ellipsis;*/
 }
 
 .filter-btn:hover{
-    font-weight: bold !important;
+    background-color: #99a6ac;
 }
 
 .filter-block a{
     cursor: pointer;
-}
-.filter-block a:hover{
-    font-weight: bold !important;
 }
 
 .child-filter{
