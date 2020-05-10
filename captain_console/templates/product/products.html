@@ -1,51 +1,16 @@
 {% extends "base.html" %}
 {% block background-color %}#63899c{% endblock background-color  %}
 {% block content %}
-        <div class="row">
-            <div class="col-12 product-order-bar">
-          Raða eftir:
-                {% if request.get_full_path  == '/products/?order=name' %}
-                    <a class="product-order-bar-active" href="?order=-name">Nafn</a>
-                    <svg  xmlns="http://www.w3.org/2000/svg"  xmlns:xlink="http://www.w3.org/1999/xlink"  width="11px" height="14px">
-                            <path fill-rule="evenodd"  fill="rgb(255, 255, 255)" d="M6.700,7.812 L6.700,11.000 L4.300,11.000 L4.300,7.812 L0.250,7.812 L5.500,-0.000 L10.750,7.812 L6.700,7.812 ZM6.750,14.000 L4.250,14.000 L4.250,12.000 L6.750,12.000 L6.750,14.000 Z"/>
-                    </svg>
-
-                    <a class="product-order-bar-link" href="?order=price"> Verði</a>
-                    <a class="product-order-bar-link" href="?order=?">Alskonar</a>
-
-                {% elif  request.get_full_path  == '/products/?order=-name'%}
-                    <a class="product-order-bar-active" href="?order=name">Nafn</a>
-                     <svg  xmlns="http://www.w3.org/2000/svg"  xmlns:xlink="http://www.w3.org/1999/xlink"  width="11px" height="14px" transform="rotate(180)">
-                            <path fill-rule="evenodd"  fill="rgb(255, 255, 255)" d="M6.700,7.812 L6.700,11.000 L4.300,11.000 L4.300,7.812 L0.250,7.812 L5.500,-0.000 L10.750,7.812 L6.700,7.812 ZM6.750,14.000 L4.250,14.000 L4.250,12.000 L6.750,12.000 L6.750,14.000 Z"/>
-                    </svg>
-
-                    <a class="product-order-bar-link"href="?order=-price"> Verði</a>
-                    <a class="product-order-bar-link" href="?order=?">Alskonar</a>
-
-                {% elif  request.get_full_path  == '/products/?order=price'%}
-                    <a class="product-order-bar-link" href="?order=name">Nafn</a>
-                    <a class="product-order-bar-active"href="?order=-price"> Verði</a>
-                      <svg  xmlns="http://www.w3.org/2000/svg"  xmlns:xlink="http://www.w3.org/1999/xlink"  width="11px" height="14px">
-                            <path fill-rule="evenodd"  fill="rgb(255, 255, 255)" d="M6.700,7.812 L6.700,11.000 L4.300,11.000 L4.300,7.812 L0.250,7.812 L5.500,-0.000 L10.750,7.812 L6.700,7.812 ZM6.750,14.000 L4.250,14.000 L4.250,12.000 L6.750,12.000 L6.750,14.000 Z"/>
-                    </svg>
-                    <a class="product-order-bar-link" href="?order=?">Alskonar</a>
-                {% elif  request.get_full_path  == '/products/?order=-price'%}
-                    <a class="product-order-bar-link" href="?order=name">Nafn</a>
-                    <a class="product-order-bar-active"href="?order=-price"> Verði</a>
-                      <svg  xmlns="http://www.w3.org/2000/svg"  xmlns:xlink="http://www.w3.org/1999/xlink"  width="11px" height="14px" transform="rotate(180)">
-                            <path fill-rule="evenodd"  fill="rgb(255, 255, 255)" d="M6.700,7.812 L6.700,11.000 L4.300,11.000 L4.300,7.812 L0.250,7.812 L5.500,-0.000 L10.750,7.812 L6.700,7.812 ZM6.750,14.000 L4.250,14.000 L4.250,12.000 L6.750,12.000 L6.750,14.000 Z"/>
-                    </svg>
-                    <a class="product-order-bar-link" href="?order=?">Alskonar</a>
-                {% else %}
-                    <a class="product-order-bar-link" href="?order=name">Nafn</a>
-                    <a class="product-order-bar-link" href="?order=price"> Verði</a>
-                    <a class="product-order-bar-active" href="?order=?">Alskonar</a>
-
-          {% endif %}
-
+    <div class="row">
+        <div class="col-12 product-order-bar">
+            <span>Raða eftir:</span>
+            <a class="product-order-bar-active order-by-btn" style="cursor: pointer" role="button" onclick="orderByName()">Nafni</a>
+            <svg  xmlns="http://www.w3.org/2000/svg"  xmlns:xlink="http://www.w3.org/1999/xlink" id="arrow" transform=""  width="11px" height="14px">
+                    <path fill-rule="evenodd"  fill="rgb(255, 255, 255)" d="M6.700,7.812 L6.700,11.000 L4.300,11.000 L4.300,7.812 L0.250,7.812 L5.500,-0.000 L10.750,7.812 L6.700,7.812 ZM6.750,14.000 L4.250,14.000 L4.250,12.000 L6.750,12.000 L6.750,14.000 Z"/>
+            </svg>
+            <a class="product-order-bar-link order-by-btn" style="cursor: pointer" role="button" onclick="orderByPrice()"> Verði</a>
         </div>
-        </div>
-
+    </div>
 
     <div class="row">
         <div class="col-sm-12 col-lg-2">

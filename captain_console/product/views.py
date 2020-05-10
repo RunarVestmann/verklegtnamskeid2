@@ -6,15 +6,8 @@ from .models import Product, ProductImage, Type, System, Manufacturer
 def index(request):
     # Store at the top what we'll be using no matter what
     all_types = Type.objects.all()
-    all_products = Product.objects.prefetch_related('system', 'type').all()
+    all_products = Product.objects.prefetch_related('system', 'type').all().order_by('name')
     all_manufacturers = Manufacturer.objects.all()
-
-    order_val_list = ['name', '-name', 'price', '-price', '?']
-    if 'order' in request.GET and request.GET['order'] in order_val_list:
-        order_val = request.GET['order']
-    else:
-        order_val = order_val_list[0]
-
 
     # If the user entered a search string we find the results
     if 'search' in request.GET:
@@ -22,7 +15,7 @@ def index(request):
 
         search_results = None
         if search:
-            query_set = all_products.order_by(order_val)
+            query_set = all_products
 
             # For every word in the search string get results from searching for that word
             search_results = __get_search_results(query_set, search[0])
@@ -54,7 +47,7 @@ def index(request):
                         search_results = search_results.exclude(system__manufacturer__name=manufacturer.name)
 
         else:
-            search_results = all_products.order_by(order_val)
+            search_results = all_products
 
         # Make a list of dictionaries that contain each products data
         products = [product.to_dict() for product in search_results]
@@ -63,7 +56,7 @@ def index(request):
 
     # If the user did not enter a search string we simply return all products in an html
     return render(request, 'product/products.html', {
-        'products': all_products.order_by(order_val),
+        'products': all_products,
         'types': all_types,
         'systems': System.objects.prefetch_related('manufacturer').all(),
         'manufacturers': all_manufacturers

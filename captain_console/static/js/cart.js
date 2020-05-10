@@ -176,7 +176,7 @@ function updateTotalsDisplay(total){
         $('#cart-total').html(total.toLocaleString('it'));
         if(total == 0){
             $('.checkout').addClass('disabled');
-            $('.checkout').attr('aria-disabled', 'true').css('opacity', 0.3);
+            $('.checkout').attr('aria-disabled', 'true').css('opacity', 0.5);
         }
 
         else{

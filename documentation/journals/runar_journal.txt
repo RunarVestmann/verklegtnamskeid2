@@ -30,3 +30,6 @@ Byrjaði á local storage fyrir shopping cart, lagfærði filters, betrumbætti 
 
 08/05/2020
 Vann meira í local storage fyrir cart-ið. Núna virðist þetta byrja að virka. Gærjaði einnig json tengingu fyrir hverja vöru /products/{id}/json
+
+09/05/2020
+Order by virkni, search history og cart storage fínpússun.
