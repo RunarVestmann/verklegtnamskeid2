@@ -197,10 +197,18 @@ function displayChanges(){
                 return productHTML;
             });
 
-            const joinedHTML = newHTML.join('');
+            if(window.location.pathname === '/products/'){
+                const activeOrderBtn = $('.product-order-bar-active')
 
-            if(window.location.pathname === '/products/')
-                products.html(joinedHTML);
+                if(activeOrderBtn){
+                    if($(activeOrderBtn).text() === 'Nafni')
+                        orderByName();
+                    else
+                        orderByPrice();
+                }
+                else
+                    products.html(newHTML.join(''));
+            }
             else{
                 // Store data so that we can use it on the redirect page
                 window.sessionStorage.setItem('searchText', searchText);
