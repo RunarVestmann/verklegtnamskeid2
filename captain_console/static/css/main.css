@@ -210,6 +210,11 @@ background: #3aac5d;
 color: white;
 }
 
+.loading-icon{
+    display: none;
+    position: absolute;
+}
+
 footer{
     color:white;
     background-color: #05021F;

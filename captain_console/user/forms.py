@@ -40,3 +40,4 @@ class SearchForm(ModelForm):
     class Meta:
         model = Search
         fields = ['profile', 'product', 'date_of_search']
+

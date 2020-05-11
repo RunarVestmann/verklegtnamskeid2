@@ -27,32 +27,37 @@
             {% endfor %}
         </div>
     </div>
-        <div class="row home-bg-color-2 pt-2 pb-2">
-            <div class="col align-self-center">
-                <div class="star star-color-2"> VAR AÐ KOMA <br/> <small> til okkar</small></div>
+    <div class="row justify-content-center">
+        <div class="col-1 loading-icon">
+            <img src="/static/nav_img/loading_animation2.gif" alt="Loading">
+        </div>
+    </div>
+    <div class="row home-bg-color-2 pt-2 pb-2">
+        <div class="col align-self-center">
+            <div class="star star-color-2"> VAR AÐ KOMA <br/> <small> til okkar</small></div>
 
-            </div>
-            <div class="col">
-                {% for product in products %}
-                    {% if forloop.counter == 1 %}
-                        {% include 'product/product.html' %}
-                    {% endif %}
-                {% endfor %}
-            </div>
-            <div class="col">
-                {% for product in products %}
-                    {% if forloop.counter == 2 %}
-                        {% include 'product/product.html' %}
-                    {% endif %}
-                {% endfor %}
-            </div>
-            <div class="col">
-                {% for product in products %}
-                    {% if forloop.counter == 3 %}
-                        {% include 'product/product.html' %}
-                    {% endif %}
-                {% endfor %}
-            </div>
+        </div>
+        <div class="col">
+            {% for product in products %}
+                {% if forloop.counter == 1 %}
+                    {% include 'product/product.html' %}
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="col">
+            {% for product in products %}
+                {% if forloop.counter == 2 %}
+                    {% include 'product/product.html' %}
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="col">
+            {% for product in products %}
+                {% if forloop.counter == 3 %}
+                    {% include 'product/product.html' %}
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
 
 {% endblock content %}

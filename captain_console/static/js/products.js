@@ -178,7 +178,7 @@ function displayChanges(){
         window.location.href = '/products/';
         return;
     }
-
+    $('.loading-icon').show();
     $.ajax({
         url: '/products?search=' + searchText,
         type: 'GET',
@@ -192,6 +192,7 @@ function displayChanges(){
                    product: product,
                    html: productHTML
                 });
+                $('.loading-icon').hide();
                 return productHTML;
             });
 
