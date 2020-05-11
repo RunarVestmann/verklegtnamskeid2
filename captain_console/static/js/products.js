@@ -183,6 +183,7 @@ function displayChanges(){
         url: '/products?search=' + searchText,
         type: 'GET',
         success: function(response){
+            $('.loading-icon').hide();
             productList = [];
             const newHTML = response.data.map(product => {
                 const productHTML = getProductHTML(product);
@@ -192,7 +193,7 @@ function displayChanges(){
                    product: product,
                    html: productHTML
                 });
-                $('.loading-icon').hide();
+
                 return productHTML;
             });
 
@@ -213,6 +214,7 @@ function displayChanges(){
         },
         error: function(xhr, status, error){
             // TODO: Display error message (using toastr?)
+            $('.loading-icon').hide();
             console.error(error);
         }
     });
