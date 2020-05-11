@@ -24,10 +24,15 @@ const cart = {
     add(id, amount=1){
         const productInStorage = cart.find(id);
         if(productInStorage){
-            productInStorage.quantity += amount;
-            cart.save();
-            toastr.success(`${productInStorage.name} bættist í körfuna`);
-            shoppingCartBtn.textContent = cart.count();
+            if(productInStorage.cartQuantity + amount > Number(productInStorage.quantity)){
+                toastr.info(`Ekki er til nægilegt magn af ${productInStorage.name} til að setja í körfuna`);
+                // Update quantity numbers
+            }else{
+                productInStorage.cartQuantity += amount;
+                cart.save();
+                toastr.success(`${productInStorage.name} bættist í körfuna`);
+                shoppingCartBtn.textContent = cart.count();
+            }
         }
         else{
             $.ajax({
@@ -36,8 +41,12 @@ const cart = {
                 success: function(response){
                     const productInStorage = cart.find(id);
                     if(productInStorage){
-                        productInStorage.quantity = Number(productInStorage.quantity);
-                        productInStorage.quantity += amount;
+                        if(productInStorage.cartQuantity + amount > Number(productInStorage.quantity)){
+                            toastr.info(`Ekki er til nægilegt magn af ${productInStorage.name} til að setja í körfuna`);
+                            return;
+                        }
+                        productInStorage.cartQuantity = Number(productInStorage.cartQuantity);
+                        productInStorage.cartQuantity += amount;
                         cart.save();
                         toastr.success(`${productInStorage.name} bættist í körfuna`);
                         shoppingCartBtn.textContent = cart.count();
@@ -46,7 +55,11 @@ const cart = {
 
                     const productFromServer = response.data;
                     if(productFromServer){
-                        productFromServer.quantity = 1;
+                        if(productFromServer.cartQuantity + amount > Number(productFromServer.quantity)){
+                            toastr.info(`Ekki er til nægilegt magn af ${productInStorage.name} til að setja í körfuna`);
+                            return;
+                        }
+                        productFromServer.cartQuantity = 1;
                         cart.products.push(productFromServer);
                         cart.save();
                         toastr.success(`${productFromServer.name} bættist í körfuna`);
@@ -68,7 +81,7 @@ const cart = {
     changeQuantity(id, quantity){
         const product = cart.find(id);
         if(product){
-            product.quantity = Number(quantity);
+            product.cartQuantity = Number(quantity);
             cart.save();
         }
     },
@@ -77,10 +90,10 @@ const cart = {
         const productInStorage = cart.find(id);
 
         if(productInStorage){
-            productInStorage.quantity -= amount;
+            productInStorage.cartQuantity -= amount;
 
             // Remove the item all together if it's quantity is at or below zero
-            if(productInStorage.quantity <= 0)
+            if(productInStorage.cartQuantity <= 0)
                 removeItemFromArray(cart.products, productInStorage);
             cart.save();
         }
@@ -97,7 +110,7 @@ const cart = {
     count(){
         let counter = 0;
         for(let i = 0; i < cart.products.length; i++)
-            counter += Number(cart.products[i].quantity);
+            counter += Number(cart.products[i].cartQuantity);
         return counter;
     },
 
