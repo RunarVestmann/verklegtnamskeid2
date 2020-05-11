@@ -9,6 +9,13 @@
                     {% for field in form %}
                         <label class="pt-3">{{ field.label_tag }}</label>
                         {{ field }}
+                        <div class="col-9 text-danger pl-0">
+                            {% for error in field.errors %}
+                                {% if forloop.counter <= 1 %}
+                                    <div class="alert alert-danger" role="alert"> {{ error }}</div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                     {% endfor %}
                     <button type="submit" class="btn btn-secondary mt-3 mb-3">Senda fyrirspurn</button>
                 </form>

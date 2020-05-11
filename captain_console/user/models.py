@@ -22,6 +22,7 @@ class Search(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     date_of_search = models.DateTimeField(default=timezone.now)
 
+
 class Order(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.DO_NOTHING)
     products = models.ManyToManyField(Product)

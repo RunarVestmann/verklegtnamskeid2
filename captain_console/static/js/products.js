@@ -44,7 +44,7 @@ $(document).ready(function(){
     }
 
     // Clear the stored clicked products when the user signs up or logs in
-    else if(window.location.pathname === '/user/login/' || window.location.pathname === '/user/signup/')
+    else if(window.location.pathname === '/user/login' || window.location.pathname === '/user/signup')
         sessionStorage.removeItem('clickedProducts');
 });
 

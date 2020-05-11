@@ -1,28 +1,40 @@
 {% extends 'base.html' %}
 {% block background-color %}#63899c{% endblock background-color %}
 {% block content %}
-    <div class="row home-bg-color-1"></div>
-        <div class="col p-4 text-center">
-            <h4>Vörur sem þú hefur skoðað nýlega</h4>
-                {% for product in search %}
-
-                    {% if forloop.counter <= 6 %}
-                    {% include 'product/product.html' %}
-                    {% endif %}
-
-                {% endfor %}
+    <div class="row">
+        <div class="col p-3 text-center">
+            <h2>Vörur sem þú hefur skoðað nýlega</h2>
         </div>
-    <!--
-    <div class="row home-bg-color-1 pl-4" >
-        <div class="col">
-
-        </div>
-        <div class="col">
-
-        </div>
-        <div class="col">
-
-        </div>
-    </div> -->
+    </div>
+    <div class="row">
+        {% for product in products %}
+            {% if forloop.counter <= 4 %}
+                <div class="col">
+                    {%  include 'product/product.html' %}
+                 </div>
+            {% endif %}
+        {% empty %}
+            <div class="col p-4 mt-4 text-center">
+                <h4>Þú hefur ekki skoðað neinar vörur</h4>
+                <br>
+                <h4>Smelltu hér til að skoða úrvalið hjá okkur</h4>
+                <br>
+                <a href="{% url 'products' %}">
+                    <button class="btn btn-secondary">Vörur</button>
+                </a>
+             </div>
+        {% endfor %}
+    </div>
+        <div class="row">
+        {% for product in products %}
+            {% if forloop.counter > 4 and forloop.counter <= 8 %}
+                <div class="col">
+                    {%  include 'product/product.html' %}
+                 </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 
 {% endblock %}
+
+<!-- p-3 col d-flex align-items-center justify-content-center -->

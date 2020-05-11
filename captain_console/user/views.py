@@ -76,13 +76,12 @@ def profile(request):
 
 @login_required
 def viewed_products(request):
+    user_id = request.user.id
     return render(request, 'user/viewed_products.html', {
-        'search': Search.objects.filter(profile=request.user.id)
+        'products': get_product_list(user_id)
     })
 
-
 search_list = []
-
 
 def add_to_search(request):
     if request.method == 'POST':
@@ -128,3 +127,12 @@ def send_json(message, status_code, data={}):
     })
     response.status_code = status_code
     return response
+
+# Get a list of all the products the current user has viewed
+def get_product_list(user_id):
+    search = Search.objects.filter(profile__user_id=user_id).values_list('product_id', flat=True)
+    product_list = []
+    for i in search:
+        curr_product = Product.objects.get(id=i)
+        product_list.append(curr_product)
+    return product_list
