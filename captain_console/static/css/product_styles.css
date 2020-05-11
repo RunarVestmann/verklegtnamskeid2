@@ -150,7 +150,7 @@
 }
 
 .product-detail-type{
-    font-size: 0.7rem;
+    font-size: 1rem;
     font-weight: 400;
     color: #fff;
     letter-spacing: 0.1rem;
@@ -158,7 +158,7 @@
 
 .product-detail-description{
     margin-top: 4rem;
-    font-size: 0.8rem;
+    font-size: 1.1rem;
     font-weight: 400;
     line-height: 1.6rem;
     color: #26343b;

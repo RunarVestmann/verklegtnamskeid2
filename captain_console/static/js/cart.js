@@ -26,6 +26,7 @@ const cart = {
         if(productInStorage){
             productInStorage.quantity += amount;
             cart.save();
+            toastr.success(`${productInStorage.name} bættist í körfuna`);
             shoppingCartBtn.textContent = cart.count();
         }
         else{
@@ -38,6 +39,7 @@ const cart = {
                         productInStorage.quantity = Number(productInStorage.quantity);
                         productInStorage.quantity += amount;
                         cart.save();
+                        toastr.success(`${productInStorage.name} bættist í körfuna`);
                         shoppingCartBtn.textContent = cart.count();
                         return;
                     }
@@ -47,6 +49,7 @@ const cart = {
                         productFromServer.quantity = 1;
                         cart.products.push(productFromServer);
                         cart.save();
+                        toastr.success(`${productFromServer.name} bættist í körfuna`);
                         shoppingCartBtn.textContent = cart.count();
                     }
                     else{

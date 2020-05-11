@@ -33,3 +33,6 @@ Vann meira í local storage fyrir cart-ið. Núna virðist þetta byrja að virk
 
 09/05/2020
 Order by virkni, search history og cart storage fínpússun.
+
+10/05/2020
+Bjó til todo lista á trello svo hlutir gleymast ekki, refactor-ið smá js kóða, betrumbætti UX fyrir takka á /products filter-unum.

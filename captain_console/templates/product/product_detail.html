@@ -50,8 +50,8 @@
             </div>
              <div class="row">
                 <div class="col-12 p-0">
-                   <!-- spacer it to fix that last line dont go over the text if the text is longer then grid-->
-                   <!-- othervise the last line sits on the bottom of the grid usin bottom-row-position-->
+                   <!-- spacer it to fix that last line dont go over the text if the text is longer than the grid-->
+                   <!-- otherwise the last line sits on the bottom of the grid using bottom-row-position-->
                     <div class="spacer-for-brp"></div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                         <div class="products-detail-price">Verð: <strong>{{ product.price|intcomma }}</strong> ISK</div>
                     </div>
                     <div class="col-5 pr-2">
-                        <button class="btn btn-success btn-block">Setja í körfu</button>
+                        <div role="button" onclick="addToCart({{ product.id }})" class="btn btn-success btn-block" style="font-size: 1.2rem">Setja í körfu</div>
                     </div>
                 </div>
                 </div>
