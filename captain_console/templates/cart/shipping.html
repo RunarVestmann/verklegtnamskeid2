@@ -19,29 +19,29 @@
 
 <form method="post">
 {%  csrf_token %}
+    {% for field in form %}
     <div class="row my-4">
-        <div class="col-2"></div>
-         <div class="col-12 col-md-8 ">
-
-
-                    {% for field in form %}
-                        <label class="pt-3">{{ field.label_tag }}</label>
-                        {{ field }}
-                    {% endfor %}
-         </div>
-    </div>
+        <div class="col-1"> </div>
+        <div class="col-2 col-form-label text-right">
+        <label><small> {{ field.label_tag }}</small></label> </div>
+        <div class="col-8">
+            {{ field }}
+        </div>
+        <div class="col-1"> </div>
+   </div>
+    {% endfor %}
 
     <div class="row my-4">
         <div class="col-2"></div>
                  <div class="col-4">
-                    <a href="/cart" class="btn btn-light btn-block mt-3 mb-3">Til baka</a>
+                    <a href="/cart" class="btn btn-secondary btn-block mt-3 mb-3">Til baka</a>
                 </div>
 
                  <div class="col-4">
                     <button type="submit" class="btn btn-success btn-block mt-3 mb-3">Áfram</button>
                 </div>
 
-        <div class="col-2"></div>
+        <div class="col-2"><a href="/cart/payment">svindl áfram</a></div>
 
     </div>
 </form>

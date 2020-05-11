@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from .forms import ShippingForm
+from .forms import ShippingForm, PaymentForm
 
 def index(request):
     return render(request, 'cart/cart.html')
@@ -12,13 +12,18 @@ def shipping_info(request):
     else:
         form = ShippingForm(request.POST)
         if form.is_valid():
-            print('do somthing')
-
+            print('do something')
     return render(request, 'cart/shipping.html', {'form': form})
 
 @login_required
 def payment_info(request):
-    return render(request, 'cart/payment.html')
+    if request.method == 'GET':
+        form = PaymentForm
+    else:
+        form = PaymentForm(request.POST)
+        if form.is_valid():
+            print('do something')
+    return render(request, 'cart/payment.html', {'form': form})
 
 @login_required
 def payment_overview(request):

@@ -40,3 +40,34 @@ class ShippingForm(forms.Form):
     country = forms.ChoiceField(choices=countries, initial='ISL', widget=forms.Select(attrs={'class': 'form-control'}))
     country.label = 'Land'
     country.error_messages = {'required': 'Vinsamlega veldu land'}
+
+
+
+
+class PaymentForm(forms.Form):
+    name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
+                                                         'placeholder': 'Settu inn nafnið sem er á greiðslukortinu'}),
+                           required=True, max_length=100)
+    name.label = 'Nafn'
+    name.error_messages = {'required': 'Vinsamlega sláðu inn nafn'}
+
+    card_nbr = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
+                                                               'placeholder': 'Settu inn kortanúmer'}),
+                                 required=True, max_length=16)
+    card_nbr.label = 'Kortanúmer'
+    card_nbr.error_messages = {'required': 'Vinsamlega sláðu inn kortanúmer'}
+
+
+    exp_day = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
+                                                               'placeholder': 'Settu inn gildistíma mán/ár (00/00)'}),
+                                 required=True, max_length=16)
+    exp_day.label = 'Gildistími'
+    exp_day.error_messages = {'required': 'Vinsamlega sláðu inn gildistíma'}
+
+
+
+    cvc_nbr = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
+                                                              'placeholder': 'Settu inn öryggisnúmerið sem er aftan á kortinu'}),
+                                required=False, max_length=10)
+    cvc_nbr.label = 'CVC '
+    cvc_nbr.error_messages = {'required': 'Vinsamlega sláðu inn öryggisnúmerið '}
