@@ -42,6 +42,10 @@ $(document).ready(function(){
             window.sessionStorage.removeItem('productList');
         }
     }
+
+    // Clear the stored clicked products when the user signs up or logs in
+    else if(window.location.pathname === '/user/login/' || window.location.pathname === '/user/signup/')
+        sessionStorage.removeItem('clickedProducts');
 });
 
 function setupOrderByButtons(){
@@ -83,12 +87,14 @@ function setupFilterButtons(){
 
             if(searchBoxValue && searchList.length === 1 && searchList.includes(searchBoxValue))
                 searchList = [];
+            else if(!toggle && searchList.length == 1 && searchList.includes(filter.innerText))
+                searchList = [];
 
             const searchText = filter.textContent;
 
             if(searchList.includes(searchText))
                 searchList = searchList.filter(s => s !== searchText);
-            else
+            else if(toggle)
                 searchList.push(searchText);
             handleSearch(event);
         });
@@ -245,7 +251,7 @@ function getProductHTML(product){
 }
 
 function onDetailClick(productId){
-    const clickedProducts = localStorage.getItem('clickedProducts');
+    const clickedProducts = sessionStorage.getItem('clickedProducts');
 
     if(clickedProducts){
         const products = JSON.parse(clickedProducts);
@@ -257,11 +263,11 @@ function onDetailClick(productId){
         // Otherwise we store locally that we've clicked on the given product
         else{
             products.push(productId);
-            localStorage.setItem('clickedProducts', JSON.stringify(products));
+            sessionStorage.setItem('clickedProducts', JSON.stringify(products));
         }
     }
     else
-        localStorage.setItem('clickedProducts', JSON.stringify([productId]));
+        sessionStorage.setItem('clickedProducts', JSON.stringify([productId]));
 
    $.ajax({
        url: '/user/add_to_search',
