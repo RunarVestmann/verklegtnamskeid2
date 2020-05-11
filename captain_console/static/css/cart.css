@@ -1,5 +1,91 @@
 /* Global settings */
 
+/*progress bar steps */
+
+/*.progressbar-container {*/
+/*  width: 600px;*/
+/*  margin: 100px auto;*/
+/*}*/
+.progressbar {
+  counter-reset: step;
+}
+.progressbar li {
+  list-style-type: none;
+  width: 20%;
+  float: left;
+  max-font-size: 20px;
+  font-size: 0.8rem;
+  position: relative;
+  text-align: center;
+  color: #7d7d7d;
+}
+.progressbar li:before {
+  width: 30px;
+  height: 30px;
+  content: counter(step);
+  counter-increment: step;
+  line-height: 27px;
+  border: 2px solid #bebebe;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  background-color: white;
+  color: #bebebe;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.progressbar a {
+  color: #3aac5d;
+
+}
+
+.progressbar a:hover {
+  font-weight: 700;
+  text-decoration: none;
+
+}
+
+.progressbar li:after {
+  width: 100%;
+  height: 4px;
+  content: '';
+  position: absolute;
+  background-color: #979797;
+  top: 15px;
+  left: -50%;
+  z-index: -1;
+}
+.progressbar li:first-child:after {
+  content: none;
+}
+.progressbar li.active {
+  color: #3aac5d;
+  font-weight: 700;
+}
+.progressbar li.active:before {
+  border-color: #3aac5d;
+  background: #3aac5d;
+  color: white;
+}
+
+.progressbar li.done:before {
+  border-color: #3aac5d;
+  background: white;
+  color: #3aac5d;;;
+}
+
+.progressbar li.done + li:after {
+  background-color: #3aac5d;;
+ }
+  /*.progressbar li.active + li:after {*/
+  /*    background-color: #55b776;*/
+  /*}*/
+
+
+
 .cart-product-image {
   float: left;
   width: 20%;
@@ -135,7 +221,17 @@ label {
 }
 
 /* Make adjustments for tablet */
+@media screen and (max-width: 1200px) {
+  .progressbar li {
+    font-size: 0.5rem;
+  }
+}
 @media screen and (max-width: 650px) {
+  .progressbar li {
+    font-size: 1.5vw;
+  }
+
+
   .column-labels {
     display: none;
   }

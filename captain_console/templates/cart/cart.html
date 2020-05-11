@@ -2,10 +2,10 @@
 
 {% block background-color %}#e9e9e9{% endblock background-color  %}
 {% block content %}
-    <div class="row m-3">
-        <div class="col-2">
-        </div>
-        <div class="col-md-8 col-sm-12">
+    <div class="row my-4">
+        <div class="col-1 col-md-2"></div>
+        <div class="col-12 col-sm-10 col-md-8">
+
               <ul class="progressbar mb-2">
                 <li class="active">Karfan</li>
                 <li>Sendingarupplýsingar</li>
@@ -13,7 +13,15 @@
                 <li>Yfirlit greiðslu</li>
                 <li>Kvittun</li>
               </ul>
-            <div style="margin-top: 6rem">
+
+        </div>
+    </div>
+
+
+    <div class="row my-4">
+        <div class="col-2"></div>
+         <div class="col-12 col-md-8 ">
+            <div>
                 <div class="column-labels">
                     <label class="cart-product-image">Mynd</label>
                     <label class="cart-product-details">Vara</label>
@@ -31,7 +39,7 @@
                 </div>
                 <a href="/cart/shipping" role="button" class="checkout btn btn-success" aria-disabled="false">Ganga frá pöntun</a>
             </div>
-
         </div>
     </div>
+
 {% endblock %}

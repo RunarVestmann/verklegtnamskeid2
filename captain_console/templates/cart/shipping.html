@@ -1,5 +1,49 @@
 {% extends "base.html" %}
 {% block background-color %}#e9e9e9{% endblock background-color  %}
 {% block content %}
-Shipping
+
+    <div class="row my-4">
+        <div class="col-1 col-md-2"></div>
+        <div class="col-12 col-sm-10 col-md-8">
+
+              <ul class="progressbar mb-2">
+                <li class="done"><a href="/cart">Karfan</a> </li>
+                <li class="active">Sendingarupplýsingar</li>
+                <li>Greiðsluupplýsingar</li>
+                <li>Yfirlit greiðslu</li>
+                <li>Kvittun</li>
+              </ul>
+
+        </div>
+    </div>
+
+<form method="post">
+{%  csrf_token %}
+    <div class="row my-4">
+        <div class="col-2"></div>
+         <div class="col-12 col-md-8 ">
+
+
+                    {% for field in form %}
+                        <label class="pt-3">{{ field.label_tag }}</label>
+                        {{ field }}
+                    {% endfor %}
+         </div>
+    </div>
+
+    <div class="row my-4">
+        <div class="col-2"></div>
+                 <div class="col-4">
+                    <a href="/cart" class="btn btn-light btn-block mt-3 mb-3">Til baka</a>
+                </div>
+
+                 <div class="col-4">
+                    <button type="submit" class="btn btn-success btn-block mt-3 mb-3">Áfram</button>
+                </div>
+
+        <div class="col-2"></div>
+
+    </div>
+</form>
+
 {% endblock %}
