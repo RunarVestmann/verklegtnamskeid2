@@ -178,12 +178,12 @@ function displayChanges(){
         window.location.href = '/products/';
         return;
     }
-    $('.loading-icon').show();
+    $('.loader-wrapper-2').show();
     $.ajax({
         url: '/products?search=' + searchText,
         type: 'GET',
         success: function(response){
-            $('.loading-icon').hide();
+            $('.loader-wrapper-2').hide();
             productList = [];
             const newHTML = response.data.map(product => {
                 const productHTML = getProductHTML(product);
