@@ -21,12 +21,48 @@ const cart = {
         return cart.products.find(product => product.id == id);
     },
 
+    updateLocalProducts(){
+        cart.products.forEach(product => {
+            const index = cart.products.indexOf(product);
+            $.ajax({
+                url: `/products/${product.id}/json`,
+                method: 'GET',
+                success: function(response){
+                    productFromServer = response.data;
+                    if(productFromServer){
+                        const quantityInCart = product.cartQuantity;
+
+                        product = productFromServer;
+                        if(quantityInCart <= product.quantity)
+                            product.cartQuantity = quantityInCart;
+                        else{
+                            product.cartQuantity = product.quantity;
+                            toastr.info(`Núna er${product.cartQuantity > 1 || product.cartQuantity == 0 ? 'u' : ''}
+                             ${product.cartQuantity} stk af ${product.name} í körfunni vegna skorts á magni`);
+                        }
+                        cart.products[index] = product;
+                        cart.save();
+                        shoppingCartBtn.textContent = cart.count();
+                    }
+                }
+            });
+        })
+
+    },
+
+    canAdd(product, amount){
+        if(product.cartQuantity + amount > Number(product.quantity)){
+            cart.updateLocalProducts();
+            return true;
+        }
+        return false;
+    },
+
     add(id, amount=1){
         const productInStorage = cart.find(id);
         if(productInStorage){
-            if(productInStorage.cartQuantity + amount > Number(productInStorage.quantity)){
+            if(cart.canAdd(productInStorage, amount)){
                 toastr.info(`Ekki er til nægilegt magn af ${productInStorage.name} til að setja í körfuna`);
-                // Update quantity numbers
             }else{
                 productInStorage.cartQuantity += amount;
                 cart.save();
@@ -41,7 +77,7 @@ const cart = {
                 success: function(response){
                     const productInStorage = cart.find(id);
                     if(productInStorage){
-                        if(productInStorage.cartQuantity + amount > Number(productInStorage.quantity)){
+                        if(cart.canAdd(productInStorage, amount)){
                             toastr.info(`Ekki er til nægilegt magn af ${productInStorage.name} til að setja í körfuna`);
                             return;
                         }
@@ -55,7 +91,7 @@ const cart = {
 
                     const productFromServer = response.data;
                     if(productFromServer){
-                        if(productFromServer.cartQuantity + amount > Number(productFromServer.quantity)){
+                        if(cart.canAdd(productFromServer, amount)){
                             toastr.info(`Ekki er til nægilegt magn af ${productInStorage.name} til að setja í körfuna`);
                             return;
                         }
@@ -122,7 +158,7 @@ const cart = {
 
 function removeItemFromArray(array, item){
     const index = array.indexOf(item);
-        if(index > -1){}
+        if(index > -1)
             array.splice(index, 1);
 }
 
@@ -130,6 +166,7 @@ $(document).ready(function(){
     cart.init();
     shoppingCartBtn.textContent = cart.count();
     if(window.location.pathname === '/cart/'){
+        cart.updateLocalProducts();
         renderProductsInCart();
         recalculateCart();
     }
@@ -146,7 +183,7 @@ function renderProductsInCart(){
                     </div>
                     <div class="cart-product-price">${p.price.toLocaleString('it')}</div>
                     <div class="cart-product-quantity">
-                        <input type="number" value="${p.quantity}" min="1" max="99" onchange="updateQuantity(this , ${p.id})">
+                        <input type="number" value="${p.quantity}" min="1" max="${p.quantity}" onchange="updateQuantity(this , ${p.id}, ${p.quantity})">
                     </div>
                     <div class="cart-product-removal" >
                         <button class="remove-cart-product" onclick="removeItem(this, ${p.id});">Eyða</button>
@@ -200,14 +237,14 @@ function updateTotalsDisplay(total){
     });
 }
 
-function updateQuantity(quantityInput, id)
+function updateQuantity(quantityInput, id, max)
 {
     let quantity = $(quantityInput).val();
     if(quantity <= 0)
         return removeItem(quantityInput, id);
-    else if(quantity > 99){
-        $(quantityInput).val(99);
-        quantity = 99;
+    else if(quantity > max){
+        $(quantityInput).val(max);
+        quantity = max;
     }
 
     /* Calculate line price */
