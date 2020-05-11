@@ -1,20 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1 class="display-4">Notandi</h1>
-    <p>
-    <spam>þessi síða er bara sýnileg fyrir: <strong> {{ user.username }}</strong>  / {{ user.email }}</spam></p>
-    <spam>{{ user.first_name }}  {{ user.last_name }}</spam>
+    <img src="{{ image }}" alt="profile mynd" width="100px" height="100px" style="border: black solid 1px"/>
 
-    <li><a href={% url 'logout' %}>Logout</a></li>
-
-    xxx {{ user.profile.image.url }}
-    <img src="{{ user_profile.image.url }}" alt="profil mynd" width="100px" height="100px" style="border: black solid 1px"/>
-
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
-
-        <button type="submit" class="btn btn-success btn-lg btn-block">Upfæra</button>
+        <button type="submit" class="btn btn-success btn-lg btn-block">Uppfæra</button>
     </form>
 
 {% endblock %}

@@ -1,10 +1,10 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import JsonResponse
-
-from .forms import SignUpForm
-from .profile_form import ProfileForm
+from django import forms
+from .forms import SignUpForm, ProfileForm
 from django.shortcuts import render, redirect
 from .models import Profile, Search
 from product.models import Product
@@ -59,29 +59,60 @@ def signup_view(request):
     #
     #     return render(request, 'user/login.html', {'form': form})
 
-
 @login_required
 def profile(request):
-    user_profile = Profile.objects.filter(user=request.user).first()
+    try:
+        profile = Profile.objects.get(user=request.user)
+    except Profile.DoesNotExist:
+        profile = Profile(user=request.user).save()
 
     if request.method == 'POST':
-        form = ProfileForm(instance=profile, data=request.POST)
-        if form.is_valid():
-            user_profile = form.save(commit=False)
-            user_profile.user = request.user
-            user_profile.save()
-            return redirect('profile')
-    return render(request, 'user/profile.html', {'form': ProfileForm(instance=user_profile)})
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
 
+        if form.is_valid():
+            form_profile = form.save(commit=False)
+
+            request.user.username = request.POST['username']
+            request.user.first_name = request.POST['first_name']
+            request.user.last_name = request.POST['last_name']
+            request.user.save()
+
+            form_profile.user = request.user
+            image = request.FILES['image']
+            if image:
+                form_profile.image = image
+            form_profile.save()
+            return redirect('profile')
+
+    form = ProfileForm(instance=profile)
+    form.fields['username'].initial = request.user.username
+    form.fields['first_name'].initial = request.user.first_name
+    form.fields['last_name'].initial = request.user.last_name
+    form.fields['email'].initial = request.user.email
+    return render(request, 'user/profile.html', {
+        'form': form,
+        'image': profile.image.url
+    })
 
 @login_required
 def viewed_products(request):
     user_id = request.user.id
     return render(request, 'user/viewed_products.html', {
-        'products': get_product_list(user_id)
+        'products': __get_product_list(user_id)
     })
 
+# Get a list of all the products the current user has viewed
+def __get_product_list(user_id):
+    search = Search.objects.filter(profile__user_id=user_id).values_list('product_id', flat=True)
+    product_list = []
+    for i in search:
+        curr_product = Product.objects.get(id=i)
+        product_list.append(curr_product)
+    return product_list
+
+
 search_list = []
+
 
 def add_to_search(request):
     if request.method == 'POST':
@@ -127,12 +158,3 @@ def send_json(message, status_code, data={}):
     })
     response.status_code = status_code
     return response
-
-# Get a list of all the products the current user has viewed
-def get_product_list(user_id):
-    search = Search.objects.filter(profile__user_id=user_id).values_list('product_id', flat=True)
-    product_list = []
-    for i in search:
-        curr_product = Product.objects.get(id=i)
-        product_list.append(curr_product)
-    return product_list

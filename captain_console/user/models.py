@@ -6,12 +6,12 @@ import pytz
 
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='images/', default='/static/nav_img/default_profile_image.svg')
+    image = models.ImageField(upload_to='images/profile/', default='images/profile/default_profile_image.svg')
 
     def save(self, *args, **kwargs):
         try:
             this = Profile.objects.get(id=self.id)
-            if this.image != self.image:
+            if self.image.url != '' and this.image != self.image and this.image.url != '/media/images/profile/default_profile_image.svg':
                 this.image.delete(save=False)
         except:
             pass
@@ -21,7 +21,6 @@ class Search(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     date_of_search = models.DateTimeField(default=timezone.now)
-
 
 class Order(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.DO_NOTHING)
