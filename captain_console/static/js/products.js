@@ -212,7 +212,7 @@ function displayChanges(){
             else{
                 // Store data so that we can use it on the redirect page
                 window.sessionStorage.setItem('searchText', searchText);
-                window.sessionStorage.setItem('newHTML', joinedHTML);
+                window.sessionStorage.setItem('newHTML', newHTML.join(''));
                 window.sessionStorage.setItem('productList', JSON.stringify(productList));
 
                 // Redirect to /products

@@ -52,17 +52,18 @@ const cart = {
 
     canAdd(product, amount){
         if(product.cartQuantity + amount > Number(product.quantity)){
+            toastr.info(`Ekki er til nægilegt magn af ${product.name} til að setja í körfuna`);
             cart.updateLocalProducts();
-            return true;
+            return false;
         }
-        return false;
+        return true;
     },
 
     add(id, amount=1){
         const productInStorage = cart.find(id);
         if(productInStorage){
-            if(cart.canAdd(productInStorage, amount)){
-                toastr.info(`Ekki er til nægilegt magn af ${productInStorage.name} til að setja í körfuna`);
+            if(!cart.canAdd(productInStorage, amount)){
+                return;
             }else{
                 productInStorage.cartQuantity += amount;
                 cart.save();
@@ -77,8 +78,7 @@ const cart = {
                 success: function(response){
                     const productInStorage = cart.find(id);
                     if(productInStorage){
-                        if(cart.canAdd(productInStorage, amount)){
-                            toastr.info(`Ekki er til nægilegt magn af ${productInStorage.name} til að setja í körfuna`);
+                        if(!cart.canAdd(productInStorage, amount)){
                             return;
                         }
                         productInStorage.cartQuantity = Number(productInStorage.cartQuantity);
@@ -91,8 +91,7 @@ const cart = {
 
                     const productFromServer = response.data;
                     if(productFromServer){
-                        if(cart.canAdd(productFromServer, amount)){
-                            toastr.info(`Ekki er til nægilegt magn af ${productInStorage.name} til að setja í körfuna`);
+                        if(!cart.canAdd(productFromServer, amount)){
                             return;
                         }
                         productFromServer.cartQuantity = 1;
@@ -183,12 +182,12 @@ function renderProductsInCart(){
                     </div>
                     <div class="cart-product-price">${p.price.toLocaleString('it')}</div>
                     <div class="cart-product-quantity">
-                        <input type="number" value="${p.quantity}" min="1" max="${p.quantity}" onchange="updateQuantity(this , ${p.id}, ${p.quantity})">
+                        <input type="number" value="${p.cartQuantity}" min="1" max="${p.quantity}" onchange="updateQuantity(this , ${p.id}, ${p.quantity})">
                     </div>
                     <div class="cart-product-removal" >
                         <button class="remove-cart-product" onclick="removeItem(this, ${p.id});">Eyða</button>
                     </div>
-                        <div class="cart-product-line-price">${(p.price * p.quantity).toLocaleString('it')}</div>
+                        <div class="cart-product-line-price">${(p.price * p.cartQuantity).toLocaleString('it')}</div>
                     </div>`;
     });
     $('#cart-products').html(newHTML.join(''));
