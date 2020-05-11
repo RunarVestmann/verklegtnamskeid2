@@ -3,10 +3,12 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 
-from .forms import SignUpForm, LoginForm
+from .forms import SignUpForm
+from .profile_form import ProfileForm
 from django.shortcuts import render, redirect
 from .models import Profile, Search
 from product.models import Product
+
 import json
 
 # Create your views here.
@@ -60,8 +62,17 @@ def signup_view(request):
 
 @login_required
 def profile(request):
-    #mostly to test login_requried decorator
-    return render(request, 'user/profile.html')
+    user_profile = Profile.objects.filter(user=request.user).first()
+
+    if request.method == 'POST':
+        form = ProfileForm(instance=profile, data=request.POST)
+        if form.is_valid():
+            user_profile = form.save(commit=False)
+            user_profile.user = request.user
+            user_profile.save()
+            return redirect('profile')
+    return render(request, 'user/profile.html', {'form': ProfileForm(instance=user_profile)})
+
 
 @login_required
 def viewed_products(request):
@@ -69,7 +80,10 @@ def viewed_products(request):
         'search': Search.objects.filter(profile=request.user.id)
     })
 
+
 search_list = []
+
+
 def add_to_search(request):
     if request.method == 'POST':
         if request.user.is_authenticated:

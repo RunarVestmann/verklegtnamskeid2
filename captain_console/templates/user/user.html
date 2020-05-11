@@ -1,46 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href={% url 'logout' %}>Logout</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div>
-</div>
 
-
-
-
-{% if user.is_authenticated %}
-
-    <style>
-        .test{
-            display: inline-block;
-            width: 4rem;
-            height: 3rem;
-            color: #000;
-            font-weight: 600;
-            font-size: 1rem;
-            text-align: center;
-            padding-top: 0.4rem;
-
-            background-image: url("/static/nav_img/shopping_bach.svg");
-            background-size: contain;
-            background-repeat: no-repeat;
-
-
-        }
-
-    </style>
-
-    <a class="test" href="#">0</a> <a class="test" href="#">0</a>
-
-
-{% endif %}
-
+xxxx
 
 
 {% endblock %}

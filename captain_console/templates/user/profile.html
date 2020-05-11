@@ -6,4 +6,15 @@
     <spam>{{ user.first_name }}  {{ user.last_name }}</spam>
 
     <li><a href={% url 'logout' %}>Logout</a></li>
+
+    xxx {{ user.profile.image.url }}
+    <img src="{{ user_profile.image.url }}" alt="profil mynd" width="100px" height="100px" style="border: black solid 1px"/>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+
+        <button type="submit" class="btn btn-success btn-lg btn-block">Upfæra</button>
+    </form>
+
 {% endblock %}
