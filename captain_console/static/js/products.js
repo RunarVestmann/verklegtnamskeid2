@@ -87,12 +87,14 @@ function setupFilterButtons(){
 
             if(searchBoxValue && searchList.length === 1 && searchList.includes(searchBoxValue))
                 searchList = [];
+            else if(!toggle && searchList.length == 1 && searchList.includes(filter.innerText))
+                searchList = [];
 
             const searchText = filter.textContent;
 
             if(searchList.includes(searchText))
                 searchList = searchList.filter(s => s !== searchText);
-            else
+            else if(toggle)
                 searchList.push(searchText);
             handleSearch(event);
         });
