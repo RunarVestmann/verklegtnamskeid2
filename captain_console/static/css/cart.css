@@ -188,7 +188,7 @@ label {
 
 .cart-overview-lines{
   font-size: 0.8rem;
-  height: 1.5rem;
+
   padding: 0.5rem;
 
 }
@@ -197,6 +197,10 @@ label {
   background: #d3d3d3;
 }
 
+.cart-overview-total{
+  font-weight: 700;
+  border-top: black solid 0.3rem;
+}
 
 
 /* Totals section */

@@ -49,9 +49,15 @@ def payment_overview(request):
             if c[0] == si['country']:
                 si['country_name'] = c[1]
 
+
+
     except:
         ci = 'ekkert hér'
         si = 'ekkert hér'
+
+
+
+
 
     return render(request, 'cart/overview.html', {'card_info': ci, 'ship_info': si})
 
