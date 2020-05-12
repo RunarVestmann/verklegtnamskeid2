@@ -183,7 +183,9 @@ function displayChanges(){
         url: '/products?search=' + searchText,
         type: 'GET',
         success: function(response){
-            $('.loader-wrapper-2').hide();
+            if(window.location.pathname !== '/')
+                $('.loader-wrapper-2').hide();
+
             productList = [];
             const newHTML = response.data.map(product => {
                 const productHTML = getProductHTML(product);
@@ -222,7 +224,7 @@ function displayChanges(){
         },
         error: function(xhr, status, error){
             // TODO: Display error message (using toastr?)
-            $('.loading-icon').hide();
+            $('.loader-wrapper-2').hide();
             console.error(error);
         }
     });
