@@ -8,11 +8,11 @@ class ShippingForm(forms.Form):
     name.label = 'Nafn'
     name.error_messages = {'required': 'Vinsamlega sláðu inn nafn'}
 
-    stree_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
+    street_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
                                                                'placeholder': 'Settu inn götuheiti hjá móttakanda'}),
                                  required=True, max_length=100)
-    stree_name.label = 'Heimilisfang'
-    stree_name.error_messages = {'required': 'Vinsamlega sláðu inn götuheiti'}
+    street_name.label = 'Heimilisfang'
+    street_name.error_messages = {'required': 'Vinsamlega sláðu inn götuheiti'}
 
     house_nbr = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
                                                               'placeholder': 'Settu inn húsnúmer eða önnur nauðsynleg einkenni'}),
@@ -71,3 +71,4 @@ class PaymentForm(forms.Form):
                                 required=False, max_length=10)
     cvc_nbr.label = 'CVC '
     cvc_nbr.error_messages = {'required': 'Vinsamlega sláðu inn öryggisnúmerið '}
+

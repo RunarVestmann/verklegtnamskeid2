@@ -169,6 +169,9 @@ $(document).ready(function(){
         renderProductsInCart();
         recalculateCart();
     }
+
+
+
 });
 
 function renderProductsInCart(){
@@ -263,3 +266,5 @@ function updateQuantity(quantityInput, id, max)
         });
     });
 }
+
+

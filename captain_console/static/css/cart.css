@@ -186,6 +186,19 @@ label {
   background-color: #a44;
 }
 
+.cart-overview-lines{
+  font-size: 0.8rem;
+  height: 1.5rem;
+  padding: 0.5rem;
+
+}
+.cart-overview-heads{
+  height: 2.2rem;
+  background: #d3d3d3;
+}
+
+
+
 /* Totals section */
 .totals .totals-item {
   float: right;

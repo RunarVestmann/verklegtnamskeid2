@@ -18,9 +18,41 @@
 
 
     <div class="row my-4">
-        <div class="col-2"></div>
-         <div class="col-12 col-md-8 ">
-<div class="col-2"><a href="/cart/receipt">svindl áfram</a></div>
+        <div class="col-1"></div>
+                    <div class="col-4">
+              <div class="cart-overview-lines cart-overview-heads">Þú hefur valið</div>
+
+             <div class="cart-overview-lines"> {{ card_info.name}}</div>
+
+              <div class="cart-overview-lines"> {{ card_info.cvc_nbr }}</div>
+
          </div>
+                    <div class="col-3">
+              <div class="cart-overview-lines cart-overview-heads">Sent á</div>
+
+                <div class="cart-overview-lines">{{ ship_info.name }}</div>
+                <div class="cart-overview-lines">{{ ship_info.street_name }} {{ ship_info.house_nbr }}</div>
+              <div class="cart-overview-lines"> {{ ship_info.zip_code }} {{ ship_info.city }}</div>
+              <div class="cart-overview-lines"> {{ ship_info.country_name }}</div>
+
+         </div>
+
+            <div class="col-3">
+              <div class="cart-overview-lines cart-overview-heads">Greiðandi</div>
+
+             <div class="cart-overview-lines"> {{ card_info.name}}</div>
+              <div class="cart-overview-lines" > #### #### #### {{ card_info.card_nbr|get_digit:"4" }}
+              {{ card_info.card_nbr|get_digit:"3" }}
+              {{ card_info.card_nbr|get_digit:"2" }}
+              {{ card_info.card_nbr|get_digit:"1" }}</div>
+              <div class="cart-overview-lines"> {{ card_info.exp_day}}</div>
+              <div class="cart-overview-lines"> {{ card_info.cvc_nbr }}</div>
+
+         </div>
+         <div class="col-1"></div>
+
     </div>
+
+                 <button type="button" class="btn btn-info" id="tester" onclick="">Test something</button>
+<div><a href="/cart/receipt">svindl áfram</a></div>
 {% endblock %}
