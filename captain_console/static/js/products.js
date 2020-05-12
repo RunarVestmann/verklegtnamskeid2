@@ -183,7 +183,7 @@ function displayChanges(){
         url: '/products?search=' + searchText,
         type: 'GET',
         success: function(response){
-            if(window.location.pathname !== '/')
+            if(window.location.pathname === '/products/')
                 $('.loader-wrapper-2').hide();
 
             productList = [];

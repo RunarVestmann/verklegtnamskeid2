@@ -7,11 +7,23 @@ from .models import ShoppingCart, ShoppingCartProducts
 from product.models import Product
 from user.models import Profile
 
+def __user_has_no_cart_products(user_id):
+    try:
+        cart = Profile.objects.get(user_id=user_id).shopping_cart
+        if not cart or not cart.products.all():
+            return True
+    except Product.DoesNotExist:
+        return True
+    return False
+
 def index(request):
     return render(request, 'cart/cart.html')
 
 @login_required
 def shipping_info(request):
+    if __user_has_no_cart_products(request.user.id):
+        return redirect('/cart')
+
     initial = {'si': request.session.get('si', None)}
     form = ShippingForm(request.POST or None, initial=initial)
     if request.method == 'POST':
@@ -27,6 +39,9 @@ def shipping_info(request):
 
 @login_required
 def payment_info(request):
+    if __user_has_no_cart_products(request.user.id):
+        return redirect('/cart')
+
     initial = {'ci': request.session.get('ci', None)}
     form = PaymentForm(request.POST or None, initial=initial)
     if request.method == 'POST':
@@ -42,6 +57,9 @@ def payment_info(request):
 
 @login_required
 def payment_overview(request):
+    if __user_has_no_cart_products(request.user.id):
+        return redirect('/cart')
+
     try:
         ci = request.session['ci']
         si = request.session['si']
@@ -55,7 +73,6 @@ def payment_overview(request):
         ci = 'ekkert hér'
         si = 'ekkert hér'
     return render(request, 'cart/overview.html', {'card_info': ci, 'ship_info': si})
-
 
 @login_required
 def receipt(request):
