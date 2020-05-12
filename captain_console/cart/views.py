@@ -1,11 +1,14 @@
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from .forms import ShippingForm, PaymentForm
-
+import json
+from .models import ShoppingCart, ShoppingCartProducts
+from product.models import Product
+from user.models import Profile
 
 def index(request):
     return render(request, 'cart/cart.html')
-
 
 @login_required
 def shipping_info(request):
@@ -48,20 +51,54 @@ def payment_overview(request):
             ''' gets humain frendly names back from code name'''
             if c[0] == si['country']:
                 si['country_name'] = c[1]
-
-
-
     except:
         ci = 'ekkert hér'
         si = 'ekkert hér'
-
-
-
-
-
     return render(request, 'cart/overview.html', {'card_info': ci, 'ship_info': si})
 
 
 @login_required
 def receipt(request):
     return render(request, 'cart/receipt.html')
+
+@login_required
+def sync_cart(request):
+    if request.method == 'PUT':
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            response = JsonResponse({'data': {}, 'message': 'Invalid JSON format'})
+            response.status_code = 400
+            return response
+        try:
+            profile = Profile.objects.get(user__id=request.user.id)
+
+        # Create a profile if the user doesn't seem to have one
+        except Profile.DoesNotExist:
+            profile = Profile(user=request.user)
+
+        if not profile.shopping_cart:
+            cart = ShoppingCart()
+            cart.save(False)
+            profile.shopping_cart = cart
+
+        if not data:
+            cart_products = ShoppingCartProducts.objects.filter(shopping_cart_id=profile.shopping_cart.id)
+            if cart_products:
+                cart_products.delete()
+        else:
+            for product in data:
+                try:
+                    ShoppingCartProducts.objects.create(product=Product.objects.get(id=product['id']),
+                                                        shopping_cart=profile.shopping_cart, quantity=product['cartQuantity'])
+                except Product.DoesNotExist:
+                    # TODO: Send back that a given product does not exist
+                    pass
+
+        profile.save()
+
+        return JsonResponse({'data': data})
+    else:
+        response = JsonResponse({'data': {}, 'message': 'Unsupported method used'})
+        response.status_code = 405
+        return response

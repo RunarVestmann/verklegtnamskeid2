@@ -168,11 +168,20 @@ $(document).ready(function(){
         cart.updateLocalProducts();
         renderProductsInCart();
         recalculateCart();
+        sendCartProductsToServer();
     }
-
-
-
 });
+
+function sendCartProductsToServer(){
+    $.ajax({
+        url: '/cart/sync',
+        method: 'PUT',
+        data: JSON.stringify(cart.products),
+        success: function(response){
+            console.log(response);
+        }
+    });
+}
 
 function renderProductsInCart(){
     const newHTML = cart.products.map(p => {
@@ -265,37 +274,6 @@ function updateQuantity(quantityInput, id, max)
             $(this).fadeIn(fadeTime);
         });
     });
-}
-
-function gummistest() {
-console.log(cart.products)
-}
-
-
-$(document).ready(function(){
-    cart.init();
-    shoppingCartBtn.textContent = cart.count();
-    if(window.location.pathname === '/cart/overview'){
-        cart.updateLocalProducts();
-        renderProductsInCartOverview();
-        recalculateCart();
-    }
-
-});
-
-function renderProductsInCartOverview(){
-    let totalprice = 0;
-    const newHTML = cart.products.map(p => {
-        totalprice += (p.price * p.cartQuantity)
-        return `<div class="row cart-overview-lines">       
-                     <div class="col-12 col-lg-6">${p.name}</div>
-                      <div class="col-6 col-lg-2">${p.cartQuantity} stk</div>
-                      <div class="col-6 col-lg-4 text-right">Verð: ${(p.price * p.cartQuantity).toLocaleString('it')} ISK</div>
-                    </div>`;
-    });
-    $('#cart-products').html(newHTML.join(''));
-    $('#total').html(totalprice.toLocaleString('it'));
-
 }
 
 
