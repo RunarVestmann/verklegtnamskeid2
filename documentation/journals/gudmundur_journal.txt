@@ -45,3 +45,10 @@ hönnun á körfu hnapp
 
 09/05/2020
 Order by virkni - vann í (langur django-learning prosses) og setti upp (CSS og SVG)
+
+10/10/2020
+css styling / skinnað product filter hnappanna, byrjaði á að setja inn profile mynd virkni, lagaði default myndina,
+ýmsar lagfæringar
+
+11/10/2020 
+vann í edit profile hlutanum, byrjaði á körfu virkninni step-progress bar og form, ýmsar lagfæringar
