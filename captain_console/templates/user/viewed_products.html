@@ -2,19 +2,19 @@
 {% block background-color %}#63899c{% endblock background-color %}
 {% block content %}
     <div class="row">
-        <div class="col p-3 text-center">
+        <div class="col m-3 p-3 text-center">
             <h2>Vörur sem þú hefur skoðað nýlega</h2>
         </div>
     </div>
     <div class="row">
         {% for product in products %}
             {% if forloop.counter <= 4 %}
-                <div class="col">
+                <div class="col p-3 d-flex justify-content-center">
                     {%  include 'product/product.html' %}
                  </div>
             {% endif %}
         {% empty %}
-            <div class="col p-4 mt-4 text-center">
+            <div class="col-3 p-4 mt-4 text-center">
                 <h4>Þú hefur ekki skoðað neinar vörur</h4>
                 <br>
                 <h4>Smelltu hér til að skoða úrvalið hjá okkur</h4>
@@ -28,7 +28,7 @@
         <div class="row">
         {% for product in products %}
             {% if forloop.counter > 4 and forloop.counter <= 8 %}
-                <div class="col">
+                <div class="col-3 p-3 d-flex justify-content-center">
                     {%  include 'product/product.html' %}
                  </div>
             {% endif %}
