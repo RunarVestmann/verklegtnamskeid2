@@ -28,7 +28,7 @@ en við byrjum að kóða.
 Vann í header fyrir síðuna og almennt læra hvernig bootstrap virkar. Funduðum með aðstoðarkennara
 
 05/05/2020
-Meiri vinna í header. Vann í forsíðu.
+Meiri vinna í header. Vann í forsíðu. Setti inn nýjustu vörur og placeholder fyrir vinsælustu.
 
 06/05/2020
 Bætti inn nýjustu vörum á forsíðu. Vann í contact appinu
@@ -36,3 +36,19 @@ Bætti inn nýjustu vörum á forsíðu. Vann í contact appinu
 07/05/2020
 Contact app að mestu endurunnið. Notandi getur sent fyrirspurn á email í gegnum form.
 Unnið í cart app.
+
+08/05/2020
+Byrjað að vinna í recently viewed. Byrjað að vinna í lógíkinni, sækja info í gegnum javascript
+senda áfram
+
+09/05/2020
+Haldið áfram í lógík fyrir recently viewed. Unnið í útlitinu fyrir þá síðu.
+
+10/05/2020
+Unnið í error messages fyrir contact us. Lagað útlit á forms í html. Unnið í loader sem fer í gang við ajax request
+
+11/05/2020
+
+
+12/05/2020
+Bætt inn vörum í gagnagrunn. Meira test með virkni á síðu og laga ýmsar villur.

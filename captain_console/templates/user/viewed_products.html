@@ -9,12 +9,12 @@
     <div class="row">
         {% for product in products %}
             {% if forloop.counter <= 4 %}
-                <div class="col p-3 d-flex justify-content-center">
+                <div class="col-3 p-3 d-flex justify-content-center">
                     {%  include 'product/product.html' %}
                  </div>
             {% endif %}
         {% empty %}
-            <div class="col-3 p-4 mt-4 text-center">
+            <div class="col p-4 mt-4 text-center">
                 <h4>Þú hefur ekki skoðað neinar vörur</h4>
                 <br>
                 <h4>Smelltu hér til að skoða úrvalið hjá okkur</h4>
