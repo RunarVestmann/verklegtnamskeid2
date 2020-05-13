@@ -169,11 +169,6 @@ function displayChanges(){
     let manufacturerText = manufacturerList.join('_');
     let systemText = systemList.join('_');
 
-    if(!searchText && !typeText && !manufacturerText && !systemText){
-        window.location.href = '/products/';
-        return;
-    }
-
     const urlParams = [];
 
     if(typeText)
@@ -185,7 +180,7 @@ function displayChanges(){
     if(systemText)
         urlParams.push('system=' + systemText);
 
-    const url = '/products?' + urlParams.join('&');
+    const url = '/products/json?' + urlParams.join('&');
 
     $.ajax({
         url: url,

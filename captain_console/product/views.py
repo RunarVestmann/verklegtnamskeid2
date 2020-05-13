@@ -3,16 +3,19 @@ from django.shortcuts import render, get_object_or_404
 from .models import Product, ProductImage, Type, System, Manufacturer
 
 def index(request):
-    # Store at the top what we'll be using no matter what
-    all_types = Type.objects.all()
-    all_products = Product.objects.prefetch_related('system', 'type').all().order_by('name')
-
     all_manufacturers = Manufacturer.objects.all()
-
     main_manufacturer_tuple = ('Nintendo', 'Sega', 'Sony', 'Microsoft')
-
     other_manufacturers = all_manufacturers.exclude(name__in=main_manufacturer_tuple)
     main_manufacturers = all_manufacturers.filter(name__in=main_manufacturer_tuple)
+    return render(request, 'product/products.html', {
+        'types': Type.objects.all(),
+        'systems': System.objects.prefetch_related('manufacturer').all(),
+        'main_manufacturers': main_manufacturers,
+        'other_manufacturers': other_manufacturers
+    })
+
+def get_products_json(request):
+    all_products = Product.objects.prefetch_related('system', 'type').all().order_by('name')
 
     # If the user entered a search string we find the results
     if 'search' in request.GET or 'type' in request.GET or 'manufacturer' in request.GET or 'system' in request.GET:
@@ -44,19 +47,9 @@ def index(request):
             else:
                 search_results |= all_products.filter(type__name__in=types)
 
-        # Make a list of dictionaries that contain each products data
-        products = [product.to_dict() for product in search_results]
-
-        return JsonResponse({'data': products})
-
-    # If the user did not enter a search string we simply return all products in an html
-    return render(request, 'product/products.html', {
-        'products': all_products,
-        'types': all_types,
-        'systems': System.objects.prefetch_related('manufacturer').all(),
-        'main_manufacturers': main_manufacturers,
-        'other_manufacturers': other_manufacturers
-    })
+        return JsonResponse({'data': [product.to_dict() for product in search_results]})
+    else:
+        return JsonResponse({'data': [product.to_dict() for product in all_products]})
 
 def get_product_by_id(request, id):
     product = get_object_or_404(Product, pk=id)
