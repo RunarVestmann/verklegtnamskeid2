@@ -10,9 +10,6 @@ class Profile(models.Model):
     image = models.ImageField(upload_to='images/profile/', default='images/profile/default_profile_image.svg')
     shopping_cart = models.OneToOneField(ShoppingCart, on_delete=models.CASCADE, null=True)
 
-    def __str__(self):
-        return str(self.user)
-
     def save(self, *args, **kwargs):
         try:
             this = Profile.objects.get(id=self.id)
