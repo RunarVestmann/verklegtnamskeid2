@@ -4,6 +4,8 @@ const products = $('#products');
 let productList = [];
 let ascendingOrder = true;
 
+const filters = [];
+
 let searchText = '';
 let manufacturerList = [];
 let typeList = [];
@@ -20,13 +22,24 @@ $(document).ready(function(){
 
     // When the site gets refreshed or the user was redirected do the following:
     if(window.location.pathname === '/products/'){
-
         const prodList = window.sessionStorage.getItem('productList');
         if(prodList){
             productList = JSON.parse(prodList);
             const newHTML = productList.map(product => { return product.html; });
             products.html(newHTML.join(''));
             window.sessionStorage.removeItem('productList');
+        }
+
+        const search = window.sessionStorage.getItem('search');
+        if(search){
+            searchBox.val(search);
+            window.sessionStorage.removeItem('search');
+        }
+
+        const nav = window.sessionStorage.getItem('nav_img');
+        if(nav){
+            highlightFilter(nav);
+            window.sessionStorage.removeItem(nav);
         }
     }
 
@@ -56,17 +69,22 @@ function setupOrderByButtons(){
 function setupFilterButtons(){
     const filterButtons = $('.filter-btn');
     for(let i = 0; i < filterButtons.length; i++){
+
         const filter = filterButtons[i];
 
-        const startingColor = filter.style.backgroundColor;
-        let toggle = false;
+        const index = filters.length;
+        filters.push({
+            filter: filter,
+            toggle: false,
+            startingColor: filter.style.backgroundColor,
+        });
 
         filter.addEventListener('click', function(event){
-            if(!toggle)
+            if(!filters[index].toggle)
                 filter.style.backgroundColor = '#99a6ac';
             else
-                filter.style.backgroundColor = startingColor;
-            toggle = !toggle;
+                filter.style.backgroundColor = filters[index].startingColor;
+            filters[index].toggle = !filters[index].toggle;
 
             if(filter.classList.contains('type')){
                 const type = filter.textContent.trim();
@@ -203,6 +221,7 @@ function displayChanges(){
             }
             else{
                 window.sessionStorage.setItem('productList', JSON.stringify(productList));
+                window.sessionStorage.setItem('search', searchText);
 
                 // Redirect to /products
                 window.location.href = '/products/';
@@ -319,10 +338,35 @@ function orderByPrice(){
 }
 
 function navigationClick(searchText){
+    if(window.location.pathname === '/products/'){
+        dehighlightFilters();
+        manufacturerList.push(searchText);
+        highlightFilter(searchText);
+    }
+    else
+        window.sessionStorage.setItem('nav_img', searchText);
+    displayChanges();
+}
+
+function highlightFilter(text){
+    filters.forEach(button => {
+       if(button.filter.textContent == text){
+           button.toggle = !button.toggle;
+           if(button.toggle)
+                button.filter.style.backgroundColor = '#99a6ac';
+            else
+                button.filter.style.backgroundColor = button.startingColor;
+       }
+    });
+}
+
+function dehighlightFilters(){
     typeList = [];
     manufacturerList = [];
     systemList = [];
-    manufacturerList.push(searchText);
     searchText = '';
-    displayChanges();
+    filters.forEach(button => {
+        button.toggle = false;
+        button.filter.style.backgroundColor = button.startingColor;
+    });
 }

@@ -21,45 +21,28 @@ def index(request):
             search = request.GET['search']
             if search:
                 search_results = all_products.filter(name__icontains=search)
-            else:
-                search_results = all_products
-        else:
-            search_results = all_products
-
-        if 'system' in request.GET:
-            systems = request.GET['system'].strip().split('_')
-
-            system_results = None
-            for system in systems:
-                if not system_results:
-                    system_results = search_results.filter(system__abbreviation=system)
-                else:
-                    system_results |= search_results.filter(system__abbreviation=system)
-            else:
-                search_results = system_results
-
-        if 'type' in request.GET:
-            types = request.GET['type'].strip().split('_')
-
-            type_results = None
-            for type in types:
-                if not type_results:
-                    type_results = search_results.filter(type__name=type)
-                else:
-                    type_results |= search_results.filter(type__name=type)
-            else:
-                search_results = type_results
+                return JsonResponse({'data': [product.to_dict() for product in search_results]})
 
         if 'manufacturer' in request.GET:
             manufacturers = request.GET['manufacturer'].strip().split('_')
-            manufacturer_results = None
-            for manufacturer in manufacturers:
-                if not manufacturer_results:
-                    manufacturer_results = search_results.filter(system__manufacturer__name=manufacturer)
-                else:
-                    manufacturer_results |= search_results.filter(system__manufacturer__name=manufacturer)
+            if not search_results:
+                search_results = all_products.filter(system__manufacturer__name__in=manufacturers)
             else:
-                search_results = manufacturer_results
+                search_results |= all_products.filter(system__manufacturer__name__in=manufacturers)
+
+        if 'system' in request.GET:
+            systems = request.GET['system'].strip().split('_')
+            if not search_results:
+                search_results = all_products.filter(system__abbreviation__in=systems)
+            else:
+                search_results |= all_products.filter(system__abbreviation__in=systems)
+
+        if 'type' in request.GET:
+            types = request.GET['type'].strip().split('_')
+            if not search_results:
+                search_results = all_products.filter(type__name__in=types)
+            else:
+                search_results |= all_products.filter(type__name__in=types)
 
         # Make a list of dictionaries that contain each products data
         products = [product.to_dict() for product in search_results]
