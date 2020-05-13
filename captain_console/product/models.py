@@ -46,7 +46,7 @@ class Product(models.Model):
             'release_date': self.release_date,
             'shop_arrival_date': self.shop_arrival_date,
             'type': self.type.name,
-            'first_image': self.productimage_set.first().image.url
+            'first_image': '' if not self.productimage_set.first() else self.productimage_set.first().image.url
         }
 
     def __str__(self):

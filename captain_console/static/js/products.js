@@ -3,7 +3,10 @@ const searchButton = $('#search-btn');
 const products = $('#products');
 let productList = [];
 let ascendingOrder = true;
-let searchList = [];
+
+let manufacturerList = [];
+let typeList = [];
+let systemList = [];
 
 $(document).ready(function(){
     // Set up all the onclick events for the buttons
@@ -17,29 +20,11 @@ $(document).ready(function(){
     // When the site gets refreshed or the user was redirected do the following:
     if(window.location.pathname === '/products/'){
 
-        // Set the search box text to be what the user searched for
-        const searchText = window.sessionStorage.getItem('searchText');
-        if(searchText !== null && searchText !== undefined){
-             searchBox.val(searchText);
-             window.sessionStorage.removeItem('searchText');
-        }
-
-        // Store behind the scenes all the products being displayed if they aren't already being stored
-        else if(productList.length === 0)
-             getAndStoreAllProducts();
-
-        // Set the html up correctly
-        const newHTML = window.sessionStorage.getItem('newHTML');
-        if(newHTML !== null && newHTML !== undefined){
-            products.html(newHTML);
-            window.sessionStorage.removeItem('newHTML');
-        }
-
-        // Cache the products in a list
-        const productString = window.sessionStorage.getItem('productList');
-        if(productString !== null && productString !== undefined){
-            productList = JSON.parse(productString);
-            window.sessionStorage.removeItem('productList');
+        const prodList = window.sessionStorage.getItem('productList');
+        if(prodList){
+            productList = JSON.parse(prodList);
+            const newHTML = productList.map(product => { return product.html; });
+            products.html(newHTML.join(''));
         }
     }
 
@@ -75,27 +60,34 @@ function setupFilterButtons(){
         let toggle = false;
 
         filter.addEventListener('click', function(event){
-            if(!toggle){
+            if(!toggle)
                 filter.style.backgroundColor = '#99a6ac';
-            }
-            else{
+            else
                 filter.style.backgroundColor = startingColor;
-            }
             toggle = !toggle;
 
-            const searchBoxValue = searchBox.val();
+            if(filter.classList.contains('type')){
+                const type = filter.textContent.trim();
+                if(typeList.includes(type))
+                    typeList = typeList.filter(s => s !== type);
+                else
+                    typeList.push(type);
+            }
+            else if(filter.classList.contains('manufacturer')){
+                const manufacturer = filter.textContent.trim();
+                if(manufacturerList.includes(manufacturer))
+                    manufacturerList = manufacturerList.filter(s => s !== manufacturer);
+                else
+                    manufacturerList.push(manufacturer);
+            }
+            else if(filter.classList.contains('system')){
+                const system = filter.textContent.trim();
+                if(systemList.includes(system))
+                    systemList = systemList.filter(s => s !== system);
+                else
+                    systemList.push(system);
+            }
 
-            if(searchBoxValue && searchList.length === 1 && searchList.includes(searchBoxValue))
-                searchList = [];
-            else if(!toggle && searchList.length == 1 && searchList.includes(filter.innerText))
-                searchList = [];
-
-            const searchText = filter.textContent;
-
-            if(searchList.includes(searchText))
-                searchList = searchList.filter(s => s !== searchText);
-            else if(toggle)
-                searchList.push(searchText);
             handleSearch(event);
         });
     }
@@ -148,39 +140,34 @@ function handleSearch(event){
     displayChanges();
 }
 
-function getAndStoreAllProducts(){
-    $.ajax({
-        url: '/products?search=',
-        type: 'GET',
-        success: function(response){
-            productList = [];
-            response.data.forEach(product => {
-                const productHTML = getProductHTML(product);
-
-                //Store all the products in a list for further use
-                productList.push({
-                    product: product,
-                    html: productHTML
-                });
-            });
-            if($('.product-order-bar-active').text() === 'Nafni')
-                orderByName();
-            else
-                orderByPrice();
-        }
-    });
-}
-
 function displayChanges(){
-    const searchText = searchList.join(' ');
+    $('.loader-wrapper-2').show();
 
-    if(!searchText && window.location.pathname !== '/products/'){
+    let searchText = searchBox.val();
+    let typeText = typeList.join(' ');
+    let manufacturerText = manufacturerList.join(' ');
+    let systemText = systemList.join(' ');
+
+    if(!searchText && !typeText && !manufacturerText && !systemText){
         window.location.href = '/products/';
         return;
     }
-    $('.loader-wrapper-2').show();
+
+    const urlParams = [];
+
+    if(typeText)
+        urlParams.push('type=' + typeText);
+    if(manufacturerText)
+        urlParams.push('manufacturer=' + manufacturerText);
+    if(searchText)
+        urlParams.push('search=' + searchText);
+    if(systemText)
+        urlParams.push('system=' + systemText);
+
+    const url = '/products?' + urlParams.join('&');
+
     $.ajax({
-        url: '/products?search=' + searchText,
+        url: url,
         type: 'GET',
         success: function(response){
             if(window.location.pathname === '/products/')
@@ -212,9 +199,6 @@ function displayChanges(){
                     products.html(newHTML.join(''));
             }
             else{
-                // Store data so that we can use it on the redirect page
-                window.sessionStorage.setItem('searchText', searchText);
-                window.sessionStorage.setItem('newHTML', newHTML.join(''));
                 window.sessionStorage.setItem('productList', JSON.stringify(productList));
 
                 // Redirect to /products
