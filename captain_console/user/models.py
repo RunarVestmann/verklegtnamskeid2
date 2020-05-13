@@ -29,8 +29,13 @@ class Search(models.Model):
 
 class Order(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.DO_NOTHING)
-    products = models.ManyToManyField(Product)
+    products = models.ManyToManyField(Product, through='OrderProduct')
     order_date = models.DateTimeField(default=timezone.now)
     address = models.CharField(max_length=255)
     country = models.CharField(max_length=100)
     zip = models.CharField(max_length=100)
+
+class OrderProduct(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField()

@@ -1,6 +1,5 @@
 from django.http import JsonResponse
-from django.shortcuts import render, get_object_or_404, redirect
-from .forms import ProductForm
+from django.shortcuts import render, get_object_or_404
 from .models import Product, ProductImage, Type, System, Manufacturer
 
 def index(request):
@@ -10,44 +9,51 @@ def index(request):
     all_manufacturers = Manufacturer.objects.all()
 
     # If the user entered a search string we find the results
-    if 'search' in request.GET:
-        search = request.GET['search'].strip().split()
-
+    if 'search' in request.GET or 'type' in request.GET or 'manufacturer' in request.GET or 'system' in request.GET:
         search_results = None
-        if search:
-            query_set = all_products
-
-            # For every word in the search string get results from searching for that word
-            search_results = __get_search_results(query_set, search[0])
-            for i in range(1, len(search)):
-                search_results |= __get_search_results(query_set, search[i])
-
-            # Count how many filter types are active
-            type_count = 0
-            for t in all_types:
-                if t.name in search:
-                    type_count += 1
-
-            # Only filter out unwanted types if there are 1 to n-1 filters active
-            if not (type_count == 0 or type_count == len(all_types)):
-                for t in all_types:
-                    if t.name not in search:
-                        search_results = search_results.exclude(type__name=t.name)
-
-            # Count how many filter types are active
-            man_count = 0
-            for manufacturer in all_manufacturers:
-                if manufacturer.name in search:
-                    man_count += 1
-
-            # Only filter out unwanted types if there are 1 to n-1 filters active
-            if not (man_count == 0 or man_count == len(all_manufacturers)):
-                for manufacturer in all_manufacturers:
-                    if manufacturer.name not in search:
-                        search_results = search_results.exclude(system__manufacturer__name=manufacturer.name)
-
+        if 'search' in request.GET:
+            search = request.GET['search']
+            if search:
+                search_results = all_products.filter(name__icontains=search)
+            else:
+                search_results = all_products
         else:
             search_results = all_products
+
+        if 'system' in request.GET:
+            systems = request.GET['system'].strip().split()
+
+            system_results = None
+            for system in systems:
+                if not system_results:
+                    system_results = search_results.filter(system__abbreviation=system)
+                else:
+                    system_results |= search_results.filter(system__abbreviation=system)
+            else:
+                search_results = system_results
+
+        if 'type' in request.GET:
+            types = request.GET['type'].strip().split()
+
+            type_results = None
+            for type in types:
+                if not type_results:
+                    type_results = search_results.filter(type__name=type)
+                else:
+                    type_results |= search_results.filter(type__name=type)
+            else:
+                search_results = type_results
+
+        if 'manufacturer' in request.GET:
+            manufacturers = request.GET['manufacturer'].strip().split()
+            manufacturer_results = None
+            for manufacturer in manufacturers:
+                if not manufacturer_results:
+                    manufacturer_results = search_results.filter(system__manufacturer__name=manufacturer)
+                else:
+                    manufacturer_results |= search_results.filter(system__manufacturer__name=manufacturer)
+            else:
+                search_results = manufacturer_results
 
         # Make a list of dictionaries that contain each products data
         products = [product.to_dict() for product in search_results]
@@ -61,13 +67,6 @@ def index(request):
         'systems': System.objects.prefetch_related('manufacturer').all(),
         'manufacturers': all_manufacturers
     })
-
-def __get_search_results(query_set, word):
-    return query_set.filter(name__icontains=word) \
-         | query_set.filter(system__name__icontains=word) \
-         | query_set.filter(system__manufacturer__name__icontains=word) \
-         | query_set.filter(system__abbreviation__icontains=word) \
-         | query_set.filter(type__name__icontains=word)
 
 def get_product_by_id(request, id):
     product = get_object_or_404(Product, pk=id)
