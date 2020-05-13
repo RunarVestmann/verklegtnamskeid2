@@ -52,3 +52,6 @@ css styling / skinnað product filter hnappanna, byrjaði á að setja inn profi
 
 11/10/2020 
 vann í edit profile hlutanum, byrjaði á körfu virkninni step-progress bar og form, ýmsar lagfæringar
+
+12/10/2020 
+körfu virkninni session notkun og layout
