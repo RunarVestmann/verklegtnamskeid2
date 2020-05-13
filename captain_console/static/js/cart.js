@@ -29,7 +29,7 @@ const cart = {
                 method: 'GET',
                 success: function(response){
                     productFromServer = response.data;
-                    if(productFromServer){
+                    if(productFromServer.id){
                         const quantityInCart = product.cartQuantity;
 
                         product = productFromServer;
@@ -43,6 +43,32 @@ const cart = {
                         cart.products[index] = product;
                         cart.save();
                         shoppingCartBtn.textContent = cart.count();
+                        if(window.location.pathname === '/cart/'){
+                            renderProductsInCart();
+                            recalculateCart();
+                        }
+                    }
+                    else{
+                        toastr.info(`${cart.products[index].name} selst ekki lengur og fjarlægðist úr körfunni`);
+                        cart.products.splice(index, 1);
+                        cart.save();
+                        shoppingCartBtn.textContent = cart.count();
+                        if(window.location.pathname === '/cart/'){
+                            renderProductsInCart();
+                            recalculateCart();
+                        }
+                    }
+                },
+                error: function(xhr, status, error){
+                    if(xhr.status == 404){
+                        toastr.info(`${cart.products[index].name} selst ekki lengur og fjarlægðist úr körfunni`);
+                        cart.products.slice(index, 1);
+                        cart.save();
+                        shoppingCartBtn.textContent = cart.count();
+                        if(window.location.pathname === '/cart/'){
+                            renderProductsInCart();
+                            recalculateCart();
+                        }
                     }
                 }
             });
@@ -139,6 +165,7 @@ const cart = {
         if(product){
             removeItemFromArray(cart.products, product);
             cart.save();
+            return product;
         }
     },
 
@@ -164,11 +191,20 @@ function removeItemFromArray(array, item){
 $(document).ready(function(){
     cart.init();
     shoppingCartBtn.textContent = cart.count();
-    if(window.location.pathname === '/cart/'){
+
+    if(window.location.pathname.includes('cart')){
         cart.updateLocalProducts();
+        if(window.location.pathname !== '/cart/overview')
+            sendCartProductsToServer();
+    }
+
+    if(window.location.pathname === '/cart/'){
         renderProductsInCart();
         recalculateCart();
-        sendCartProductsToServer();
+    }
+    else if(window.location.pathname === '/cart/overview'){
+        renderProductsInCartOverview();
+        recalculateCart();
     }
 });
 
@@ -178,7 +214,13 @@ function sendCartProductsToServer(){
         method: 'PUT',
         data: JSON.stringify(cart.products),
         success: function(response){
-            console.log(response);
+            if(response.nonExistingProductIds){
+                response.nonExistingProductIds.forEach(id => {
+                   const removedProduct = cart.removeAll(id);
+                   if(removedProduct)
+                       toastr.info(`${removedProduct.name} selst ekki lengur og fjarlægðist úr körfunni`);
+                });
+            }
         }
     });
 }
@@ -274,6 +316,21 @@ function updateQuantity(quantityInput, id, max)
             $(this).fadeIn(fadeTime);
         });
     });
+}
+
+function renderProductsInCartOverview(){
+    let totalprice = 0;
+    const newHTML = cart.products.map(p => {
+        totalprice += (p.price * p.cartQuantity)
+        return `<div class="row cart-overview-lines">       
+                     <div class="col-12 col-lg-6">${p.name}</div>
+                      <div class="col-6 col-lg-2">${p.cartQuantity} stk</div>
+                      <div class="col-6 col-lg-4 text-right">Verð: ${(p.price * p.cartQuantity).toLocaleString('it')} ISK</div>
+                    </div>`;
+    });
+    $('#cart-products').html(newHTML.join(''));
+    $('#total').html(totalprice.toLocaleString('it'));
+
 }
 
 

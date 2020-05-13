@@ -56,14 +56,5 @@ class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images/')
 
-    def save(self, *args, **kwargs):
-        try:
-            this = ProductImage.objects.get(id=self.id)
-            if this.image != self.image:
-                this.image.delete(save=False)
-        except ProductImage.DoesNotExist:
-            pass
-        super(ProductImage, self).save(*args, **kwargs)
-
     def __str__(self):
         return self.image.url

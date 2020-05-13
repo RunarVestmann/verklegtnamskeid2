@@ -41,4 +41,4 @@ Bjó til todo lista á trello svo hlutir gleymast ekki, refactor-ið smá js kó
 Lagfærði order by takka virknina, sá til þess að vörur sem eru í körfu en síðan er ekki til nóg magn af hverfi og kom upp nokkrum skilaboðum fyrir notandann ásamt því að leyfa notandanum að skipta um mynd, nafn og e-mail.
 
 12/05/2020
-Bætti við körfunni í gagnagrunninn ásamt því að útfæra okkar eigin tengitöflu fyrir vörurnar í körfunni.
+Bætti við körfunni í gagnagrunninn ásamt því að útfæra okkar eigin tengitöflu fyrir vörurnar í körfunni. Prófaði einnig að láta client-inn bregðast við því ef vörumagn breytist eða einfaldlega klárast.

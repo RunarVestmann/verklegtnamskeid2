@@ -28,12 +28,12 @@ class LoginForm(AuthenticationForm):
 
 class ProfileForm(ModelForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Notandanafn')
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Fornafn')
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Eftirnafn')
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Fornafn', required=False)
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Eftirnafn', required=False)
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}), label='Netfang')
     class Meta:
         model = Profile
-        exclude = ['id', 'user']
+        exclude = ['id', 'user', 'shopping_cart']
         field = ('image', 'username', 'first_name', 'last_name', 'email')
 
 class SearchForm(ModelForm):

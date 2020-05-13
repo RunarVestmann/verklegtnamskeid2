@@ -78,9 +78,10 @@ def profile(request):
             request.user.save()
 
             form_profile.user = request.user
-            image = request.FILES['image']
-            if image:
-                form_profile.image = image
+            if 'image' in request.FILES:
+                image = request.FILES['image']
+                if image:
+                    form_profile.image = image
             form_profile.save()
             return redirect('profile')
 

@@ -66,7 +66,7 @@ def payment_overview(request):
 
         countries = ShippingForm.countries
         for c in countries:
-            ''' gets humain frendly names back from code name'''
+            ''' gets human frendly names back from code name'''
             if c[0] == si['country']:
                 si['country_name'] = c[1]
     except:
@@ -99,6 +99,8 @@ def sync_cart(request):
             cart.save(False)
             profile.shopping_cart = cart
 
+        non_existing_product_id_list = []
+
         if not data:
             cart_products = ShoppingCartProducts.objects.filter(shopping_cart_id=profile.shopping_cart.id)
             if cart_products:
@@ -109,12 +111,15 @@ def sync_cart(request):
                     ShoppingCartProducts.objects.create(product=Product.objects.get(id=product['id']),
                                                         shopping_cart=profile.shopping_cart, quantity=product['cartQuantity'])
                 except Product.DoesNotExist:
-                    # TODO: Send back that a given product does not exist
-                    pass
+                    non_existing_product_id_list.append(product['id'])
 
         profile.save()
 
-        return JsonResponse({'data': data})
+        if non_existing_product_id_list:
+            return JsonResponse({'data': data, 'nonExistingProductIds': non_existing_product_id_list})
+        else:
+            return JsonResponse({'data': data})
+
     else:
         response = JsonResponse({'data': {}, 'message': 'Unsupported method used'})
         response.status_code = 405

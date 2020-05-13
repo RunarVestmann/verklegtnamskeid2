@@ -6,5 +6,5 @@ class ShoppingCart(models.Model):
 
 class ShoppingCartProducts(models.Model):
     shopping_cart = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField()
