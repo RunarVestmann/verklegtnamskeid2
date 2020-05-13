@@ -52,3 +52,7 @@ Unnið í error messages fyrir contact us. Lagað útlit á forms í html. Unni�
 
 12/05/2020
 Bætt inn vörum í gagnagrunn. Meira test með virkni á síðu og laga ýmsar villur.
+
+13/05/2020
+Bætt inn profile mynd hjá user í header. Refactora og commenta kóða. Villutest á hinu og þessu.
+Eyddum tíma í að leysa vandamál með github.
