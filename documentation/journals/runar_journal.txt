@@ -42,3 +42,6 @@ Lagfærði order by takka virknina, sá til þess að vörur sem eru í körfu e
 
 12/05/2020
 Bætti við körfunni í gagnagrunninn ásamt því að útfæra okkar eigin tengitöflu fyrir vörurnar í körfunni. Prófaði einnig að láta client-inn bregðast við því ef vörumagn breytist eða einfaldlega klárast.
+
+13/05/2020
+Betrumbætti filters, lagfærði kóðavillu þegar karfa er geymd í grunninum og útfærði Order model-ið þannig það geymist í grunninum.
