@@ -202,7 +202,7 @@ $(document).ready(function(){
         renderProductsInCart();
         recalculateCart();
     }
-    else if(window.location.pathname === '/cart/overview'){
+    else if(window.location.pathname === '/cart/overview' || window.location.pathname === '/cart/receipt'){
         renderProductsInCartOverview();
         recalculateCart();
     }

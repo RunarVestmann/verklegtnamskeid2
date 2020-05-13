@@ -7,6 +7,7 @@ from .models import ShoppingCart, ShoppingCartProducts
 from product.models import Product
 from user.models import Profile
 
+
 def __user_has_no_cart_products(user_id):
     try:
         cart = Profile.objects.get(user_id=user_id).shopping_cart
@@ -16,8 +17,10 @@ def __user_has_no_cart_products(user_id):
         return True
     return False
 
+
 def index(request):
     return render(request, 'cart/cart.html')
+
 
 @login_required
 def shipping_info(request):
@@ -60,6 +63,22 @@ def payment_overview(request):
     if __user_has_no_cart_products(request.user.id):
         return redirect('/cart')
 
+    ci, si = get_session_info(request)
+
+    return render(request, 'cart/overview.html', {'card_info': ci, 'ship_info': si})
+
+
+@login_required
+def receipt(request):
+    if __user_has_no_cart_products(request.user.id):
+        return redirect('/cart')
+
+    ci, si = get_session_info(request)
+
+    return render(request, 'cart/receipt.html', {'card_info': ci, 'ship_info': si})
+
+
+def get_session_info(request):
     try:
         ci = request.session['ci']
         si = request.session['si']
@@ -69,14 +88,12 @@ def payment_overview(request):
             ''' gets human frendly names back from code name'''
             if c[0] == si['country']:
                 si['country_name'] = c[1]
-    except:
-        ci = 'ekkert hér'
-        si = 'ekkert hér'
-    return render(request, 'cart/overview.html', {'card_info': ci, 'ship_info': si})
 
-@login_required
-def receipt(request):
-    return render(request, 'cart/receipt.html')
+    except:
+        ci = ''
+        si = ''
+    return ci, si
+
 
 @login_required
 def sync_cart(request):
@@ -109,7 +126,8 @@ def sync_cart(request):
             for product in data:
                 try:
                     ShoppingCartProducts.objects.create(product=Product.objects.get(id=product['id']),
-                                                        shopping_cart=profile.shopping_cart, quantity=product['cartQuantity'])
+                                                        shopping_cart=profile.shopping_cart,
+                                                        quantity=product['cartQuantity'])
                 except Product.DoesNotExist:
                     non_existing_product_id_list.append(product['id'])
 

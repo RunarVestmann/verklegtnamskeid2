@@ -17,6 +17,75 @@
     </div>
 
 
+    <div class="row my-4">
+        <div class="col-1"></div>
+        <div class="col-7">
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-8">
+              <div class="cart-overview-lines font-weight-bold">Greiðslukvittun</div>
+                <div id="cart-products" ></div>
+                         {#  javascript here#}
+                <div class="row cart-overview-lines">
+                     <div class="col-12 col-lg-6"></div>
+                      <div class="col-6 col-lg-2"></div>
+                      <div class="col-6 col-lg-4 text-right cart-overview-total">
+                          <div class="totals">
+                            <div class="totals-item totals-item-total">
+                              Samtals: <span id="total"></span> ISK
+                            </div>
+                          </div>
+                      </div>
+                </div>
+ {#                 end of RA   #}
+                    </div>
+                    <div class="col-4">
+                        <div class="cart-overview-lines"><strong>Captain Console</strong>
+                            <br/> Aðalgata 99
+                            <br/> 991 Aðalvík
+                        </div>
+  {#                 end of RB   #}
+                    </div>
+               </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="cart-overview-lines cart-carry">Greiðandi</div>
+
+                        <div class="cart-overview-lines"> {{ card_info.name}}</div>
+                        <div class="cart-overview-lines" > #### #### ####
+                            {{ card_info.card_nbr|get_digit:"4" }}{{ card_info.card_nbr|get_digit:"3" }}{{ card_info.card_nbr|get_digit:"2" }}{{ card_info.card_nbr|get_digit:"1" }}</div>
+                        <div class="cart-overview-lines"> {{ card_info.exp_day}}</div>
+                        <div class="cart-overview-lines"> {{ card_info.cvc_nbr }}</div>
+{#                 end of RC   #}
+                    </div>
+                      <div class="col-4">
+                        <div class="cart-overview-lines cart-carry">Afhending</div>
+
+                        <div class="cart-overview-lines">{{ ship_info.name }}</div>
+                        <div class="cart-overview-lines">{{ ship_info.street_name }} {{ ship_info.house_nbr }}</div>
+                        <div class="cart-overview-lines"> {{ ship_info.zip_code }} {{ ship_info.city }}</div>
+                        <div class="cart-overview-lines"> {{ ship_info.country_name }}</div>
+
+                    </div>
+
+                </div>
+
+                </div>
+{#                 end of A   #}
+            </div>
+        <div class="col-3">
+
+            <div class="cart-end-message">
+                <div class="text-center"><img class="cart-end-message-img-poss" src="/static/nav_img/captainconsole.svg" width="80rem"></div>
+            <strong>Captain Console</strong> þakkar kærlega fyrir viðskiptin og minnir á að við bjóðum upp á allskonar skemmtilegt á vefversuninni. Má ekki bjóða ykkur að staldra aðeins lengur við !
+               <p> <a class="btn btn-warning btn-block text-center mt-4" href="/">Aftur á forsíðu</a> </p>
+            </div>
+        </div>
+
+
+         <div class="col-1"></div>
+
+    </div>
 
 
 {% endblock %}

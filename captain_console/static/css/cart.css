@@ -189,7 +189,7 @@ label {
 .cart-overview-lines{
   font-size: 0.8rem;
 
-  padding: 0.5rem;
+  padding: 0.1rem 0.4rem;
 
 }
 .cart-overview-heads{
@@ -200,6 +200,23 @@ label {
 .cart-overview-total{
   font-weight: 700;
   border-top: black solid 0.3rem;
+}
+
+.cart-end-message{
+  padding: 0rem 3rem 1rem 3rem;
+  font-size: 0.8rem;
+  line-height: 1.5rem;
+  background: #c2af37;
+  border-radius: 0.5rem;
+}
+
+.cart-end-message-img-poss{
+  position: relative;
+  top: -1em;
+}
+
+.cart-carry{
+  color: #c2af37;
 }
 
 
