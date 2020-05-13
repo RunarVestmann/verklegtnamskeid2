@@ -5,48 +5,44 @@ from .models import Product, ProductImage, Type, System, Manufacturer
 def index(request):
     all_manufacturers = Manufacturer.objects.all()
     main_manufacturer_tuple = ('Nintendo', 'Sega', 'Sony', 'Microsoft')
-    other_manufacturers = all_manufacturers.exclude(name__in=main_manufacturer_tuple)
-    main_manufacturers = all_manufacturers.filter(name__in=main_manufacturer_tuple)
     return render(request, 'product/products.html', {
         'types': Type.objects.all(),
         'systems': System.objects.prefetch_related('manufacturer').all(),
-        'main_manufacturers': main_manufacturers,
-        'other_manufacturers': other_manufacturers
+        'main_manufacturers': all_manufacturers.filter(name__in=main_manufacturer_tuple),
+        'other_manufacturers': all_manufacturers.exclude(name__in=main_manufacturer_tuple)
     })
 
 def get_products_json(request):
-    all_products = Product.objects.prefetch_related('system', 'type').all().order_by('name')
+    all_products = Product.objects.prefetch_related('system', 'type').all()
+    search_results = None
+    if 'search' in request.GET:
+        search = request.GET['search']
+        if search:
+            search_results = all_products.filter(name__icontains=search)
+            return JsonResponse({'data': [product.to_dict() for product in search_results]})
 
-    # If the user entered a search string we find the results
-    if 'search' in request.GET or 'type' in request.GET or 'manufacturer' in request.GET or 'system' in request.GET:
-        search_results = None
-        if 'search' in request.GET:
-            search = request.GET['search']
-            if search:
-                search_results = all_products.filter(name__icontains=search)
-                return JsonResponse({'data': [product.to_dict() for product in search_results]})
+    if 'manufacturer' in request.GET:
+        manufacturers = request.GET['manufacturer'].strip().split('_')
+        if not search_results:
+            search_results = all_products.filter(system__manufacturer__name__in=manufacturers)
+        else:
+            search_results |= all_products.filter(system__manufacturer__name__in=manufacturers)
 
-        if 'manufacturer' in request.GET:
-            manufacturers = request.GET['manufacturer'].strip().split('_')
-            if not search_results:
-                search_results = all_products.filter(system__manufacturer__name__in=manufacturers)
-            else:
-                search_results |= all_products.filter(system__manufacturer__name__in=manufacturers)
+    if 'system' in request.GET:
+        systems = request.GET['system'].strip().split('_')
+        if not search_results:
+            search_results = all_products.filter(system__abbreviation__in=systems)
+        else:
+            search_results |= all_products.filter(system__abbreviation__in=systems)
 
-        if 'system' in request.GET:
-            systems = request.GET['system'].strip().split('_')
-            if not search_results:
-                search_results = all_products.filter(system__abbreviation__in=systems)
-            else:
-                search_results |= all_products.filter(system__abbreviation__in=systems)
+    if 'type' in request.GET:
+        types = request.GET['type'].strip().split('_')
+        if not search_results:
+            search_results = all_products.filter(type__name__in=types)
+        else:
+            search_results |= all_products.filter(type__name__in=types)
 
-        if 'type' in request.GET:
-            types = request.GET['type'].strip().split('_')
-            if not search_results:
-                search_results = all_products.filter(type__name__in=types)
-            else:
-                search_results |= all_products.filter(type__name__in=types)
-
+    if search_results:
         return JsonResponse({'data': [product.to_dict() for product in search_results]})
     else:
         return JsonResponse({'data': [product.to_dict() for product in all_products]})
