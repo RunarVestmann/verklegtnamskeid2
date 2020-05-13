@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="col-6 col-lg-12">
                          <div class="filter-block">
-                            {% for manufacturer in manufacturers %}
+                            {% for manufacturer in main_manufacturers %}
                             <div class="filter-level1  ">
                                 <div class="symbol">+</div>
                                 <a class="filter-btn manufacturer">{{ manufacturer.name }}</a>
@@ -33,6 +33,23 @@
                                 </ul>
                             </div>
                             {% endfor %}
+                             {% for manufacturer in other_manufacturers %}
+                                <div class="filter-level1  ">
+                                    <div class="symbol">+</div>
+                                    <a class="filter-btn manufacturer">{{ manufacturer.name }}</a>
+                                    <ul class="child-filter">
+                                    {% for system in systems %}
+                                        {% if system.manufacturer.name == manufacturer.name %}
+                                        <li>
+                                            <a class="filter-btn system" role="button">{{ system.abbreviation }}</a>
+                                        </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endfor %}
+
+
                         </div>
 
                     </div>

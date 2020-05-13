@@ -4,6 +4,7 @@ const products = $('#products');
 let productList = [];
 let ascendingOrder = true;
 
+let searchText = '';
 let manufacturerList = [];
 let typeList = [];
 let systemList = [];
@@ -25,6 +26,7 @@ $(document).ready(function(){
             productList = JSON.parse(prodList);
             const newHTML = productList.map(product => { return product.html; });
             products.html(newHTML.join(''));
+            window.sessionStorage.removeItem('productList');
         }
     }
 
@@ -87,7 +89,7 @@ function setupFilterButtons(){
                 else
                     systemList.push(system);
             }
-
+            searchText = searchBox.val();
             handleSearch(event);
         });
     }
@@ -97,8 +99,10 @@ function setupFilterButtons(){
 function setupSearchButton(filterButtons){
     // When the search button gets clicked
     searchButton.on('click', function(event){
-        searchList = [];
-        searchList.push(searchBox.val());
+        typeList = [];
+        manufacturerList = [];
+        systemList = [];
+        searchText = searchBox.val();
 
         // Clear out all the underlines for the filters
         for(let i = 0; i < filterButtons.length; i++){
@@ -143,10 +147,9 @@ function handleSearch(event){
 function displayChanges(){
     $('.loader-wrapper-2').show();
 
-    let searchText = searchBox.val();
-    let typeText = typeList.join(' ');
-    let manufacturerText = manufacturerList.join(' ');
-    let systemText = systemList.join(' ');
+    let typeText = typeList.join('_');
+    let manufacturerText = manufacturerList.join('_');
+    let systemText = systemList.join('_');
 
     if(!searchText && !typeText && !manufacturerText && !systemText){
         window.location.href = '/products/';
@@ -313,4 +316,13 @@ function orderByPrice(){
        return product.html;
     });
     products.html(newHTML.join(''));
+}
+
+function navigationClick(searchText){
+    typeList = [];
+    manufacturerList = [];
+    systemList = [];
+    manufacturerList.push(searchText);
+    searchText = '';
+    displayChanges();
 }

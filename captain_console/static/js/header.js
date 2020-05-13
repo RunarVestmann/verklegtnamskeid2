@@ -7,8 +7,3 @@ inputBox.addEventListener("keyup", function(event) {
         searchBtn.click();
     }
 });
-
-function navigationClick(searchText){
-    inputBox.value = searchText;
-    searchBtn.click();
-}

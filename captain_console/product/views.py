@@ -6,7 +6,13 @@ def index(request):
     # Store at the top what we'll be using no matter what
     all_types = Type.objects.all()
     all_products = Product.objects.prefetch_related('system', 'type').all().order_by('name')
+
     all_manufacturers = Manufacturer.objects.all()
+
+    main_manufacturer_tuple = ('Nintendo', 'Sega', 'Sony', 'Microsoft')
+
+    other_manufacturers = all_manufacturers.exclude(name__in=main_manufacturer_tuple)
+    main_manufacturers = all_manufacturers.filter(name__in=main_manufacturer_tuple)
 
     # If the user entered a search string we find the results
     if 'search' in request.GET or 'type' in request.GET or 'manufacturer' in request.GET or 'system' in request.GET:
@@ -21,7 +27,7 @@ def index(request):
             search_results = all_products
 
         if 'system' in request.GET:
-            systems = request.GET['system'].strip().split()
+            systems = request.GET['system'].strip().split('_')
 
             system_results = None
             for system in systems:
@@ -33,7 +39,7 @@ def index(request):
                 search_results = system_results
 
         if 'type' in request.GET:
-            types = request.GET['type'].strip().split()
+            types = request.GET['type'].strip().split('_')
 
             type_results = None
             for type in types:
@@ -45,7 +51,7 @@ def index(request):
                 search_results = type_results
 
         if 'manufacturer' in request.GET:
-            manufacturers = request.GET['manufacturer'].strip().split()
+            manufacturers = request.GET['manufacturer'].strip().split('_')
             manufacturer_results = None
             for manufacturer in manufacturers:
                 if not manufacturer_results:
@@ -65,7 +71,8 @@ def index(request):
         'products': all_products,
         'types': all_types,
         'systems': System.objects.prefetch_related('manufacturer').all(),
-        'manufacturers': all_manufacturers
+        'main_manufacturers': main_manufacturers,
+        'other_manufacturers': other_manufacturers
     })
 
 def get_product_by_id(request, id):
