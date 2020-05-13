@@ -90,8 +90,9 @@ def get_session_info(request):
                 si['country_name'] = c[1]
 
     except:
-        ci = ''
-        si = ''
+        return redirect('/cart')
+        # ci = ''
+        # si = ''
     return ci, si
 
 
@@ -142,3 +143,26 @@ def sync_cart(request):
         response = JsonResponse({'data': {}, 'message': 'Unsupported method used'})
         response.status_code = 405
         return response
+
+
+
+
+@login_required
+def order(request):
+    if __user_has_no_cart_products(request.user.id):
+        return redirect('/cart')
+
+    ci, si = get_session_info(request)
+
+    name = si['name']
+    address = si['street_name'] + ' ' + si['house_nbr']
+    city = si['city']
+    zip = si['zip_code']
+    country = si['country']
+    # country code not humain frendly name
+    print(name + address + zip +city+ country)
+
+
+
+
+    return redirect('receipt')
