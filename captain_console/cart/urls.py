@@ -20,7 +20,6 @@ urlpatterns = [
     # http://localhost:8000/cart/sync => PUT request
     path('sync', views.sync_cart, name='sync_cart'),
 
-    # http://localhost:8000/cart/order => PUT request
+    # http://localhost:8000/cart/order
     path('order', views.order, name='order'),
-
 ]

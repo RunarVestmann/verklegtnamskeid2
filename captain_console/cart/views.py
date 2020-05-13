@@ -70,8 +70,8 @@ def payment_overview(request):
 
 @login_required
 def receipt(request):
-    if __user_has_no_cart_products(request.user.id):
-        return redirect('/cart')
+
+    #TODO: if there is no session, redirect somewhere else
 
     ci, si = get_session_info(request)
 
@@ -111,19 +111,20 @@ def sync_cart(request):
         # Create a profile if the user doesn't seem to have one
         except Profile.DoesNotExist:
             profile = Profile(user=request.user)
+            profile.save()
 
         if not profile.shopping_cart:
             cart = ShoppingCart()
-            cart.save(False)
+            cart.save()
             profile.shopping_cart = cart
 
         non_existing_product_id_list = []
 
-        if not data:
-            cart_products = ShoppingCartProducts.objects.filter(shopping_cart_id=profile.shopping_cart.id)
-            if cart_products:
-                cart_products.delete()
-        else:
+        cart_products = ShoppingCartProducts.objects.filter(shopping_cart_id=profile.shopping_cart.id)
+        if cart_products:
+            cart_products.delete()
+
+        if data:
             for product in data:
                 try:
                     ShoppingCartProducts.objects.create(product=Product.objects.get(id=product['id']),
@@ -144,9 +145,6 @@ def sync_cart(request):
         response.status_code = 405
         return response
 
-
-
-
 @login_required
 def order(request):
     if __user_has_no_cart_products(request.user.id):
@@ -154,48 +152,41 @@ def order(request):
 
     ci, si = get_session_info(request)
 
-    # name = si['name']
-    # address = si['street_name'] + ' ' + si['house_nbr']
-    # city = si['city']
-    # zip = si['zip_code']
-    # country = si['country']
-    # # country code not humain frendly name
+    # Some error checks are needed to make sure the session data persists...... TODO
+    #name = si['name']
+    #address = si['street_name'] + ' ' + si['house_nbr']
+    #city = si['city']
+    #zip = si['zip_code']
+    #country = si['country']
+    # # country code not human frendly name
 
-
+    # Getting the profile instance
     try:
         profile = Profile.objects.get(user__id=request.user.id)
-
-    # Create a profile if the user doesn't seem to have one
+    # Creating it if it doesn't exist
     except Profile.DoesNotExist:
         profile = Profile(user=request.user)
+        profile.save()
 
+    # Creating the order
+    new_order = Order.objects.create(name=si['name'],
+                      address=si['street_name'] + ' ' + si['house_nbr'],
+                      city=si['city'],
+                      zip=si['zip_code'],
+                      country=si['country'],
+                      profile=profile)
 
-    try:
-        print('í geymslu vegna cart')
+    # Setting the cart products into the join table
+    cart_products = ShoppingCartProducts.objects.filter(shopping_cart_id=profile.shopping_cart.id)
+    for cp in cart_products:
+        OrderProduct.objects.create(quantity=cp.quantity,
+                                    product=cp.product,
+                                    order=new_order)
 
-        # new_order = Order.objects.create(name=si['name'],
-        #                      address=si['street_name'] + ' ' + si['house_nbr'],
-        #                      city=si['city'],
-        #                      zip=si['zip_code'],
-        #                      country=si['country'],
-        #                      profile=profile)
+        # Reducing the product quantity and saving it
+        cp.product.quantity -= cp.quantity
+        cp.product.save()
 
+    cart_products.delete()
 
-    except:
-        print('It didint work : new order was not created')
-
-    try:
-        print('í geymslu vegna cart')
-        # cart_id = profile.shopping_cart.id
-        # cart_products = ShoppingCartProducts.objects.filter(shopping_cart_id=cart_id)
-        # for cart in cart_products:
-        #     print(cart.shopping_cart_id)
-        #     OrderProduct.objects.create(quantity=cart.quantity,
-        #                                 product_id=cart.products,
-        #                                 order_id=new_order)
-
-
-    except:
-        print('It didint work :no profile')
-
-    return redirect('receipt')
+    return redirect('/cart/receipt')
