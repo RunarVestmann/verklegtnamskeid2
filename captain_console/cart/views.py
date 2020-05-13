@@ -160,9 +160,16 @@ def order(request):
     zip = si['zip_code']
     country = si['country']
     # country code not humain frendly name
-    print(name + address + zip +city+ country)
 
 
+    try:
+        profile = Profile.objects.get(user__id=request.user.id)
+
+    # Create a profile if the user doesn't seem to have one
+    except Profile.DoesNotExist:
+        profile = Profile(user=request.user)
+
+    print(name + address + zip + city + country + str(profile.id))
 
 
     return redirect('receipt')
