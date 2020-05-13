@@ -39,7 +39,7 @@ $(document).ready(function(){
         const nav = window.sessionStorage.getItem('nav_img');
         if(nav){
             highlightFilter(nav);
-            window.sessionStorage.removeItem(nav);
+            window.sessionStorage.removeItem('nav_img');
         }
     }
 
@@ -340,7 +340,6 @@ function orderByPrice(){
 function navigationClick(searchText){
     if(window.location.pathname === '/products/'){
         dehighlightFilters();
-        manufacturerList.push(searchText);
         highlightFilter(searchText);
     }
     else
@@ -351,7 +350,8 @@ function navigationClick(searchText){
 function highlightFilter(text){
     filters.forEach(button => {
        if(button.filter.textContent == text){
-           button.toggle = !button.toggle;
+           manufacturerList.push(text);
+           button.toggle = true;
            if(button.toggle)
                 button.filter.style.backgroundColor = '#99a6ac';
             else
