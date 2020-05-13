@@ -5,7 +5,7 @@ from .forms import ShippingForm, PaymentForm
 import json
 from .models import ShoppingCart, ShoppingCartProducts
 from product.models import Product
-from user.models import Profile
+from user.models import Profile, Order, OrderProduct
 
 
 def __user_has_no_cart_products(user_id):
@@ -154,12 +154,12 @@ def order(request):
 
     ci, si = get_session_info(request)
 
-    name = si['name']
-    address = si['street_name'] + ' ' + si['house_nbr']
-    city = si['city']
-    zip = si['zip_code']
-    country = si['country']
-    # country code not humain frendly name
+    # name = si['name']
+    # address = si['street_name'] + ' ' + si['house_nbr']
+    # city = si['city']
+    # zip = si['zip_code']
+    # country = si['country']
+    # # country code not humain frendly name
 
 
     try:
@@ -169,7 +169,33 @@ def order(request):
     except Profile.DoesNotExist:
         profile = Profile(user=request.user)
 
-    print(name + address + zip + city + country + str(profile.id))
 
+    try:
+        print('í geymslu vegna cart')
+
+        # new_order = Order.objects.create(name=si['name'],
+        #                      address=si['street_name'] + ' ' + si['house_nbr'],
+        #                      city=si['city'],
+        #                      zip=si['zip_code'],
+        #                      country=si['country'],
+        #                      profile=profile)
+
+
+    except:
+        print('It didint work : new order was not created')
+
+    try:
+        print('í geymslu vegna cart')
+        # cart_id = profile.shopping_cart.id
+        # cart_products = ShoppingCartProducts.objects.filter(shopping_cart_id=cart_id)
+        # for cart in cart_products:
+        #     print(cart.shopping_cart_id)
+        #     OrderProduct.objects.create(quantity=cart.quantity,
+        #                                 product_id=cart.products,
+        #                                 order_id=new_order)
+
+
+    except:
+        print('It didint work :no profile')
 
     return redirect('receipt')
