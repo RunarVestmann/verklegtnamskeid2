@@ -192,8 +192,12 @@ $(document).ready(function(){
     cart.init();
     shoppingCartBtn.textContent = cart.count();
 
-    if(window.location.pathname === '/cart/overview' || window.location.pathname === '/cart/receipt'){
-        renderProductsInCartOverview();
+    if(window.location.pathname === '/cart/receipt' || window.location.pathname === '/cart/overview'){
+        const productsInStorage = sessionStorage.getItem('cartProducts');
+        if(productsInStorage)
+            renderProductsInCartOverview(JSON.parse(productsInStorage));
+        else
+            renderProductsInCartOverview();
         recalculateCart();
     }
 
@@ -212,7 +216,6 @@ $(document).ready(function(){
         renderProductsInCart();
         recalculateCart();
     }
-
 });
 
 function sendCartProductsToServer(){
@@ -325,9 +328,12 @@ function updateQuantity(quantityInput, id, max)
     });
 }
 
-function renderProductsInCartOverview(){
+function renderProductsInCartOverview(products=null){
+    if(!products)
+        products = cart.products;
+
     let totalprice = 0;
-    const newHTML = cart.products.map(p => {
+    const newHTML = products.map(p => {
         totalprice += (p.price * p.cartQuantity)
         return `<div class="row cart-overview-lines">       
                      <div class="col-12 col-lg-6">${p.name}</div>
@@ -338,6 +344,24 @@ function renderProductsInCartOverview(){
     $('#cart-products').html(newHTML.join(''));
     $('#total').html(totalprice.toLocaleString('it'));
 
+}
+
+function placeOrder(){
+    if(cart.count() > 0){
+        $.ajax({
+            url: '/cart/order',
+            method: 'GET',
+            success: function(response){
+                $('.loader-wrapper-2').show();
+                sessionStorage.setItem('cartProducts', JSON.stringify(cart.products));
+                cart.clear();
+                window.location.href = '/cart/receipt';
+            },
+            error: function(xhr, status, error){
+                toastr.error('Ekki gekk að ganga frá pöntuninni');
+            }
+        });
+    }
 }
 
 
