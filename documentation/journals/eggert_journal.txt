@@ -25,34 +25,34 @@ Héldum áfram frá deginum áður. Funduðum saman um kvöldið til að samstil
 en við byrjum að kóða.
 
 04/05/2020
-Vann í header fyrir síðuna og almennt læra hvernig bootstrap virkar. Funduðum með aðstoðarkennara
+Vann í header fyrir síðuna og lærði hvernig bootstrap virkar. Funduðum með aðstoðarkennara.
 
 05/05/2020
 Meiri vinna í header. Vann í forsíðu. Setti inn nýjustu vörur og placeholder fyrir vinsælustu.
 
 06/05/2020
-Bætti inn nýjustu vörum á forsíðu. Vann í contact appinu
+Bætti inn nýjustu vörum á forsíðu. Vann í contact appinu.
 
 07/05/2020
 Contact app að mestu endurunnið. Notandi getur sent fyrirspurn á email í gegnum form.
 Unnið í cart app.
 
 08/05/2020
-Byrjað að vinna í recently viewed. Byrjað að vinna í lógíkinni, sækja info í gegnum javascript
-senda áfram
+Byrjað að vinna í recently viewed. Byrjað að vinna í lógíkinni, sækja info í gegnum javascript og svo
+senda áfram.
 
 09/05/2020
 Haldið áfram í lógík fyrir recently viewed. Unnið í útlitinu fyrir þá síðu.
 
 10/05/2020
-Unnið í error messages fyrir contact us. Lagað útlit á forms í html. Unnið í loader sem fer í gang við ajax request
+Unnið í error messages fyrir contact us. Lagað útlit á forms í html. Unnið í loading animation sem fer í gang við ajax request.
 
 11/05/2020
-
+Fundað með aðstoðarkennara. Meiri vinna í loading animation. Unnið í hinu og þessu útlitstengdu, bæði html og css.
 
 12/05/2020
-Bætt inn vörum í gagnagrunn. Meira test með virkni á síðu og laga ýmsar villur.
+Bætt inn vörum í gagnagrunn. Test með virkni á síðu og laga ýmsar villur því tengdu.
 
 13/05/2020
 Bætt inn profile mynd hjá user í header. Refactora og commenta kóða. Villutest á hinu og þessu.
-Eyddum tíma í að leysa vandamál með github.
+Eyddum tíma í að leysa vandamál með github. Default product image og lagað lúkkið á product images í  'Skoða Nánar'.
