@@ -35,7 +35,7 @@ Vann meira í local storage fyrir cart-ið. Núna virðist þetta byrja að virk
 Order by virkni, search history og cart storage fínpússun.
 
 10/05/2020
-Bjó til todo lista á trello svo hlutir gleymast ekki, refactor-ið smá js kóða, betrumbætti UX fyrir takka á /products filter-unum.
+Bjó til todo lista á trello svo hlutir gleymast ekki, refactor-aði smá js kóða, betrumbætti UX fyrir takka á /products filter-unum.
 
 11/05/2020
 Lagfærði order by takka virknina, sá til þess að vörur sem eru í körfu en síðan er ekki til nóg magn af hverfi og kom upp nokkrum skilaboðum fyrir notandann ásamt því að leyfa notandanum að skipta um mynd, nafn og e-mail.
@@ -45,3 +45,6 @@ Bætti við körfunni í gagnagrunninn ásamt því að útfæra okkar eigin ten
 
 13/05/2020
 Betrumbætti filters, lagfærði kóðavillu þegar karfa er geymd í grunninum og útfærði Order model-ið þannig það geymist í grunninum.
+
+14/05/2020
+Kom form validation í gang, lagfærði greiðslu checkout-ið þar sem karfan tæmdist ekki. Bug test-aði og research-aði queries
