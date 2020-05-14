@@ -18,32 +18,34 @@ import json
 
 
 def signup_view(request):
-    form = SignUpForm(request.POST)
-    if form.is_valid():
-        form.save()
-        username = form.cleaned_data.get('username')
-        password = form.cleaned_data.get('password1')
-        user = authenticate(username=username, password=password)
-        login(request, user)
-        profile = Profile()
-        profile.user = request.user
-        profile.save()
-        return redirect('home')
-
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            profile = Profile()
+            profile.user = request.user
+            profile.save()
+            return redirect('home')
+    else:
+        form = SignUpForm()
     return render(request, 'user/signup.html', {'form': form})
 
-
 def login_view(request):
+    if request.method == 'POST':
         form = LoginForm(request, data=request.POST)
-
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
             login(request, user)
             return redirect('home')
-
-        return render(request, 'user/login.html', {'form': form})
+    else:
+        form = LoginForm()
+    return render(request, 'user/login.html', {'form': form})
 
 
 

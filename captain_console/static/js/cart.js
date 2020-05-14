@@ -192,16 +192,24 @@ $(document).ready(function(){
     cart.init();
     shoppingCartBtn.textContent = cart.count();
 
-    if(window.location.pathname === '/cart/receipt' || window.location.pathname === '/cart/overview'){
+    if(window.location.pathname === '/cart/payment')
+        sessionStorage.setItem('cartProducts', JSON.stringify(cart.products));
+
+    if(window.location.pathname === '/cart/overview'){
         const productsInStorage = sessionStorage.getItem('cartProducts');
         if(productsInStorage)
             renderProductsInCartOverview(JSON.parse(productsInStorage));
         else
             renderProductsInCartOverview();
-        recalculateCart();
     }
 
     if(window.location.pathname === '/cart/receipt'){
+        const productsInStorage = sessionStorage.getItem('cartProducts');
+        if(productsInStorage)
+            renderProductsInCartOverview(JSON.parse(productsInStorage));
+        else
+            renderProductsInCartOverview();
+        sessionStorage.removeItem('cartProducts');
         cart.clear();
         shoppingCartBtn.textContent = cart.count();
     }
@@ -369,6 +377,8 @@ function placeOrder(){
             }
         });
     }
+    else
+        window.location.href = '/cart';
 }
 
 
