@@ -34,7 +34,13 @@ class Order(models.Model):
     zip = models.CharField(max_length=100)
     city = models.CharField(max_length=255)
 
+    def __str__(self):
+        return f'Pöntun nr.{self.id} fyrir {self.name}'
+
 class OrderProduct(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField()
+
+    def __str__(self):
+        return f'Vara fyrir pöntun nr.{self.order.id}'

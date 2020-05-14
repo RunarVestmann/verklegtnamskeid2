@@ -31,16 +31,11 @@ class ShippingForm(forms.Form):
     zip_code.label = 'Póstnúmer'
     zip_code.error_messages = {'required': 'Vinsamlega sláðu inn póstnúmer'}
 
-
-
-
     countries = [('AFG', 'Afganistan'),('USA', 'Bandaríkin'),('FRA', 'Frakkland'),('GRE', 'Grænland'),('ISL', 'Ísland'), ('NOR', 'Noregur'),('XXX', 'Annarstaðar')]
 
     country = forms.ChoiceField(choices=countries, initial='ISL', widget=forms.Select(attrs={'class': 'form-control'}))
     country.label = 'Land'
     country.error_messages = {'required': 'Vinsamlega veldu land'}
-
-
 
 
 class PaymentForm(forms.Form):
@@ -52,7 +47,7 @@ class PaymentForm(forms.Form):
 
     card_nbr = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
                                                                'placeholder': 'Kortanúmer'}),
-                                 required=True, max_length=16)
+                                 required=True, max_length=16, min_length=16)
     card_nbr.label = 'Kortanúmer'
     card_nbr.error_messages = {'required': 'Vinsamlega sláðu inn kortanúmer'}
 
@@ -63,11 +58,9 @@ class PaymentForm(forms.Form):
     exp_day.label = 'Gildistími'
     exp_day.error_messages = {'required': 'Vinsamlega sláðu inn gildistíma'}
 
-
-
     cvc_nbr = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
                                                               'placeholder': 'Öryggisnúmer'}),
-                                required=False, max_length=10)
+                                required=False, max_length=3, min_length=3)
     cvc_nbr.label = 'CVC '
     cvc_nbr.error_messages = {'required': 'Vinsamlega sláðu inn öryggisnúmerið '}
 
