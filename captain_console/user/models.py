@@ -19,6 +19,9 @@ class Profile(models.Model):
             pass
         super(Profile, self).save(*args, **kwargs)
 
+    def __str__(self):
+        return self.user.username
+
 class Search(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
