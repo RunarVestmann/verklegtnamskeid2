@@ -177,21 +177,26 @@ function displayChanges(){
             window.location.href = '/products';
             return;
         }
-        else
-            url = '/products?all'
+        else{
+            url = '/products?all';
+            dehighlightFilters();
+        }
     }
     else{
         const urlParams = [];
 
-        if(typeText)
-            urlParams.push('type=' + typeText);
-        if(manufacturerText)
-            urlParams.push('manufacturer=' + manufacturerText);
-        if(searchText)
+        if(searchText){
             urlParams.push('search=' + searchText);
-        if(systemText)
-            urlParams.push('system=' + systemText);
-
+            dehighlightFilters();
+        }
+        else{
+            if(typeText)
+                urlParams.push('type=' + typeText);
+            if(manufacturerText)
+                urlParams.push('manufacturer=' + manufacturerText);
+            if(systemText)
+                urlParams.push('system=' + systemText);
+        }
         url = '/products?' + urlParams.join('&');
     }
 
@@ -383,5 +388,6 @@ function dehighlightFilters(){
     filters.forEach(button => {
         button.toggle = false;
         button.filter.style.backgroundColor = button.startingColor;
+        button.filter.style.fontWeight = 'bold';
     });
 }

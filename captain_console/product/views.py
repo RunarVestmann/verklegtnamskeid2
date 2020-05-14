@@ -7,6 +7,10 @@ def index(request):
 
     if 'all' in request.GET:
         return JsonResponse({'data': [product.to_dict() for product in all_products]})
+    if 'search' in request.GET:
+        search = request.GET['search']
+        if search:
+            return JsonResponse({'data': [product.to_dict() for product in all_products.filter(name__icontains=search)]})
 
     search_results = __find_search_results(request, all_products)
 
@@ -25,12 +29,6 @@ def index(request):
 
 def __find_search_results(request, all_products):
     search_results = None
-    if 'search' in request.GET:
-        search = request.GET['search']
-        if search:
-            search_results = all_products.filter(name__icontains=search)
-            return JsonResponse({'data': [product.to_dict() for product in search_results]})
-
     if 'manufacturer' in request.GET:
         manufacturers = request.GET['manufacturer'].strip().split('_')
         if not search_results:
