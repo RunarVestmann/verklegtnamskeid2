@@ -7,32 +7,24 @@
         </div>
     </div>
     <div class="row">
+
         {% for product in products %}
-            {% if forloop.counter <= 4 %}
-                <div class="col p-3 d-flex justify-content-center">
+            {% if forloop.counter <= 8 %}
+
                     {%  include 'product/product.html' %}
-                 </div>
+
             {% endif %}
         {% empty %}
-            <div class="col-3 p-4 mt-4 text-center">
-                <h4>Þú hefur ekki skoðað neinar vörur</h4>
+            <div class="col-10 col-sm-6 col-lg-3 p-4 mt-4 text-center">
+                <h5>Þú hefur ekki skoðað neinar vörur</h5>
                 <br>
-                <h4>Smelltu hér til að skoða úrvalið hjá okkur</h4>
+                <h4>Smelltu á Vörur til að skoða úrvalið hjá okkur</h4>
                 <br>
-                <a href="{% url 'products' %}">
-                    <button class="btn btn-warning">Vörur</button>
-                </a>
+
+                <a class="btn btn-warning btn-block" href="{% url 'products' %}">Vörur</a>
              </div>
         {% endfor %}
-    </div>
-        <div class="row">
-        {% for product in products %}
-            {% if forloop.counter > 4 and forloop.counter <= 8 %}
-                <div class="col-3 p-3 d-flex justify-content-center">
-                    {%  include 'product/product.html' %}
-                 </div>
-            {% endif %}
-        {% endfor %}
+
     </div>
 
 {% endblock %}
