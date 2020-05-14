@@ -151,8 +151,10 @@ def order(request):
         return redirect('/cart')
 
     ci, si = get_session_info(request)
+    # the are error check in the get_session function
 
-    # Some error checks are needed to make sure the session data persists...... TODO
+    # Some error checks are needed to make sure the session data persists......
+
     #name = si['name']
     #address = si['street_name'] + ' ' + si['house_nbr']
     #city = si['city']

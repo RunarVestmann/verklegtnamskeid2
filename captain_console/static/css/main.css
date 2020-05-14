@@ -184,9 +184,14 @@ footer{
 
 }
 
-.user-tab-nav{
+/*user-tab.. is used in Login and Signup to layout tabs and frame, for navigate function between them */
+.user-tab{
+    /*top level so a:hover do work*/
     font-size:0.75rem;
     text-align: center;
+}
+.user-tab-nav{
+    /*difine the size of tabs and active bottum*/
     padding-top: 2rem;
     padding-bottom: 1rem;
 
@@ -201,10 +206,17 @@ footer{
     color: #C2AF37;
     font-weight: 700;
 }
+
 .user-tab-link{
     color: #62899C;
     font-weight: 400;
     border: thin solid #C2AF37;
+}
+.user-tab a:hover{
+    color: #62899C;
+    font-weight: 700;
+    background: #edecd6;
+    text-decoration: none;
 }
 
 .user-dropdown{
