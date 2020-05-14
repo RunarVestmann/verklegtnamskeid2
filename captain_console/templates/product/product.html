@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-12 p-0">
 
-                <div class="products-img-frame"><img class="product-img" src="{{ product.productimage_set.first }}" alt="{{ product.name }}" onerror="this.src='/media/images/default-image.svg'"></div>
+                <div class="products-img-frame"><img class="product-img" src="{% if product.productimage_set.first %}{{ product.productimage_set.first }}{% else %}/media/images/default-image.svg{% endif %}" alt="{{ product.name }}"></div>
             </div>
         </div>
         <div class="row mt-2">

@@ -36,10 +36,10 @@ $(document).ready(function(){
             window.sessionStorage.removeItem('search');
         }
 
-        const nav = window.sessionStorage.getItem('nav_img');
-        if(nav){
-            highlightFilter(nav);
-            window.sessionStorage.removeItem('nav_img');
+        const navClick = window.sessionStorage.getItem('navClick');
+        if(navClick){
+            highlightFilter(navClick);
+            window.sessionStorage.removeItem('navClick');
         }
     }
 
@@ -169,18 +169,31 @@ function displayChanges(){
     let manufacturerText = manufacturerList.join('_');
     let systemText = systemList.join('_');
 
-    const urlParams = [];
+    let url = '';
 
-    if(typeText)
-        urlParams.push('type=' + typeText);
-    if(manufacturerText)
-        urlParams.push('manufacturer=' + manufacturerText);
-    if(searchText)
-        urlParams.push('search=' + searchText);
-    if(systemText)
-        urlParams.push('system=' + systemText);
+    if(!searchText && !typeText && !manufacturerText)
+    {
+        if(window.location.pathname !== '/products/'){
+            window.location.href = '/products';
+            return;
+        }
+        else
+            url = '/products?all'
+    }
+    else{
+        const urlParams = [];
 
-    const url = '/products/json?' + urlParams.join('&');
+        if(typeText)
+            urlParams.push('type=' + typeText);
+        if(manufacturerText)
+            urlParams.push('manufacturer=' + manufacturerText);
+        if(searchText)
+            urlParams.push('search=' + searchText);
+        if(systemText)
+            urlParams.push('system=' + systemText);
+
+        url = '/products?' + urlParams.join('&');
+    }
 
     $.ajax({
         url: url,
@@ -212,11 +225,12 @@ function displayChanges(){
                         orderByPrice();
                 }
                 else
-                    products.html(newHTML.join(''));
+                    orderByName();
             }
             else{
                 window.sessionStorage.setItem('productList', JSON.stringify(productList));
-                window.sessionStorage.setItem('search', searchText);
+                if(searchText)
+                    window.sessionStorage.setItem('search', searchText);
 
                 // Redirect to /products
                 window.location.href = '/products/';
@@ -236,7 +250,7 @@ function getProductHTML(product){
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 p-0">
-                                        <div class="products-img-frame"><img class="product-img" src="${ product.first_image }" alt="${ product.name }" onerror="this.src='/media/images/default-image.svg'"></div>
+                                        <div class="products-img-frame"><img class="product-img" src="${ product.first_image }" alt=${ product.name }></div>
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -332,13 +346,19 @@ function orderByPrice(){
     products.html(newHTML.join(''));
 }
 
-function navigationClick(searchText){
+function navigationClick(text){
     if(window.location.pathname === '/products/'){
         dehighlightFilters();
-        highlightFilter(searchText);
+        highlightFilter(text);
     }
-    else
-        window.sessionStorage.setItem('nav_img', searchText);
+    else{
+        typeList = [];
+        manufacturerList = [];
+        systemList = [];
+        searchText = '';
+        manufacturerList.push(text);
+        window.sessionStorage.setItem('navClick', text);
+    }
     displayChanges();
 }
 

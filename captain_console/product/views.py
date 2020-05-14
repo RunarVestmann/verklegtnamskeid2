@@ -3,17 +3,27 @@ from django.shortcuts import render, get_object_or_404
 from .models import Product, ProductImage, Type, System, Manufacturer
 
 def index(request):
-    all_manufacturers = Manufacturer.objects.all()
-    main_manufacturer_tuple = ('Nintendo', 'Sega', 'Sony', 'Microsoft')
-    return render(request, 'product/products.html', {
-        'types': Type.objects.all(),
-        'systems': System.objects.prefetch_related('manufacturer').all(),
-        'main_manufacturers': all_manufacturers.filter(name__in=main_manufacturer_tuple),
-        'other_manufacturers': all_manufacturers.exclude(name__in=main_manufacturer_tuple)
-    })
+    all_products = Product.objects.prefetch_related('system', 'type').all().order_by('name')
 
-def get_products_json(request):
-    all_products = Product.objects.prefetch_related('system', 'type').all()
+    if 'all' in request.GET:
+        return JsonResponse({'data': [product.to_dict() for product in all_products]})
+
+    search_results = __find_search_results(request, all_products)
+
+    if search_results:
+        return JsonResponse({'data': [product.to_dict() for product in search_results]})
+    else:
+        all_manufacturers = Manufacturer.objects.all()
+        main_manufacturer_tuple = ('Nintendo', 'Sega', 'Sony', 'Microsoft')
+        return render(request, 'product/products.html', {
+            'types': Type.objects.all(),
+            'systems': System.objects.prefetch_related('manufacturer').all(),
+            'main_manufacturers': all_manufacturers.filter(name__in=main_manufacturer_tuple),
+            'other_manufacturers': all_manufacturers.exclude(name__in=main_manufacturer_tuple),
+            'products': all_products
+        })
+
+def __find_search_results(request, all_products):
     search_results = None
     if 'search' in request.GET:
         search = request.GET['search']
@@ -42,10 +52,7 @@ def get_products_json(request):
         else:
             search_results |= all_products.filter(type__name__in=types)
 
-    if search_results:
-        return JsonResponse({'data': [product.to_dict() for product in search_results]})
-    else:
-        return JsonResponse({'data': [product.to_dict() for product in all_products]})
+    return search_results
 
 def get_product_by_id(request, id):
     product = get_object_or_404(Product, pk=id)

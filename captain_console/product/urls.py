@@ -10,7 +10,4 @@ urlpatterns = [
 
     # http://localhost:8000/products/{id}/json
     path('<int:id>/json', views.get_product_json_by_id, name='product_json'),
-
-    # http://localhost:8000/products/json
-    path('json', views.get_products_json, name='products_json'),
 ]
