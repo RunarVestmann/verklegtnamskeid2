@@ -236,7 +236,7 @@ function getProductHTML(product){
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-12 p-0">
-                                        <div class="products-img-frame"><img class="product-img" src="${ product.first_image }" alt=${ product.name }></div>
+                                        <div class="products-img-frame"><img class="product-img" src="${ product.first_image }" alt="${ product.name }" onerror="this.src='/media/images/default-image.svg'"></div>
                                     </div>
                                 </div>
                                 <div class="row mt-2">

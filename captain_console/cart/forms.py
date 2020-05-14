@@ -3,31 +3,30 @@ from django import forms
 
 class ShippingForm(forms.Form):
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
-                                                         'placeholder': 'Settu inn fullt nafn hjá móttakanda'}),
+                                                         'placeholder': 'Fullt nafn'}),
                            required=True, max_length=100)
     name.label = 'Nafn'
     name.error_messages = {'required': 'Vinsamlega sláðu inn nafn'}
 
     street_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
-                                                               'placeholder': 'Settu inn götuheiti hjá móttakanda'}),
+                                                               'placeholder': 'Heimilisfang'}),
                                  required=True, max_length=100)
     street_name.label = 'Heimilisfang'
     street_name.error_messages = {'required': 'Vinsamlega sláðu inn götuheiti'}
 
     house_nbr = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
-                                                              'placeholder': 'Settu inn húsnúmer eða önnur nauðsynleg einkenni'}),
+                                                              'placeholder': 'Íbúð (ef á við)'}),
                                 required=False, max_length=100)
-    house_nbr.label = 'Húsnúmer '
-    house_nbr.error_messages = {'required': 'Vinsamlega sláðu inn húsnúmer '}
+    house_nbr.label = 'Íbúð '
 
     city = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
-                                                         'placeholder': 'Settu inn borg, bæ eða sveitafélag'}),
+                                                         'placeholder': 'Staður'}),
                            required=True, max_length=100)
     city.label = 'Staður'
     city.error_messages = {'required': 'Vinsamlega sláðu inn stað '}
 
     zip_code = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
-                                                             'placeholder': 'Settu inn póstnúmer'}),
+                                                             'placeholder': 'Póstnúmer'}),
                                required=True, max_length=100)
     zip_code.label = 'Póstnúmer'
     zip_code.error_messages = {'required': 'Vinsamlega sláðu inn póstnúmer'}
@@ -46,20 +45,20 @@ class ShippingForm(forms.Form):
 
 class PaymentForm(forms.Form):
     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
-                                                         'placeholder': 'Settu inn nafnið sem er á greiðslukortinu'}),
+                                                         'placeholder': 'Fullt nafn korthafa'}),
                            required=True, max_length=100)
     name.label = 'Nafn'
     name.error_messages = {'required': 'Vinsamlega sláðu inn nafn'}
 
     card_nbr = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
-                                                               'placeholder': 'Settu inn kortanúmer'}),
+                                                               'placeholder': 'Kortanúmer'}),
                                  required=True, max_length=16)
     card_nbr.label = 'Kortanúmer'
     card_nbr.error_messages = {'required': 'Vinsamlega sláðu inn kortanúmer'}
 
 
     exp_day = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
-                                                               'placeholder': 'Settu inn gildistíma mán/ár (00/00)'}),
+                                                               'placeholder': 'Gildistími: xx/xx'}),
                                  required=True, max_length=16)
     exp_day.label = 'Gildistími'
     exp_day.error_messages = {'required': 'Vinsamlega sláðu inn gildistíma'}
@@ -67,7 +66,7 @@ class PaymentForm(forms.Form):
 
 
     cvc_nbr = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
-                                                              'placeholder': 'Settu inn öryggisnúmerið sem er aftan á kortinu'}),
+                                                              'placeholder': 'Öryggisnúmer'}),
                                 required=False, max_length=10)
     cvc_nbr.label = 'CVC '
     cvc_nbr.error_messages = {'required': 'Vinsamlega sláðu inn öryggisnúmerið '}
