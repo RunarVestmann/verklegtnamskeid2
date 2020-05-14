@@ -350,8 +350,15 @@ function placeOrder(){
     if(cart.count() > 0){
         $.ajax({
             url: '/cart/order',
-            method: 'GET',
+            method: 'POST',
             success: function(response){
+
+                if(response.message && response.data && response.data.redirect){
+                    toastr.info(response.message);
+                    window.location.href = response.data.redirect;
+                    return;
+                }
+
                 $('.loader-wrapper-2').show();
                 sessionStorage.setItem('cartProducts', JSON.stringify(cart.products));
                 cart.clear();

@@ -37,6 +37,15 @@ def shipping_info(request):
 
             request.session['si'] = ship_info
             return redirect('payment')
+
+    if initial['si']:
+        si = initial['si']
+        form.fields['name'].initial = si['name']
+        form.fields['street_name'].initial = si['street_name']
+        form.fields['house_nbr'].initial = si['house_nbr']
+        form.fields['city'].initial = si['city']
+        form.fields['zip_code'].initial = si['zip_code']
+        form.fields['country'].initiall = si['country']
     return render(request, 'cart/shipping.html', {'form': form})
 
 
@@ -46,6 +55,10 @@ def payment_info(request):
         return redirect('/cart')
 
     initial = {'ci': request.session.get('ci', None)}
+
+    if not request.session.get('si', None):
+        return redirect('/cart/shipping')
+
     form = PaymentForm(request.POST or None, initial=initial)
     if request.method == 'POST':
         if form.is_valid():
@@ -55,6 +68,13 @@ def payment_info(request):
 
             request.session['ci'] = card_info
             return redirect('overview')
+
+    if initial['ci']:
+        ci = initial['ci']
+        form.fields['name'].initial = ci['name']
+        form.fields['card_nbr'].initial = ci['card_nbr']
+        form.fields['exp_day'].initial = ci['exp_day']
+        form.fields['cvc_nbr'].initial = ci['cvc_nbr']
     return render(request, 'cart/payment.html', {'form': form})
 
 
@@ -162,49 +182,46 @@ def sync_cart(request):
 
 @login_required
 def order(request):
-    if __user_has_no_cart_products(request.user.id):
-        return redirect('/cart')
+    if request.method == 'POST':
+        ci, si = get_session_info(request)
+        if not si:
+            return JsonResponse({'data': {'redirect': '/cart/shipping'}, 'message': 'Vantar sendingarupplýsingar'})
+        elif not ci:
+            return JsonResponse({'data': {'redirect': '/cart/payment'}, 'message': 'Vantar Greiðsluupplýsingar '})
 
-    ci, si = get_session_info(request)
-    if not si:
-        return redirect('/cart/shipping')
-    elif not ci:
-        return redirect('/cart/payment')
+        # Getting the profile instance
+        try:
+            profile = Profile.objects.get(user__id=request.user.id)
+        # Creating it if it doesn't exist
+        except Profile.DoesNotExist:
+            profile = Profile(user=request.user)
+            profile.save()
 
+        # Creating the order
+        new_order = Order.objects.create(name=si['name'],
+                          address=si['street_name'] + ' ' + si['house_nbr'],
+                          city=si['city'],
+                          zip=si['zip_code'],
+                          country=si['country'],
+                          profile=profile)
 
-    # Some my need some error message checks ......
+        # Setting the cart products into the join table
+        cart_products = ShoppingCartProducts.objects.filter(shopping_cart_id=profile.shopping_cart.id)
+        for cp in cart_products:
+            OrderProduct.objects.create(quantity=cp.quantity,
+                                        product=cp.product,
+                                        order=new_order)
 
+            # Reducing the product quantity and saving it
+            cp.product.quantity -= cp.quantity
+            cp.product.save()
 
+        cart_products.delete()
 
-    # Getting the profile instance
-    try:
-        profile = Profile.objects.get(user__id=request.user.id)
-    # Creating it if it doesn't exist
-    except Profile.DoesNotExist:
-        profile = Profile(user=request.user)
-        profile.save()
-
-    # Creating the order
-    new_order = Order.objects.create(name=si['name'],
-                      address=si['street_name'] + ' ' + si['house_nbr'],
-                      city=si['city'],
-                      zip=si['zip_code'],
-                      country=si['country'],
-                      profile=profile)
-    # country sends three letter code - not human frendly name
-
-
-    # Setting the cart products into the join table
-    cart_products = ShoppingCartProducts.objects.filter(shopping_cart_id=profile.shopping_cart.id)
-    for cp in cart_products:
-        OrderProduct.objects.create(quantity=cp.quantity,
-                                    product=cp.product,
-                                    order=new_order)
-
-        # Reducing the product quantity and saving it
-        cp.product.quantity -= cp.quantity
-        cp.product.save()
-
-    cart_products.delete()
-
-    return redirect('/cart/receipt')
+        response = JsonResponse({'data': {'redirect': '/cart/receipt'}})
+        response.status_code = 201
+        return response
+    else:
+        response = JsonResponse({'data': {}, 'message': 'Unsupported method used, this route only supports POST'})
+        response.status_code = 400
+        return response
