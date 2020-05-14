@@ -25,7 +25,11 @@
                 <a href="{% url 'product_details' id=product.id %}" onclick="onDetailClick({{ product.id }})" class="btn btn-warning btn-block">Nánar</a>
             </div>
             <div class="col-6 p-1">
-                <div role="button" onclick="addToCart({{ product.id }})" class="btn btn-success btn-block">Setja í körfu</div>
+                {% if product.quantity <= 0 %}
+                <div class="btn btn-secondary disabled" aria-disabled="true" style="font-size: 1.2rem">Væntanlegt</div>
+                {% else %}
+                <div role="button" onclick="addToCart({{ product.id }})" class="btn btn-success btn-block" style="font-size: 1.2rem">Setja í körfu</div>
+                {% endif %}
             </div>
         </div>
     </div>

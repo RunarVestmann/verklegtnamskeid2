@@ -69,7 +69,11 @@
                         <div class="products-detail-price">Verð: <strong>{{ product.price|intcomma }}</strong> ISK</div>
                     </div>
                     <div class="col-5 pr-2">
+                        {% if product.quantity <= 0 %}
+                        <div class="btn btn-secondary disabled" aria-disabled="true" style="font-size: 1.2rem">Væntanlegt</div>
+                        {% else %}
                         <div role="button" onclick="addToCart({{ product.id }})" class="btn btn-success btn-block" style="font-size: 1.2rem">Setja í körfu</div>
+                        {% endif %}
                     </div>
                 </div>
                 </div>
