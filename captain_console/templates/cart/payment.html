@@ -24,9 +24,14 @@
         <div class="col-1"> </div>
         <div class="col-2 col-form-label text-right">
         <label><small> {{ field.label_tag }}</small></label> </div>
-        <div class="col-8">
-            {{ field }}
+
+        <div class="col-8 col-lg-6">
+            <input class="form-control"{{ field }}
+            {% if field.errors %}
+            <div class="alert alert-danger" role="alert"> {{ field.errors.0 }}</div>
+            {% endif %}
         </div>
+
         <div class="col-1"> </div>
    </div>
     {% endfor %}

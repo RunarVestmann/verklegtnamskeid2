@@ -1,4 +1,6 @@
 from django import forms
+from creditcards.forms import CardExpiryField, CardNumberField, SecurityCodeField
+from django.forms import Widget
 
 
 class ShippingForm(forms.Form):
@@ -15,9 +17,9 @@ class ShippingForm(forms.Form):
     street_name.error_messages = {'required': 'Vinsamlega sláðu inn götuheiti'}
 
     house_nbr = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
-                                                              'placeholder': 'Íbúð (ef á við)'}),
+                                                              'placeholder': 'Húsnúmer'}),
                                 required=False, max_length=100)
-    house_nbr.label = 'Íbúð '
+    house_nbr.label = 'Húsnúmer '
 
     city = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
                                                          'placeholder': 'Staður'}),
@@ -38,29 +40,37 @@ class ShippingForm(forms.Form):
     country.error_messages = {'required': 'Vinsamlega veldu land'}
 
 
+# class PaymentForm(forms.Form):
+#     name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
+#                                                          'placeholder': 'Fullt nafn korthafa'}),
+#                            required=True, max_length=100)
+#     name.label = 'Nafn'
+#     name.error_messages = {'required': 'Vinsamlegast sláðu inn nafn'}
+#
+#     card_nbr = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
+#                                                                'placeholder': 'Kortanúmer'}),
+#                                  required=True, max_length=16, min_length=16)
+#     card_nbr.label = 'Kortanúmer'
+#     card_nbr.error_messages = {'required': 'Vinsamlegast sláðu inn kortanúmer'}
+#
+#
+#     exp_day = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
+#                                                                'placeholder': 'Gildistími(MM/YY)'}),
+#                                  required=True, max_length=16)
+#     exp_day.label = 'Gildistími'
+#     exp_day.error_messages = {'required': 'Vinsamlegast sláðu inn gildistíma'}
+#
+#     cvc_nbr = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
+#                                                               'placeholder': 'Öryggisnúmer'}),
+#                                 required=False, max_length=3, min_length=3)
+#     cvc_nbr.label = 'CVC '
+#     cvc_nbr.error_messages = {'required': 'Vinsamlegast sláðu inn öryggisnúmerið '}
+
 class PaymentForm(forms.Form):
-    name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
-                                                         'placeholder': 'Fullt nafn korthafa'}),
-                           required=True, max_length=100)
-    name.label = 'Nafn'
-    name.error_messages = {'required': 'Vinsamlega sláðu inn nafn'}
-
-    card_nbr = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
-                                                               'placeholder': 'Kortanúmer'}),
-                                 required=True, max_length=16, min_length=16)
-    card_nbr.label = 'Kortanúmer'
-    card_nbr.error_messages = {'required': 'Vinsamlega sláðu inn kortanúmer'}
-
-
-    exp_day = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
-                                                               'placeholder': 'Gildistími: xx/xx'}),
-                                 required=True, max_length=16)
-    exp_day.label = 'Gildistími'
-    exp_day.error_messages = {'required': 'Vinsamlega sláðu inn gildistíma'}
-
-    cvc_nbr = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
-                                                              'placeholder': 'Öryggisnúmer'}),
-                                required=False, max_length=3, min_length=3)
-    cvc_nbr.label = 'CVC '
-    cvc_nbr.error_messages = {'required': 'Vinsamlega sláðu inn öryggisnúmerið '}
-
+    name = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Fullt nafn korthafa'}),
+        required=True, max_length=100)
+    card_nbr = CardNumberField(label='Kortanúmer')
+    exp_day = CardExpiryField(label='Gildistími')
+    cvc_nbr = SecurityCodeField(label='CVV/CVC')
