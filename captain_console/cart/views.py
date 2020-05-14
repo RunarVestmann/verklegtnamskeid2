@@ -63,7 +63,14 @@ def payment_overview(request):
     if __user_has_no_cart_products(request.user.id):
         return redirect('/cart')
 
+
     ci, si = get_session_info(request)
+
+    if not si:
+        return redirect('/cart/shipping')
+    elif not ci:
+        return redirect('/cart/payment')
+
 
     return render(request, 'cart/overview.html', {'card_info': ci, 'ship_info': si})
 
@@ -71,9 +78,13 @@ def payment_overview(request):
 @login_required
 def receipt(request):
 
-    #TODO: if there is no session, redirect somewhere else
 
     ci, si = get_session_info(request)
+
+    if not si:
+        return redirect('/cart/shipping')
+    elif not ci:
+        return redirect('/cart/payment')
 
     return render(request, 'cart/receipt.html', {'card_info': ci, 'ship_info': si})
 
@@ -81,6 +92,11 @@ def receipt(request):
 def get_session_info(request):
     try:
         ci = request.session['ci']
+    except:
+        ci = False
+
+
+    try:
         si = request.session['si']
 
         countries = ShippingForm.countries
@@ -90,9 +106,8 @@ def get_session_info(request):
                 si['country_name'] = c[1]
 
     except:
-        return redirect('/cart')
-        # ci = ''
-        # si = ''
+        si = False
+
     return ci, si
 
 
@@ -151,16 +166,15 @@ def order(request):
         return redirect('/cart')
 
     ci, si = get_session_info(request)
-    # the are error check in the get_session function
+    if not si:
+        return redirect('/cart/shipping')
+    elif not ci:
+        return redirect('/cart/payment')
 
-    # Some error checks are needed to make sure the session data persists......
 
-    #name = si['name']
-    #address = si['street_name'] + ' ' + si['house_nbr']
-    #city = si['city']
-    #zip = si['zip_code']
-    #country = si['country']
-    # # country code not human frendly name
+    # Some my need some error message checks ......
+
+
 
     # Getting the profile instance
     try:
@@ -177,6 +191,8 @@ def order(request):
                       zip=si['zip_code'],
                       country=si['country'],
                       profile=profile)
+    # country sends three letter code - not human frendly name
+
 
     # Setting the cart products into the join table
     cart_products = ShoppingCartProducts.objects.filter(shopping_cart_id=profile.shopping_cart.id)
