@@ -26,7 +26,7 @@
             </div>
             <div class="col-6 p-1">
                 {% if product.quantity <= 0 %}
-                <div role="button" class="btn btn-secondary disabled" aria-disabled="true" style="font-size: 1.2rem; display:block; cursor: default;">Væntanlegt</div>
+                <div role="button" class="btn btn-secondary btn-block disabled" aria-disabled="true" style="font-size: 1.2rem; cursor: default;">Væntanlegt</div>
                 {% else %}
                 <div role="button" onclick="addToCart({{ product.id }})" class="btn btn-success btn-block" style="font-size: 1.2rem">Setja í körfu</div>
                 {% endif %}
