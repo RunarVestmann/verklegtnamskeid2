@@ -29,7 +29,26 @@ $(document).ready(function(){
             products.html(newHTML.join(''));
             window.sessionStorage.removeItem('productList');
         }
+        else{
+            // Fill up the product list if it's empty
+            if(productList.length === 0){
+                $.ajax({
+                   url: '/products?all',
+                   method: 'GET',
+                   success: function(response){
+                       if(response.data){
+                           response.data.forEach(prod => {
+                              productList.push({
+                                  product: prod,
+                                  html: getProductHTML(prod)
+                              });
+                           });
+                       }
+                   }
+                });
 
+            }
+        }
         const search = window.sessionStorage.getItem('search');
         if(search){
             searchBox.val(search);
