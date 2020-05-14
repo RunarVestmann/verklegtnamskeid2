@@ -4,7 +4,8 @@
 {% block content %}
 
     <div class="row p-3">
-         <div class="col-sm-12 col-md-5 mb-4">
+         <div class="col-sm-12 col-md-5 col-lg-4 mb-4">
+
             <div id="carouselIndicators" class="carousel slide products-detail-img-frame" data-ride="carousel">
                 <ol class="carousel-indicators">
                 {% for image in images %}
@@ -14,11 +15,11 @@
                 <div class="carousel-inner">
                 {% for image in images %}
                     <div class="carousel-item{% if forloop.first %} active{% endif %}">
-                        <img class="d-block w-100 product-img-white-frame" src="{{ image }}" alt="{{ product.name }}" style="height:60vh">
+                        <img class="d-block w-100 product-img-white-frame" src="{{ image }}" alt="{{ product.name }}">
                     </div>
                 {% empty %}
                     <div class="carousel-item active">
-                        <img class="d-block w-100 product-img-white-frame" src="/media/images/default-image.svg" alt="{{ product.name }}" style="height:60vh;">
+                        <img class="d-block w-100 product-img-white-frame" src="/media/images/default-image.svg" alt="{{ product.name }}">
                     </div>
                 {% endfor %}
                 </div>
@@ -31,6 +32,7 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
+
         </div>
         <!-- Descripton colom -->
         <div class="col-sm-12 col-md-7 col-lg-6 col-xl-5">

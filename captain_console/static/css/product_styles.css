@@ -187,8 +187,17 @@
 }
 
 .products-detail-img-frame{
+    width: 100%;
+    max-width: 30rem;
+    height: 30rem;
+    background: #FFF;
     border: #63899c solid 0.2rem;
+}
 
+.product-img-white-frame{
+    height: 50%;
+    border: 100px solid white;
+    background-color: white;
 }
 
 .carousel-control-prev-icon {
@@ -196,6 +205,10 @@
 }
 .carousel-control-next-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2363899c' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
+
+.carousel-width{
+    width: 200px;
 }
 
 
@@ -207,4 +220,27 @@
 
     padding: 1rem;
 }
+
+@media screen and (max-width: 1200px) {
+    .products-detail-img-frame{
+
+        max-width: 20rem;
+        height: 20rem;
+
+    }
+
+}
+
+@media screen and (max-width: 760px) {
+    .products-detail-img-frame{
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        min-height:25rem ;
+        background: #FFF;
+        border: #63899c solid 0.2rem;
+    }
+
+}
+
 
