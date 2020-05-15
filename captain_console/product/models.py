@@ -31,7 +31,10 @@ class Product(models.Model):
     shop_arrival_date = models.DateField(default=date.today)
     type = models.ForeignKey(Type, on_delete=models.DO_NOTHING)
 
-    def to_dict(self):
+    def to_dict(self, first_image=None):
+        if not first_image:
+            first_image = self.productimage_set.first()
+
         return {
             'id': self.id,
             'name': self.name,
@@ -46,7 +49,7 @@ class Product(models.Model):
             'release_date': self.release_date,
             'shop_arrival_date': self.shop_arrival_date,
             'type': self.type.name,
-            'first_image': '/media/images/default-image.svg' if not self.productimage_set.first() else self.productimage_set.first().image.url
+            'first_image': '/media/images/default-image.svg' if not first_image else first_image.image.url
         }
 
     def __str__(self):
