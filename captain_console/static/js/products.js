@@ -11,6 +11,8 @@ let manufacturerList = [];
 let typeList = [];
 let systemList = [];
 
+let doneFetchingMissingProducts = true;
+
 $(document).ready(function(){
     // Set up all the onclick events for the buttons
     setupOrderByButtons();
@@ -32,6 +34,7 @@ $(document).ready(function(){
         else{
             // Fill up the product list if it's empty
             if(productList.length === 0){
+                doneFetchingMissingProducts = false;
                 $.ajax({
                    url: '/products?all',
                    method: 'GET',
@@ -44,9 +47,9 @@ $(document).ready(function(){
                               });
                            });
                        }
+                       doneFetchingMissingProducts = true;
                    }
                 });
-
             }
         }
         const search = window.sessionStorage.getItem('search');
@@ -335,6 +338,10 @@ function flipArrow(){
 }
 
 function orderByName(){
+    if(!doneFetchingMissingProducts){
+        toastr.info('Er enn að sækja vörurnar, prófaðu að smella aftur innan skamms');
+        return;
+    }
     productList.sort(function(a, b){
         const aName = a.product.name.toUpperCase();
         const bName = b.product.name.toUpperCase();
@@ -353,6 +360,10 @@ function orderByName(){
 }
 
 function orderByPrice(){
+    if(!doneFetchingMissingProducts){
+        toastr.info('Er enn að sækja vörurnar, prófaðu að smella aftur innan skamms');
+        return;
+    }
     productList.sort(function(a, b){
         const aPrice = Number(String(a.product.price).split('.').join(''));
         const bPrice = Number(String(b.product.price).split('.').join(''));
