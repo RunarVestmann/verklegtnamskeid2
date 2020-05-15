@@ -86,7 +86,7 @@ class PaymentForm(forms.Form):
         initial_month = '0' + str(initial_month)
 
     exp_month = forms.ChoiceField(choices=months, initial=initial_month)
-    exp_month.label = 'Gildismánuður'
+    exp_month.label = 'Gildistími'
     year = datetime.now().year
     years = []
     for i in range(5):

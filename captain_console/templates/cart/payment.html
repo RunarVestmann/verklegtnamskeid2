@@ -19,25 +19,83 @@
 
 <form method="post">
 {%  csrf_token %}
-    {% for field in form %}
-    <div class="row my-4">
+       <div class="row my-4">
         <div class="col-1"> </div>
-        <div class="col-2 col-form-label text-right">
-        <label><small> {{ field.label_tag }}</small></label> </div>
+            <div class="col-2 col-form-label text-right">
+             <label><small> {{ form.name.label_tag }}</small></label>
+            </div>
 
-        <div class="col-8 col-lg-6">
-            {{ field }}
-            {% if field.errors %}
-            <div class="alert alert-danger" role="alert"> {{ field.errors.0 }}</div>
-            {% endif %}
+            <div class="col-8 col-lg-6">
+                {{ form.name }}
+                {% if form.name.errors %}
+                <div class="alert alert-danger" role="alert"> {{ form.name.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <div class="col-1"> </div>
         </div>
 
+       <div class="row my-4">
         <div class="col-1"> </div>
-   </div>
-    {% endfor %}
-    {% if form.non_field_errors %}
-        <div class="alert alert-danger" role="alert"> {{ form.non_field_errors.0 }}</div>
-    {% endif %}
+            <div class="col-2 col-form-label text-right">
+             <label><small> {{ form.card_nbr.label_tag }}</small></label>
+            </div>
+
+            <div class="col-8 col-lg-6">
+                <input class= "form-control" {{ form.card_nbr}}
+                {% if form.card_nbr.errors %}
+                <div class="alert alert-danger" role="alert"> {{ form.card_nbr.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <div class="col-1"> </div>
+        </div>
+
+<div class="row my-4">
+        <div class="col-1"> </div>
+            <div class="col-2 col-form-label text-right">
+             <label><small> {{ form.exp_month.label_tag }}</small></label>
+            </div>
+
+            <div class="col-6">
+                {{ form.exp_month }}
+                {{ form.exp_year }}
+            </div>
+
+        </div>
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger col-3" role="alert"> {{ form.non_field_errors.0 }}</div>
+            {% endif %}
+
+
+
+
+
+
+
+       <div class="row my-4">
+        <div class="col-1"> </div>
+            <div class="col-2 col-form-label text-right">
+             <label><small> {{ form.cvc_nbr.label_tag }}</small></label>
+            </div>
+
+            <div class="col-8 col-lg-6">
+                <input class= "form-control" {{ form.cvc_nbr }}
+                {% if form.cvc_nbr.errors %}
+                <div class="alert alert-danger" role="alert"> {{ form.cvc_nbr.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <div class="col-1"> </div>
+        </div>
+
+
+
+
+
+
+
+
 
     <div class="row my-4">
         <div class="col-2"></div>
