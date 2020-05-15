@@ -144,6 +144,9 @@ def add_to_search(request):
             search.product = product
             search.save()
             return send_json('', 201, product_id)
+
+        else:
+            return JsonResponse({'data': request.GET})
     else:
         return send_json('Request method not supported', 400)
 
