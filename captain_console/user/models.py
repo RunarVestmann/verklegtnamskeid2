@@ -3,14 +3,13 @@ from django.db import models
 from cart.models import ShoppingCart
 from product.models import Product
 from django.utils import timezone
-import pytz
 
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images/profile/', default='images/profile/default_profile_image.svg')
     shopping_cart = models.OneToOneField(ShoppingCart, on_delete=models.CASCADE, null=True)
 
-    # Save method that makes sure that we don't delete the default img if we're replacing it
+    # Save method that makes sure that we don't delete the default image if we're replacing it
     def save(self, *args, **kwargs):
         try:
             this = Profile.objects.get(id=self.id)

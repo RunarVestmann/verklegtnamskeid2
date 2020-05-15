@@ -1,5 +1,5 @@
 from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import ContactForm
 
@@ -14,6 +14,8 @@ def contactView(request):
             name = form.cleaned_data['name']
             from_email = form.cleaned_data['from_email']
             message = form.cleaned_data['message']
+
+            # Format for the email, receiving email address in brackets
             try:
                 send_mail('Skilaboð frá: ' + name + '. Svarist til: ' + from_email, message, from_email, ['captainconsolestaff@gmail.com'])
             except BadHeaderError:

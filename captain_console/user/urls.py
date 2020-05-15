@@ -1,10 +1,6 @@
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LogoutView
 from django.urls import path
 from . import views
-
-from .forms import LoginForm
-
-
 
 
 urlpatterns = [
@@ -28,6 +24,5 @@ urlpatterns = [
 
     # http://localhost:8000/user/add_to_search -> json
     path('add_to_search', views.add_to_search, name='add_to_search'),
-
 ]
 
