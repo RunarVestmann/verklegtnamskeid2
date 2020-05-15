@@ -28,8 +28,8 @@ class LoginForm(AuthenticationForm):
 class ProfileForm(ModelForm):
     image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form'}), required=False)
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=150, label='Notandanafn')
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Fornafn', required=False)
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Eftirnafn', required=False)
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}),max_length=30, label='Fornafn', required=False)
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=30, label='Eftirnafn', required=False)
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}), max_length=254, label='Netfang')
     class Meta:
         model = Profile

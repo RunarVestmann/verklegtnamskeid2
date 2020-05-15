@@ -55,7 +55,7 @@ def profile(request):
         if form.is_valid():
             form_profile = form.save(commit=False)
 
-            # We get the required info about the user
+            # We set the profile info
             request.user.username = request.POST['username']
             request.user.first_name = request.POST['first_name']
             request.user.last_name = request.POST['last_name']

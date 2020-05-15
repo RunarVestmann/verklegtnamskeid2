@@ -3,8 +3,6 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import ContactForm
 
-
-# Create your views here.
 def contactView(request):
     if request.method == 'GET':
         form = ContactForm()

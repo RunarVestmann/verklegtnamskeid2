@@ -9,6 +9,7 @@ from user.models import Profile, Order, OrderProduct
 
 
 def __user_has_no_cart_products(user_id):
+    # Check whether the user has any products in his cart
     try:
         cart = Profile.objects.get(user_id=user_id).shopping_cart
         if not cart or not cart.products.all():
@@ -24,10 +25,11 @@ def index(request):
 
 @login_required
 def shipping_info(request):
+    # The user goes back to the cart page if his cart is empty
     if __user_has_no_cart_products(request.user.id):
         return redirect('/cart')
 
-    initial = {'si': request.session.get('si', None)}
+    initial = {'shipping_info': request.session.get('shipping_info', None)}
     form = ShippingForm(request.POST or None, initial=initial)
     if request.method == 'POST':
         if form.is_valid():
@@ -35,17 +37,17 @@ def shipping_info(request):
             for field in form:
                 ship_info[field.name] = form.cleaned_data[field.name]
 
-            request.session['si'] = ship_info
+            request.session['shipping_info'] = ship_info
             return redirect('payment')
 
-    if initial['si']:
-        si = initial['si']
-        form.fields['name'].initial = si['name']
-        form.fields['street_name'].initial = si['street_name']
-        form.fields['house_nbr'].initial = si['house_nbr']
-        form.fields['city'].initial = si['city']
-        form.fields['zip_code'].initial = si['zip_code']
-        form.fields['country'].initiall = si['country']
+    if initial['shipping_info']:
+        shipping_info = initial['shipping_info']
+        form.fields['name'].initial = shipping_info['name']
+        form.fields['street_name'].initial = shipping_info['street_name']
+        form.fields['house_nbr'].initial = shipping_info['house_nbr']
+        form.fields['city'].initial = shipping_info['city']
+        form.fields['zip_code'].initial = shipping_info['zip_code']
+        form.fields['country'].initiall = shipping_info['country']
     return render(request, 'cart/shipping.html', {'form': form})
 
 
@@ -54,9 +56,9 @@ def payment_info(request):
     if __user_has_no_cart_products(request.user.id):
         return redirect('/cart')
 
-    initial = {'ci': request.session.get('ci', None)}
+    initial = {'contact_info': request.session.get('contact_info', None)}
 
-    if not request.session.get('si', None):
+    if not request.session.get('shipping_info', None):
         return redirect('/cart/shipping')
 
     form = PaymentForm(request.POST or None, initial=initial)
@@ -66,18 +68,18 @@ def payment_info(request):
             for field in form:
                 card_info[field.name] = form.cleaned_data[field.name]
             card_info['exp_day'] = card_info['exp_month'] + '/' + card_info['exp_year']
-            request.session['ci'] = card_info
+            request.session['contact_info'] = card_info
             return redirect('overview')
 
-    if initial['ci']:
-        ci = initial['ci']
-        form.fields['name'].initial = ci['name']
-        form.fields['card_nbr'].initial = ci['card_nbr']
+    if initial['contact_info']:
+        contact_info = initial['contact_info']
+        form.fields['name'].initial = contact_info['name']
+        form.fields['card_nbr'].initial = contact_info['card_nbr']
         if 'exp_month' in initial:
-            form.fields['exp_month'].initial = ci['exp_month']
+            form.fields['exp_month'].initial = contact_info['exp_month']
         if 'exp_year' in initial:
-            form.fields['exp_year'].initial = ci['exp_year']
-        form.fields['cvc_nbr'].initial = ci['cvc_nbr']
+            form.fields['exp_year'].initial = contact_info['exp_year']
+        form.fields['cvc_nbr'].initial = contact_info['cvc_nbr']
     return render(request, 'cart/payment.html', {'form': form})
 
 
@@ -86,50 +88,50 @@ def payment_overview(request):
     if __user_has_no_cart_products(request.user.id):
         return redirect('/cart')
 
-    ci, si = get_session_info(request)
+    contact_info, shipping_info = get_session_info(request)
 
-    if not si:
+    if not shipping_info:
         return redirect('/cart/shipping')
-    elif not ci:
+    elif not contact_info:
         return redirect('/cart/payment')
 
-    return render(request, 'cart/overview.html', {'card_info': ci, 'ship_info': si})
+    return render(request, 'cart/overview.html', {'card_info': contact_info, 'ship_info': shipping_info})
 
 
 @login_required
 def receipt(request):
 
 
-    ci, si = get_session_info(request)
+    contact_info, shipping_info = get_session_info(request)
 
-    if not si:
+    if not shipping_info:
         return redirect('/cart/shipping')
-    elif not ci:
+    elif not contact_info:
         return redirect('/cart/payment')
 
-    return render(request, 'cart/receipt.html', {'card_info': ci, 'ship_info': si})
+    return render(request, 'cart/receipt.html', {'card_info': contact_info, 'ship_info': shipping_info})
 
 
 def get_session_info(request):
     try:
-        ci = request.session['ci']
+        contact_info = request.session['contact_info']
     except:
-        ci = False
+        contact_info = False
 
 
     try:
-        si = request.session['si']
+        shipping_info = request.session['shipping_info']
 
         countries = ShippingForm.countries
         for c in countries:
             ''' gets human frendly names back from code name'''
-            if c[0] == si['country']:
-                si['country_name'] = c[1]
+            if c[0] == shipping_info['country']:
+                shipping_info['country_name'] = c[1]
 
     except:
-        si = False
+        shipping_info = False
 
-    return ci, si
+    return contact_info, shipping_info
 
 
 @login_required
@@ -184,10 +186,10 @@ def sync_cart(request):
 @login_required
 def order(request):
     if request.method == 'POST':
-        ci, si = get_session_info(request)
-        if not si:
+        contact_info, shipping_info = get_session_info(request)
+        if not shipping_info:
             return JsonResponse({'data': {'redirect': '/cart/shipping'}, 'message': 'Vantar sendingarupplýsingar'})
-        elif not ci:
+        elif not contact_info:
             return JsonResponse({'data': {'redirect': '/cart/payment'}, 'message': 'Vantar Greiðsluupplýsingar '})
 
         # Getting the profile instance
@@ -199,11 +201,11 @@ def order(request):
             profile.save()
 
         # Creating the order
-        new_order = Order.objects.create(name=si['name'],
-                          address=si['street_name'] + ' ' + si['house_nbr'],
-                          city=si['city'],
-                          zip=si['zip_code'],
-                          country=si['country'],
+        new_order = Order.objects.create(name=shipping_info['name'],
+                          address=shipping_info['street_name'] + ' ' + shipping_info['house_nbr'],
+                          city=shipping_info['city'],
+                          zip=shipping_info['zip_code'],
+                          country=shipping_info['country'],
                           profile=profile)
 
         # Setting the cart products into the join table
