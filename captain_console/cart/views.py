@@ -73,8 +73,10 @@ def payment_info(request):
         ci = initial['ci']
         form.fields['name'].initial = ci['name']
         form.fields['card_nbr'].initial = ci['card_nbr']
-        form.fields['exp_month'].initial = ci['exp_month']
-        form.fields['exp_year'].initial = ci['exp_year']
+        if 'exp_month' in initial:
+            form.fields['exp_month'].initial = ci['exp_month']
+        if 'exp_year' in initial:
+            form.fields['exp_year'].initial = ci['exp_year']
         form.fields['cvc_nbr'].initial = ci['cvc_nbr']
     return render(request, 'cart/payment.html', {'form': form})
 
