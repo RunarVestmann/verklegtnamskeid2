@@ -25,9 +25,9 @@ def index(request):
                                                             |product_objects.filter(system__name__icontains=search)
                                                             |product_objects.filter(system__abbreviation__icontains=search))})
 
-    search_results = __find_search_results(request, product_objects)
+    search_results, found_results = __find_search_results(request, product_objects)
 
-    if search_results:
+    if found_results:
         return JsonResponse({'data': __get_list_of_dicts(search_results)})
     else:
         main_manufacturer_tuple = ('Nintendo', 'Sega', 'Sony', 'Microsoft')
@@ -44,25 +44,29 @@ def __get_list_of_dicts(query_set):
 
 def __find_search_results(request, product_objects):
     search_results = None
+    found_results = False
     if 'manufacturer' in request.GET:
+        found_results = True
         manufacturers = request.GET['manufacturer'].strip().split('_')
         search_results = product_objects.filter(system__manufacturer__name__in=manufacturers)
 
     if 'system' in request.GET:
+        found_results = True
         systems = request.GET['system'].strip().split('_')
         if not search_results:
             search_results = product_objects.filter(system__abbreviation__in=systems)
         else:
-            search_results |= product_objects.filter(system__abbreviation__in=systems)
+            search_results = search_results.filter(system__abbreviation__in=systems)
 
     if 'type' in request.GET:
+        found_results = True
         types = request.GET['type'].strip().split('_')
         if not search_results:
             search_results = product_objects.filter(type__name__in=types)
         else:
-            search_results |= product_objects.filter(type__name__in=types)
+            search_results = search_results.filter(type__name__in=types)
 
-    return search_results
+    return search_results, found_results
 
 def get_product_by_id(request, id):
     product = get_object_or_404(Product, pk=id)

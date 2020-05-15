@@ -241,12 +241,12 @@ function displayChanges(){
 
                 if(activeOrderBtn){
                     if($(activeOrderBtn).text() === 'Nafni')
-                        orderByName();
+                        orderByName(true);
                     else
-                        orderByPrice();
+                        orderByPrice(true);
                 }
                 else
-                    orderByName();
+                    orderByName(true);
             }
             else{
                 window.sessionStorage.setItem('productList', JSON.stringify(productList));
@@ -337,8 +337,8 @@ function flipArrow(){
         arrow.attr('transform', 'rotate(180)');
 }
 
-function orderByName(){
-    if(!doneFetchingMissingProducts){
+function orderByName(jsOrder=false){
+    if(!jsOrder && !doneFetchingMissingProducts){
         toastr.info('Er enn að sækja vörurnar, prófaðu að smella aftur innan skamms');
         return;
     }
@@ -359,8 +359,8 @@ function orderByName(){
     products.html(newHTML.join(''));
 }
 
-function orderByPrice(){
-    if(!doneFetchingMissingProducts){
+function orderByPrice(jsOrder=false){
+    if(!jsOrder && !doneFetchingMissingProducts){
         toastr.info('Er enn að sækja vörurnar, prófaðu að smella aftur innan skamms');
         return;
     }
