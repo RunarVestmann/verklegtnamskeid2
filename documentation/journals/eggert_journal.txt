@@ -56,3 +56,7 @@ Bætt inn vörum í gagnagrunn. Test með virkni á síðu og laga ýmsar villur
 13/05/2020
 Bætt inn profile mynd hjá user í header. Refactora og commenta kóða. Villutest á hinu og þessu.
 Eyddum tíma í að leysa vandamál með github. Default product image og lagað lúkkið á product images í  'Skoða Nánar'.
+
+14/05/2020
+Vann í error messages og lúkki á forms. Tókum langt session saman á discord og fórum saman í ýmsa hluti, eins og
+shipping, payment, errors ofl.

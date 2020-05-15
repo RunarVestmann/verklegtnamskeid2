@@ -16,7 +16,7 @@ class SignUpForm(UserCreationForm):
     email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=254, label='Netfang')
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}), label='Lykilorð')
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}), label='Staðfesting lykilorðs')
-    password2.error_messages = {'required': 'Veljið lykilorð sem er að lágmarki 8 stafir'}
+    #password2.error_messages = {'required': 'Veljið lykilorð sem er að lágmarki 8 stafir'}
 
     class Meta:
         model = User

@@ -72,5 +72,6 @@ class PaymentForm(forms.Form):
         'placeholder': 'Fullt nafn korthafa'}),
         required=True, max_length=100)
     card_nbr = CardNumberField(label='Kortanúmer')
+    card_nbr.error_messages = {'invalid': 'Vinsamlega sláðu inn gilt kortanúmer'}
     exp_day = CardExpiryField(label='Gildistími')
     cvc_nbr = SecurityCodeField(label='CVV/CVC')
