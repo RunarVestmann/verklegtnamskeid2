@@ -86,14 +86,12 @@ def payment_overview(request):
     if __user_has_no_cart_products(request.user.id):
         return redirect('/cart')
 
-
     ci, si = get_session_info(request)
 
     if not si:
         return redirect('/cart/shipping')
     elif not ci:
         return redirect('/cart/payment')
-
 
     return render(request, 'cart/overview.html', {'card_info': ci, 'ship_info': si})
 
