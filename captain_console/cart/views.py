@@ -29,6 +29,7 @@ def shipping_info(request):
     if __user_has_no_cart_products(request.user.id):
         return redirect('/cart')
 
+    # Fetch data from session and fill out fields, if any data
     initial = {'shipping_info': request.session.get('shipping_info', None)}
     form = ShippingForm(request.POST or None, initial=initial)
     if request.method == 'POST':
@@ -40,6 +41,7 @@ def shipping_info(request):
             request.session['shipping_info'] = ship_info
             return redirect('payment')
 
+    # We fill the fields with the info we get, if any
     if initial['shipping_info']:
         shipping_info = initial['shipping_info']
         form.fields['name'].initial = shipping_info['name']
@@ -55,9 +57,10 @@ def shipping_info(request):
 def payment_info(request):
     if __user_has_no_cart_products(request.user.id):
         return redirect('/cart')
-
+    # Fetch data from session and fill out fields, if any data
     initial = {'contact_info': request.session.get('contact_info', None)}
 
+    # Redirect to shipping info if no shipping info in session
     if not request.session.get('shipping_info', None):
         return redirect('/cart/shipping')
 
@@ -67,10 +70,12 @@ def payment_info(request):
             card_info = {}
             for field in form:
                 card_info[field.name] = form.cleaned_data[field.name]
+            # We combine the data from exp_month and exp_year into exp_day
             card_info['exp_day'] = card_info['exp_month'] + '/' + card_info['exp_year']
             request.session['contact_info'] = card_info
             return redirect('overview')
 
+    # We fill the fields with the info we get, if any
     if initial['contact_info']:
         contact_info = initial['contact_info']
         form.fields['name'].initial = contact_info['name']
@@ -88,8 +93,10 @@ def payment_overview(request):
     if __user_has_no_cart_products(request.user.id):
         return redirect('/cart')
 
+    # Try getting session data
     contact_info, shipping_info = get_session_info(request)
 
+    # Cant get the overview unless there is both shipping and payment info
     if not shipping_info:
         return redirect('/cart/shipping')
     elif not contact_info:
@@ -100,10 +107,10 @@ def payment_overview(request):
 
 @login_required
 def receipt(request):
-
-
+    # Try getting session data
     contact_info, shipping_info = get_session_info(request)
 
+    # Cant finish the order unless there is both shipping and payment info
     if not shipping_info:
         return redirect('/cart/shipping')
     elif not contact_info:
@@ -113,11 +120,11 @@ def receipt(request):
 
 
 def get_session_info(request):
+    # Gets info from the session cookie if there is any
     try:
         contact_info = request.session['contact_info']
     except:
         contact_info = False
-
 
     try:
         shipping_info = request.session['shipping_info']
@@ -146,11 +153,12 @@ def sync_cart(request):
         try:
             profile = Profile.objects.get(user__id=request.user.id)
 
-        # Create a profile if the user doesn't seem to have one
+        # Create a profile if the user doesn't have one
         except Profile.DoesNotExist:
             profile = Profile(user=request.user)
             profile.save()
 
+        # If the user doesn't have a shopping cart
         if not profile.shopping_cart:
             cart = ShoppingCart()
             cart.save()
