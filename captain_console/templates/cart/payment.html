@@ -51,26 +51,30 @@
             <div class="col-1"> </div>
         </div>
 
-<div class="row my-4">
+        <div class="row my-4">
         <div class="col-1"> </div>
             <div class="col-2 col-form-label text-right">
              <label><small> {{ form.exp_month.label_tag }}</small></label>
             </div>
 
-            <div class="col-6">
+            <div class="col-4 col-lg-1">
                 {{ form.exp_month }}
+
+            </div>
+                <div class="col-4 col-lg-1">
+
                 {{ form.exp_year }}
             </div>
+         </div>
 
+    {% if form.non_field_errors %}
+        <div class="row my-4">
+                 <div class="col-3"> </div>
+                <div class="col-8 col-lg-6">
+                 <div class="alert alert-danger" role="alert"> {{ form.non_field_errors.0 }}</div>
+                </div>
         </div>
-            {% if form.non_field_errors %}
-                <div class="alert alert-danger col-3" role="alert"> {{ form.non_field_errors.0 }}</div>
-            {% endif %}
-
-
-
-
-
+    {% endif %}
 
 
        <div class="row my-4">

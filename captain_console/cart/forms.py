@@ -85,14 +85,15 @@ class PaymentForm(forms.Form):
     if initial_month < 10:
         initial_month = '0' + str(initial_month)
 
-    exp_month = forms.ChoiceField(choices=months, initial=initial_month)
+
+    exp_month = forms.ChoiceField(choices=months, initial=initial_month, widget=forms.Select(attrs={'class': 'form-control'}))
     exp_month.label = 'Gildistími'
     year = datetime.now().year
     years = []
     for i in range(5):
         years.append((str(year + i), str(year + i)[2:]))
 
-    exp_year = forms.ChoiceField(choices=years, initial=year)
+    exp_year = forms.ChoiceField(choices=years, initial=year, widget=forms.Select(attrs={'class': 'form-control'}))
     exp_year.label = 'Gildisár'
 
     cvc_nbr = SecurityCodeField(label='CVV/CVC')

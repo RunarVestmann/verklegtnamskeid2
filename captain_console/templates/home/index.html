@@ -6,7 +6,7 @@
             <div class="star star-color-1">VINSÆLUSTU <br/> <small> vörurnar</small></div>
         </div>
         {% for product in most_popular_products %}
-        <div class="col">
+        <div class="col p-0">
             {% include 'product/product.html' %}
         </div>
         {% endfor %}
@@ -16,7 +16,7 @@
             <div class="star star-color-2">VAR AÐ KOMA<br/> <small> til okkar</small></div>
         </div>
         {% for product in newest_products %}
-        <div class="col">
+        <div class="col p-0">
             {% include 'product/product.html' %}
         </div>
         {% endfor %}
