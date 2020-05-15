@@ -196,8 +196,8 @@
 }
 
 .product-img-white-frame{
-    height: 50%;
-    border: 100px solid white;
+    max-height: 530px;
+    border: 50px solid white;
     background-color: white;
 }
 

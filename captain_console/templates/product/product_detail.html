@@ -5,22 +5,23 @@
 
     <div class="row p-3">
          <div class="col-sm-12 col-md-5 col-lg-4 mb-4">
+
             <div id="carouselIndicators" class="carousel slide products-detail-img-frame" data-ride="carousel">
                 <ol class="carousel-indicators">
-                    {% for image in images %}
-                        <li data-target="#carouselIndicators" style="background-color:#63899c" data-slide-to="{{forloop.counter0}}" class="{% if forloop.first %}active{% endif %}"></li>
-                    {% endfor %}
+                {% for image in images %}
+                    <li data-target="#carouselIndicators" style="background-color:#63899c" data-slide-to="{{forloop.counter0}}" class="{% if forloop.first %}active{% endif %}"></li>
+                {% endfor %}
                 </ol>
                 <div class="carousel-inner">
-                    {% for image in images %}
-                        <div class="carousel-item{% if forloop.first %} active{% endif %}">
-                            <img class="d-block w-100 product-img-white-frame" src="{{ image }}" alt="{{ product.name }}">
-                        </div>
-                    {% empty %}
-                        <div class="carousel-item active">
-                            <img class="d-block w-100 product-img-white-frame" src="/media/images/default-image.svg" alt="{{ product.name }}">
-                        </div>
-                    {% endfor %}
+                {% for image in images %}
+                    <div class="carousel-item{% if forloop.first %} active{% endif %}">
+                        <img class="d-block w-100 product-img-white-frame" src="{{ image }}" alt="{{ product.name }}">
+                    </div>
+                {% empty %}
+                    <div class="carousel-item active">
+                        <img class="d-block w-100 product-img-white-frame" src="/media/images/default-image.svg" alt="{{ product.name }}">
+                    </div>
+                {% endfor %}
                 </div>
                 <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -31,50 +32,43 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-         </div>
 
-        {# Descripton column #}
+        </div>
+        <!-- Description column -->
         <div class="col-sm-12 col-md-7 col-lg-6 col-xl-5">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12 p-0">
-                        <div class="product-detail-name">{{ product.name }}</div>
-                    </div>
+             <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 p-0">
+                    <div class="product-detail-name">{{ product.name }}</div>
                 </div>
-
-                 <div class="row">
-                    <div class="col-12 p-0">
-                        <div class="product-detail-type">{{ product.system.manufacturer }}<span class="slash-space"> / </span>{{ product.system }}<span class="slash-space"> / </span>{{ product.type }}</div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12 p-0">
-                        <div class="product-detail-description">{{ product.description }}</div>
-                    </div>
-                </div>
-                 <div class="row">
-                    <div class="col-12 p-0">
-                        {# spacer it to fix that last line dont go over the text if the text is longer than the grid #}
-                        {# otherwise the last line sits on the bottom of the grid using bottom-row-position #}
-                        <div class="spacer-for-brp"></div>
-                    </div>
-                 </div>
             </div>
 
-            <div class="container-fluid bottom-row-positon">
+             <div class="row">
+                <div class="col-12 p-0">
+                    <div class="product-detail-type">{{ product.system.manufacturer }}<span class="slash-space"> / </span>{{ product.system }}<span class="slash-space"> / </span>{{ product.type }}</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 p-0">
+                    <div class="product-detail-description" style="margin-bottom: 4rem">{{ product.description }}</div>
+                </div>
+            </div>
+        </div>
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-7 p-0">
                         <div class="products-detail-price">Verð: <strong>{{ product.price|intcomma }}</strong> ISK</div>
                     </div>
                     <div class="col-5 pr-2">
                         {% if product.quantity <= 0 %}
-                            <div class="btn btn-secondary btn-block disabled" aria-disabled="true" style="cursor: default;">Væntanlegt</div>
+                        <div class="btn btn-secondary btn-block disabled" aria-disabled="true" style="cursor: default;">Væntanlegt</div>
                         {% else %}
-                            <div role="button" onclick="addToCart({{ product.id }})" class="btn btn-success btn-block" style="font-size: 1.2rem">Setja í körfu</div>
+                        <div role="button" onclick="addToCart({{ product.id }})" class="btn btn-success btn-block" style="font-size: 1.2rem">Setja í körfu</div>
                         {% endif %}
                     </div>
                 </div>
-            </div>
+                </div>
         </div>
+    </div>
 {% endblock content %}
