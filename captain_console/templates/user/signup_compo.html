@@ -1,28 +1,27 @@
 <form method="post">
-  {% csrf_token %}
+    {% csrf_token %}
     {% for field in form %}
-    <div class="form-group row p-0 m-0">
-        <label class="col-2 col-form-label text-right"><small> {{ field.label_tag }}</small></label>
-        <div class="col-9">
-            {{ field }}
-        {% if field.errors %}
-            <div class="alert alert-danger" role="alert"> {{ field.errors.0 }}</div>
-        {% endif %}
+        <div class="form-group row p-0 m-0">
+            <label class="col-2 col-form-label text-right"><small> {{ field.label_tag }}</small></label>
+            <div class="col-9">
+                {{ field }}
+                {% if field.errors %}
+                    <div class="alert alert-danger" role="alert"> {{ field.errors.0 }}</div>
+                {% endif %}
+            </div>
+            <div class="col-1"> </div>
         </div>
-        <div class="col-1"> </div>
-    </div>
     {% endfor %}
 
-
-  <div class="form-group row row p-0 m-0">
-{#      buttons line       #}
-    <div class="col-2"> </div>
-    <div class="col-4">
-        <button type="submit" class="btn btn-success btn-lg btn-block">Nýskrá</button>
+    <div class="form-group row row p-0 m-0">
+        {# buttons line #}
+        <div class="col-2"> </div>
+        <div class="col-4">
+            <button type="submit" class="btn btn-success btn-lg btn-block">Nýskrá</button>
+        </div>
+        <div class="col-4">
+            <button type="reset" class="btn btn-secondary btn-lg btn-block">Hreinsa</button>
+        </div>
+        <div class="col-2"> </div>
     </div>
-      <div class="col-4">
-        <button type="reset" class="btn btn-secondary btn-lg btn-block">Hreinsa</button>
-    </div>
-    <div class="col-2"> </div>
-  </div>
 </form>

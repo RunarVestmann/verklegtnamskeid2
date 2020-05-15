@@ -1,4 +1,3 @@
-
 <header>
     <div class="container-fluid">
         <div class="row header-nav pt-2 pb-2">
@@ -7,51 +6,47 @@
                 <input id="search-box" class="form-control pl-3" type="search" placeholder="Leit að vöru...">
                 <img id="search-btn" class="search-icon" type="submit" src="/static/nav_img/magnifying_glass_2.svg">
             </div>
-             <div class="col-3 col-sm-1 text-right mt-1" >
-                    <a class="shopping-cart-btn" href="/cart"></a>
-             </div>
+            <div class="col-3 col-sm-1 text-right mt-1" >
+                <a class="shopping-cart-btn" href="/cart"></a>
+            </div>
             <div class="col-9 col-sm-4 col-lg-3 text-right">
 
-
                 {% if user.is_authenticated %}
-                        <!-- menu for users info, edit and logout-->
-                        <div class="dropdown">
-                          <button class="btn dropdown-toggle p-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {# menu for users info, edit and logout #}
+                    <div class="dropdown">
+                      <button class="btn dropdown-toggle p-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {% if request.user.profile_set.first.image != "images/profile/default_profile_image.svg" %}
+                            <img class="mr-1 pb-0" src="/media/{{ request.user.profile_set.first.image }}" style="height:2.3rem; width: 2.3rem;">
+                        {% else %}
+                            <svg class="bi bi-person-fill" width="1.25em" height="1.25em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                            </svg>
+                        {% endif %}
 
-                            {% if request.user.profile_set.first.image != "images/profile/default_profile_image.svg" %}
-                                <img class="mr-1 pb-0" src="/media/{{ request.user.profile_set.first.image }}" style="height:2.3rem; width: 2.3rem;">
-                            {% else %}
-                                <svg class="bi bi-person-fill" width="1.25em" height="1.25em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
-                                </svg>
-                            {% endif %}
+                          {# If names are empty then display username #}
+                          {% if user.first_name or user.last_name%}
+                              {{ user.first_name }}  {{ user.last_name }}
+                          {% else %}
+                              {{ user.username }}
+                          {% endif %}
+                      </button>
 
-                         <!-- if names are emty then display username -->
-                         {% if user.first_name or user.last_name%}
-                            {{ user.first_name }}  {{ user.last_name }}
-                             {% else %}
-                             {{ user.username }}
-                         {% endif %}   </button>
-
-                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                             <span class="dropdown-item-text user-dropdown"><strong> {{ user.username }}</strong> </span>
-                             <span class="dropdown-item-text user-dropdown"><small> {{ user.first_name }} {{ user.last_name }}</small></span>
-                             <span class="dropdown-item-text user-dropdown"><small> {{ user.email }}</small></span>
-                             <div class="dropdown-divider mb-2"></div>
+                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                         <span class="dropdown-item-text user-dropdown"><strong> {{ user.username }}</strong> </span>
+                         <span class="dropdown-item-text user-dropdown"><small> {{ user.first_name }} {{ user.last_name }}</small></span>
+                         <span class="dropdown-item-text user-dropdown"><small> {{ user.email }}</small></span>
+                         <div class="dropdown-divider mb-2"></div>
 
                              <a class="dropdown-item" href={% url 'viewed_products' %}>Skoðaðar vörur</a>
                              <a class="dropdown-item" href={% url 'profile' %}>Breyta skráningu</a>
                              <a class="dropdown-item" href={% url 'logout' %}>Útskrá</a>
+                     </div>
+                    </div>
 
-  </div>
-
-                        </div>
-
-          {% else %}
-
-                <a class="btn btn-sm font-weight-bold" href="/user/login" role="button">Innskrá</a>
-                <a class="btn btn-sm font-weight-bold" href="/user/signup" role="button">Stofna Aðgang</a>
-          {% endif %}
+                {% else %}
+                    <a class="btn btn-sm font-weight-bold" href="/user/login" role="button">Innskrá</a>
+                    <a class="btn btn-sm font-weight-bold" href="/user/signup" role="button">Stofna Aðgang</a>
+                {% endif %}
             </div>
         </div>
 
@@ -91,6 +86,6 @@
                     <p>Annað</p>
                 </div>
             </div>
+        </div>
     </div>
-  </div>
 </header>

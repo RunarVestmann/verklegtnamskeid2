@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 {% block background-color %}#63899c{% endblock background-color  %}
 {% block content %}
+
     <div class="row">
         <div class="col-12 product-order-bar">
             <span>Raða eftir:</span>
             <a class="product-order-bar-active order-by-btn" style="cursor: pointer" role="button" onclick="orderByName()">Nafni</a>
             <svg  xmlns="http://www.w3.org/2000/svg"  xmlns:xlink="http://www.w3.org/1999/xlink" id="arrow" transform=""  width="11px" height="14px">
-                    <path fill-rule="evenodd"  fill="rgb(255, 255, 255)" d="M6.700,7.812 L6.700,11.000 L4.300,11.000 L4.300,7.812 L0.250,7.812 L5.500,-0.000 L10.750,7.812 L6.700,7.812 ZM6.750,14.000 L4.250,14.000 L4.250,12.000 L6.750,12.000 L6.750,14.000 Z"/>
+                <path fill-rule="evenodd"  fill="rgb(255, 255, 255)" d="M6.700,7.812 L6.700,11.000 L4.300,11.000 L4.300,7.812 L0.250,7.812 L5.500,-0.000 L10.750,7.812 L6.700,7.812 ZM6.750,14.000 L4.250,14.000 L4.250,12.000 L6.750,12.000 L6.750,14.000 Z"/>
             </svg>
             <a class="product-order-bar-link order-by-btn" style="cursor: pointer" role="button" onclick="orderByPrice()"> Verði</a>
         </div>
@@ -17,55 +18,51 @@
             <div class="container-fluid p-0 m-0">
                 <div class="row">
                     <div class="col-6 col-lg-12">
-                         <div class="filter-block">
+                        <div class="filter-block">
                             {% for manufacturer in main_manufacturers %}
-                            <div class="filter-level1  ">
-                                <div class="symbol">+</div>
-                                <a class="filter-btn manufacturer">{{ manufacturer.name }}</a>
-                                <ul class="child-filter">
-                                {% for system in systems %}
-                                    {% if system.manufacturer.name == manufacturer.name %}
-                                    <li>
-                                        <a class="filter-btn system" role="button">{{ system.abbreviation }}</a>
-                                    </li>
-                                    {% endif %}
-                                {% endfor %}
-                                </ul>
-                            </div>
-                            {% endfor %}
-                             {% for manufacturer in other_manufacturers %}
                                 <div class="filter-level1  ">
                                     <div class="symbol">+</div>
                                     <a class="filter-btn manufacturer">{{ manufacturer.name }}</a>
                                     <ul class="child-filter">
-                                    {% for system in systems %}
-                                        {% if system.manufacturer.name == manufacturer.name %}
-                                        <li>
-                                            <a class="filter-btn system" role="button">{{ system.abbreviation }}</a>
-                                        </li>
-                                        {% endif %}
-                                    {% endfor %}
+                                        {% for system in systems %}
+                                            {% if system.manufacturer.name == manufacturer.name %}
+                                                <li>
+                                                    <a class="filter-btn system" role="button">{{ system.abbreviation }}</a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
                                     </ul>
                                 </div>
                             {% endfor %}
-
-
+                            {% for manufacturer in other_manufacturers %}
+                                <div class="filter-level1">
+                                    <div class="symbol">+</div>
+                                    <a class="filter-btn manufacturer">{{ manufacturer.name }}</a>
+                                    <ul class="child-filter">
+                                        {% for system in systems %}
+                                            {% if system.manufacturer.name == manufacturer.name %}
+                                                <li>
+                                                    <a class="filter-btn system" role="button">{{ system.abbreviation }}</a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endfor %}
                         </div>
-
                     </div>
                     <div class="col-6 col-lg-12">
                         <div class="filter-block">
                             <ul class="filter-level2">
-                            {% for type in types %}
-                                <li><a role="button" class="filter-btn type" style="margin-left: 1rem"> {{ type }}</a></li>
-                            {% endfor %}
+                                {% for type in types %}
+                                    <li><a role="button" class="filter-btn type" style="margin-left: 1rem"> {{ type }}</a></li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-
-    </div>
+        </div>
 
         <div class="col-sm-12 col-lg-10">
             <div id="products" class="row">
@@ -74,7 +71,6 @@
             {% endfor %}
             </div>
         </div>
-
     </div>
 
 {% endblock content %}

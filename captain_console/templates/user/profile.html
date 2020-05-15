@@ -3,37 +3,32 @@
     <form method="post" enctype="multipart/form-data">
      {% csrf_token %}
 
-
     <div class="row m-4">
         <div class="col-2"></div>
-        <div class="col-2"><img src="{{ image }}" alt="profile mynd" width="100px" /> </div>
+        <div class="col-2">
+            <img src="{{ image }}" alt="profile mynd" width="100px"/>
+        </div>
         <div class="col-10 col-md-3 pt-4 mt-4">
             {{ form.image }}
         </div>
-
-
-        </div>
-
     </div>
 
      {% for field in form %}
          {% if forloop.first %}
              <div> </div>
-
          {% else %}
-    <div class="form-group row p-0 m-0">
-        <label class="col-2 col-form-label user-profile-labels"><small> {{ field.label_tag }}</small></label>
-        <div class="col-12 col-md-8 col-lg-6 my-2">
-            {{ field }}
-        {% if field.errors %}
-            <div class="alert alert-danger" role="alert"> {{ field.errors.0 }}</div>
-        {% endif %}
-        </div>
-        <div class="col-1"> </div>
-    </div>
-        {% endif %}
-    {% endfor %}
-
+             <div class="form-group row p-0 m-0">
+                 <label class="col-2 col-form-label user-profile-labels"><small> {{ field.label_tag }}</small></label>
+                 <div class="col-12 col-md-8 col-lg-6 my-2">
+                     {{ field }}
+                     {% if field.errors %}
+                         <div class="alert alert-danger" role="alert"> {{ field.errors.0 }}</div>
+                     {% endif %}
+                 </div>
+                 <div class="col-1"> </div>
+             </div>
+         {% endif %}
+     {% endfor %}
 
      <div class="form-group row p-0 m-0">
         <div class="col-2"></div>

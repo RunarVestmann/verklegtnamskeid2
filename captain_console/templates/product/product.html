@@ -11,7 +11,7 @@
                 <div class="products-name">{{ product.name }}</div>
             </div>
         </div>
-         <div class="row my-2">
+        <div class="row my-2">
             <div class="col-7 p-0">
                 <div class="products-type">{{ product.system.manufacturer }} / {{ product.system.abbreviation }} / {{ product.type }}</div>
             </div>
@@ -25,9 +25,9 @@
             </div>
             <div class="col-6 p-1">
                 {% if product.quantity <= 0 %}
-                <div role="button" class="btn btn-secondary btn-block disabled" aria-disabled="true" style="cursor: default;">Væntanlegt</div>
+                    <div role="button" class="btn btn-secondary btn-block disabled" aria-disabled="true" style="cursor: default;">Væntanlegt</div>
                 {% else %}
-                <div role="button" onclick="addToCart({{ product.id }})" class="btn btn-success btn-block">Setja í körfu</div>
+                    <div role="button" onclick="addToCart({{ product.id }})" class="btn btn-success btn-block">Setja í körfu</div>
                 {% endif %}
             </div>
         </div>

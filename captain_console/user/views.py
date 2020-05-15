@@ -91,7 +91,7 @@ def profile(request):
 @login_required
 def viewed_products(request):
     return render(request, 'user/viewed_products.html', {
-        'products': __get_product_list(request.user.id)[:8]
+        'products': __get_product_list(request.user.id)[:10]
     })
 
 # Get a list of all the products the current user has viewed
