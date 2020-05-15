@@ -192,7 +192,7 @@ function displayChanges(){
 
     let url = '';
 
-    if(!searchText && !typeText && !manufacturerText)
+    if(!searchText && !typeText && !manufacturerText && !systemText)
     {
         url = '/products?all';
         if(window.location.pathname === '/products/')
