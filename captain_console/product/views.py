@@ -25,6 +25,8 @@ def index(request):
                                                             |product_objects.filter(system__manufacturer__name__icontains=search)
                                                             |product_objects.filter(system__name__icontains=search)
                                                             |product_objects.filter(system__abbreviation__icontains=search))})
+        else:
+            return JsonResponse({'data': __get_list_of_dicts(product_objects.all())})
 
     search_results, found_results = __find_search_results(request, product_objects)
 
