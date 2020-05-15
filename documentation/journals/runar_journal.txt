@@ -48,3 +48,6 @@ Betrumbætti filters, lagfærði kóðavillu þegar karfa er geymd í grunninum 
 
 14/05/2020
 Kom form validation í gang, lagfærði greiðslu checkout-ið þar sem karfan tæmdist ekki. Bug test-aði og research-aði queries
+
+15/05/2020
+Bug test-aði og lagaði það sem ég sá var ekki að virka rétt, Tæmdi grunninn af öllum test gögnumm comment-aði kóða til að gefa fólki innsýn í hvað hver kóðabútur gerir og kom upp nokkrum toastr skilaboðum.
