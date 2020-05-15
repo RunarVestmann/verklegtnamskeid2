@@ -58,12 +58,12 @@ vann í körfu virkninni, session notkun og layout
 
 13/05/2020
 vann í körfu virkninni uppsetning á kvittun og lokaskilaboðum,
-<<<<<<< HEAD
-vann í að senda order á gagnagrunninn, smá layout lagfæringar á öðrum stöðum
-=======
 vann í að senda order á gagnagrunninn, smá layout lagfæringar á öðrum stöðum
 
-14/15/2020
+
+14/05/2020
 refactors login view, lagaði carusela mynda fitusinn, lagaði ýmisleg í cartinu 
 try and exept í með session í cart,og svo sam-forritun á discort með hópnum í lok dagsins yfirferð á flestu
->>>>>>> f44aaac094b38c2ddea61ee38a99cb164f97d38f
+
+15/05/2020
+loka yfirferðir error test and fix, styling fyrir profile og allskonar smá lagfæringar
