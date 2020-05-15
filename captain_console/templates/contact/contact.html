@@ -6,18 +6,18 @@
                 <h4>Hvernig getum við aðstoðað?</h4>
                 <form method="post">
                     {%  csrf_token %}
+                    {# Show each field in the form #}
                     {% for field in form %}
                         <label class="pt-3">{{ field.label_tag }}</label>
                         {{ field }}
-                        <div class="col-9 text-danger pl-0">
+                            {# Print error messages if any #}
                             {% for error in field.errors %}
-                                {% if forloop.counter <= 1 %}
-                                    <div class="alert alert-danger" role="alert"> {{ error }}</div>
-                                {% endif %}
+                                <div class="text-danger pl-0">
+                                    <div class="alert alert-danger" role="alert"> {{ field.errors.0 }}</div>
+                                </div>
                             {% endfor %}
-                        </div>
                     {% endfor %}
-                    <button type="submit" class="btn btn-secondary mt-3 mb-3">Senda fyrirspurn</button>
+                    <button type="submit" class="btn btn-success mt-3 mb-3">Senda fyrirspurn</button>
                 </form>
             </div>
             <div class="col-6">
