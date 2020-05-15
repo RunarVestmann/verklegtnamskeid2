@@ -61,7 +61,6 @@ $(document).ready(function(){
             window.sessionStorage.removeItem('navClick');
         }
     }
-
     // Clear the stored clicked products when the user signs up or logs in
     else if(window.location.pathname === '/user/login' || window.location.pathname === '/user/signup')
         sessionStorage.removeItem('clickedProducts');
@@ -192,14 +191,9 @@ function displayChanges(){
 
     if(!searchText && !typeText && !manufacturerText)
     {
-        if(window.location.pathname !== '/products/'){
-            window.location.href = '/products';
-            return;
-        }
-        else{
-            url = '/products?all';
+        url = '/products?all';
+        if(window.location.pathname === '/products/')
             dehighlightFilters();
-        }
     }
     else{
         const urlParams = [];
@@ -257,7 +251,7 @@ function displayChanges(){
                     window.sessionStorage.setItem('search', searchText);
 
                 // Redirect to /products
-                window.location.href = '/products/';
+                window.location.href = '/products?noproduct';
             }
 
         },

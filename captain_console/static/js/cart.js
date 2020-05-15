@@ -29,7 +29,7 @@ const cart = {
                 method: 'GET',
                 success: function(response){
                     productFromServer = response.data;
-                    if(productFromServer.id){
+                    if(productFromServer.id && productFromServer.quantity > 0){
                         const quantityInCart = product.cartQuantity;
 
                         product = productFromServer;

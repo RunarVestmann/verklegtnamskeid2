@@ -5,12 +5,25 @@ from .models import Product, ProductImage, Type, System, Manufacturer
 def index(request):
     product_objects = Product.objects.prefetch_related('system', 'type').order_by('name')
 
+    if 'noproducts' in request.GET and request.path != '/products?noproducts':
+        main_manufacturer_tuple = ('Nintendo', 'Sega', 'Sony', 'Microsoft')
+        return render(request, 'product/products.html', {
+            'types': Type.objects.all(),
+            'systems': System.objects.prefetch_related('manufacturer').all(),
+            'main_manufacturers': Manufacturer.objects.filter(name__in=main_manufacturer_tuple),
+            'other_manufacturers': Manufacturer.objects.exclude(name__in=main_manufacturer_tuple),
+            'products': []
+        })
+
     if 'all' in request.GET:
         return JsonResponse({'data': __get_list_of_dicts(product_objects.all())})
     if 'search' in request.GET:
         search = request.GET['search']
         if search:
-            return JsonResponse({'data': __get_list_of_dicts(product_objects.filter(name__icontains=search))})
+            return JsonResponse({'data': __get_list_of_dicts(product_objects.filter(name__icontains=search)
+                                                            |product_objects.filter(system__manufacturer__name__icontains=search)
+                                                            |product_objects.filter(system__name__icontains=search)
+                                                            |product_objects.filter(system__abbreviation__icontains=search))})
 
     search_results = __find_search_results(request, product_objects)
 

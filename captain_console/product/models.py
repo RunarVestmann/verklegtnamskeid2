@@ -59,5 +59,18 @@ class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images/')
 
+    # Save method that makes sure that we don't delete the default img if we're replacing it
+    def save(self, *args, **kwargs):
+        try:
+            this = ProductImage.objects.get(id=self.id)
+            if self.image != this.image and this.image.url != '/media/images/default-image.svg':
+                this.image.delete(save=False)
+        except:
+            pass
+        super(ProductImage, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.user.username
+
     def __str__(self):
         return self.image.url
