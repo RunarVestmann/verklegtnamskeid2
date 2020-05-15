@@ -1,6 +1,9 @@
 from django import forms
-from creditcards.forms import CardExpiryField, CardNumberField, SecurityCodeField
+from creditcards.forms import CardNumberField, SecurityCodeField
+from django.core.exceptions import ValidationError
 from django.forms import Widget
+from datetime import datetime
+from django.utils.translation import gettext_lazy as _
 
 
 class ShippingForm(forms.Form):
@@ -66,6 +69,7 @@ class ShippingForm(forms.Form):
 #     cvc_nbr.label = 'CVC '
 #     cvc_nbr.error_messages = {'required': 'Vinsamlegast sláðu inn öryggisnúmerið '}
 
+
 class PaymentForm(forms.Form):
     name = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control',
@@ -73,5 +77,30 @@ class PaymentForm(forms.Form):
         required=True, max_length=100)
     card_nbr = CardNumberField(label='Kortanúmer')
     card_nbr.error_messages = {'invalid': 'Vinsamlegast sláðu inn gilt kortanúmer'}
-    exp_day = CardExpiryField(label='Gildistími')
+    months = [
+        ('01', '01'), ('02', '02'),('03', '03'),('04', '04'),('05', '05'),('06', '06'),
+        ('07', '07'),('08', '08'),('09', '09'),('10', '10'),('11', '11'),('12', '12')
+    ]
+    initial_month = datetime.now().month
+    if initial_month < 10:
+        initial_month = '0' + str(initial_month)
+
+    exp_month = forms.ChoiceField(choices=months, initial=initial_month)
+    exp_month.label = 'Gildismánuður'
+    year = datetime.now().year
+    years = []
+    for i in range(5):
+        years.append((str(year + i), str(year + i)[2:]))
+
+    exp_year = forms.ChoiceField(choices=years, initial=year)
+    exp_year.label = 'Gildisár'
+
     cvc_nbr = SecurityCodeField(label='CVV/CVC')
+
+    def clean(self):
+        exp_month = self.cleaned_data['exp_month']
+        exp_year = self.cleaned_data['exp_year']
+        if int(exp_year) == int(datetime.now().year):
+            if int(exp_month) < int(datetime.now().month):
+                raise ValidationError(_('Gildistími er liðinn'), code='invalid')
+        return self.cleaned_data

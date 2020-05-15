@@ -65,7 +65,7 @@ def payment_info(request):
             card_info = {}
             for field in form:
                 card_info[field.name] = form.cleaned_data[field.name]
-
+            card_info['exp_day'] = card_info['exp_month'] + '/' + card_info['exp_year']
             request.session['ci'] = card_info
             return redirect('overview')
 
@@ -73,7 +73,8 @@ def payment_info(request):
         ci = initial['ci']
         form.fields['name'].initial = ci['name']
         form.fields['card_nbr'].initial = ci['card_nbr']
-        form.fields['exp_day'].initial = ci['exp_day']
+        form.fields['exp_month'].initial = ci['exp_month']
+        form.fields['exp_year'].initial = ci['exp_year']
         form.fields['cvc_nbr'].initial = ci['cvc_nbr']
     return render(request, 'cart/payment.html', {'form': form})
 
