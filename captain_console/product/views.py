@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from .models import Product, ProductImage, Type, System, Manufacturer
 
+# The landing page for /products
 def index(request):
     product_objects = Product.objects.prefetch_related('system', 'type').order_by('name')
 
@@ -68,6 +69,7 @@ def __find_search_results(request, product_objects):
 
     return search_results, found_results
 
+# A more detailed view for a given product
 def get_product_by_id(request, id):
     product = get_object_or_404(Product, pk=id)
     images = ProductImage.objects.filter(product=product)
@@ -76,6 +78,7 @@ def get_product_by_id(request, id):
         'images': images
     })
 
+# A view that returns a given product as json
 def get_product_json_by_id(request, id):
     try:
         product = Product.objects.prefetch_related('system', 'type').get(pk=id)
