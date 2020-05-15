@@ -235,6 +235,10 @@ footer{
     margin-right: 0.5rem;
 }
 
+.user-profile-labels{
+    text-align: right;
+}
+
 
 
 
@@ -261,6 +265,10 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
         margin-left: 40%;
     }
 
+
+
+
+
 }
 
 
@@ -269,6 +277,15 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     .star {
         margin-left: 4.8rem;
     }
+
+    .user-profile-labels{
+        text-align: left;
+        margin-left:1rem ;
+    }
+
+
+
+
 
 }
 

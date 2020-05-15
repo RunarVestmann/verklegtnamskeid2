@@ -31,6 +31,7 @@ class LoginForm(AuthenticationForm):
         fields = ('username', 'password' )
 
 class ProfileForm(ModelForm):
+    image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form'}), required=False)
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Notandanafn')
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Fornafn', required=False)
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), label='Eftirnafn', required=False)
