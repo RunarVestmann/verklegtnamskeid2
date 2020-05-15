@@ -189,7 +189,8 @@
 .products-detail-img-frame{
     width: 100%;
     max-width: 30rem;
-    height: 30rem;
+    height: auto;
+
     background: #FFF;
     border: #63899c solid 0.2rem;
 }
@@ -223,9 +224,8 @@
 
 @media screen and (max-width: 1200px) {
     .products-detail-img-frame{
-
         max-width: 20rem;
-        height: 20rem;
+        height: auto;
 
     }
 
