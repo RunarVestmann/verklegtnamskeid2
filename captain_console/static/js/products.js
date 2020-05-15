@@ -249,6 +249,8 @@ function displayChanges(){
                 window.sessionStorage.setItem('productList', JSON.stringify(productList));
                 if(searchText)
                     window.sessionStorage.setItem('search', searchText);
+                else if(searchBox.val())
+                    window.sessionStorage.setItem('search', searchBox.val());
 
                 // Redirect to /products
                 window.location.href = '/products?noproduct';
