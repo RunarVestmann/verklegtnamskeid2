@@ -69,7 +69,7 @@ class PaymentForm(forms.Form):
     exp_year = forms.ChoiceField(choices=years, initial=year, widget=forms.Select(attrs={'class': 'form-control'}))
     exp_year.label = 'Gildisár'
 
-    cvc_nbr = SecurityCodeField(label='CVV/CVC')
+    cvc_nbr = SecurityCodeField(label='CVV/CVC', min_length=3, max_length=4)
     cvc_nbr.error_messages = {'invalid': 'Vinsamlegast sláðu inn gilt CVC númer'}
 
 

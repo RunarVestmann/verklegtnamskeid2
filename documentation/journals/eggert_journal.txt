@@ -34,11 +34,10 @@ Meiri vinna í header. Vann í forsíðu. Setti inn nýjustu vörur og placehold
 Bætti inn nýjustu vörum á forsíðu. Vann í contact appinu.
 
 07/05/2020
-Contact app að mestu endurunnið. Notandi getur sent fyrirspurn á email í gegnum form.
-Unnið í cart app.
+Contact app að mestu endurunnið. Notandi getur sent fyrirspurn á email í gegnum form. Unnið í cart app.
 
 08/05/2020
-Byrjað að vinna í recently viewed. Byrjað að vinna í lógíkinni, sækja info í gegnum javascript og svo
+Byrjað að vinna í recently viewed. Byrjað að vinna í lógíkinni fyrir það, sækja info í gegnum javascript og svo
 senda áfram.
 
 09/05/2020
@@ -60,3 +59,7 @@ Eyddum tíma í að leysa vandamál með github. Default product image og lagað
 14/05/2020
 Vann í error messages og lúkki á forms. Tókum langt session saman á discord og fórum saman í ýmsa hluti, eins og
 shipping, payment, errors ofl.
+
+15/15/2020
+Endurunnum gildistíma í payment_info. Mikið bug tests og smávægileg fix. Rennt yfir kóða, bætt inn commentum og kóði lagfærður
+þar sem átti við.
