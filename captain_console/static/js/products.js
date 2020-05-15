@@ -261,7 +261,6 @@ function displayChanges(){
 
         },
         error: function(xhr, status, error){
-            // TODO: Display error message (using toastr?)
             $('.loader-wrapper-2').hide();
             toastr.error('Ekki gekk að ná í vörurnar');
         }

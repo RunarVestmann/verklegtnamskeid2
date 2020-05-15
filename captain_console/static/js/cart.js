@@ -127,13 +127,11 @@ const cart = {
                         shoppingCartBtn.textContent = cart.count();
                     }
                     else{
-                        // TODO: Show a message that says that the product id was not found
-                        console.log('Product with id ' + id + ' was not found');
+                        toastr.error('Því miður þá fannst varan ekki');
                     }
                 },
                 error: function(xhr, status, error){
-                    // TODO: Show error message using toastr?
-                    console.error(error);
+                    toastr.error('Ekki gekk að setja vöruna í körfuna');
                 }
             });
         }
