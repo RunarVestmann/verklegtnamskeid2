@@ -76,7 +76,8 @@ def profile(request):
             form_profile.save()
             return redirect('profile')
 
-    form = ProfileForm(instance=profile)
+    form = ProfileForm()
+    form.fields['image'].label = 'Mynd'
     form.fields['username'].initial = request.user.username
     form.fields['first_name'].initial = request.user.first_name
     form.fields['last_name'].initial = request.user.last_name
