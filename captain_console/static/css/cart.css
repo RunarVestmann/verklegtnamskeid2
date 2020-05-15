@@ -193,6 +193,7 @@ label {
 
 }
 .cart-overview-heads{
+  padding-top: 0.4rem;
   height: 2.2rem;
   background: #d3d3d3;
 }
