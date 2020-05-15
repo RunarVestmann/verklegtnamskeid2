@@ -294,7 +294,7 @@ function getProductHTML(product){
                                         <a href="/products/${product.id}" onclick="onDetailClick(${product.id})" class="btn btn-warning btn-block">Nánar</a>
                                     </div>
                                     <div class="col-6 p-1">
-                                        ${product.quantity > 0 ? '<div role="button" onclick="addToCart(${ product.id })" class="btn btn-success btn-block">Setja í körfu</div>' : '<div class="btn btn-secondary btn-block disabled" aria-disabled="true" style="font-size: 1.2rem;cursor: default;">Væntanlegt</div>'}
+                                        ${product.quantity > 0 ? `<div role="button" onclick="addToCart(${product.id})" class="btn btn-success btn-block">Setja í körfu</div>` : '<div class="btn btn-secondary btn-block disabled" aria-disabled="true" style="font-size: 1.2rem;cursor: default;">Væntanlegt</div>'}
                                     </div>
                                 </div>
                             </div>
