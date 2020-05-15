@@ -46,18 +46,19 @@ def __get_list_of_dicts(query_set):
 def __find_search_results(request, product_objects):
     search_results = None
     found_results = False
-    if 'manufacturer' in request.GET:
-        found_results = True
-        manufacturers = request.GET['manufacturer'].strip().split('_')
-        search_results = product_objects.filter(system__manufacturer__name__in=manufacturers)
 
     if 'system' in request.GET:
         found_results = True
         systems = request.GET['system'].strip().split('_')
+        search_results = product_objects.filter(system__abbreviation__in=systems)
+
+    if 'manufacturer' in request.GET:
+        found_results = True
+        manufacturers = request.GET['manufacturer'].strip().split('_')
         if not search_results:
-            search_results = product_objects.filter(system__abbreviation__in=systems)
+            search_results = product_objects.filter(system__manufacturer__name__in=manufacturers)
         else:
-            search_results = search_results.filter(system__abbreviation__in=systems)
+            search_results |= product_objects.filter(system__manufacturer__name__in=manufacturers)
 
     if 'type' in request.GET:
         found_results = True

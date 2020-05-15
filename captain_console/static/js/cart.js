@@ -190,6 +190,7 @@ $(document).ready(function(){
     cart.init();
     shoppingCartBtn.textContent = cart.count();
 
+
     if(window.location.pathname !== '/cart/overview' && window.location.pathname !== '/cart/receipt'){
         sessionStorage.removeItem('cartProducts');
     }

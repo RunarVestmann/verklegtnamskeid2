@@ -186,18 +186,23 @@ function handleSearch(event){
 function displayChanges(){
     $('.loader-wrapper-2').show();
 
+    // All the different filters, excluding the search
     let typeText = typeList.join('_');
     let manufacturerText = manufacturerList.join('_');
     let systemText = systemList.join('_');
 
+    // The url we're gonna GET a json response from
     let url = '';
 
+    // If we are not filtering we grab all the products
     if(!searchText && !typeText && !manufacturerText && !systemText)
     {
         url = '/products?all';
         if(window.location.pathname === '/products/')
             dehighlightFilters();
     }
+
+    // Otherwise we do some filtering by setting url params
     else{
         const urlParams = [];
 
@@ -223,19 +228,18 @@ function displayChanges(){
             if(window.location.pathname === '/products/')
                 $('.loader-wrapper-2').hide();
 
-            productList = [];
-            const newHTML = response.data.map(product => {
-                const productHTML = getProductHTML(product);
 
-                //Store all the products in a list for further use
+            productList = [];
+
+            //Cache the products we got from the response so we can change the order we display the products
+            response.data.forEach(product => {
                 productList.push({
                    product: product,
-                   html: productHTML
+                   html: getProductHTML(product)
                 });
-
-                return productHTML;
             });
 
+            // Set the correct order for the products
             if(window.location.pathname === '/products/'){
                 const activeOrderBtn = $('.product-order-bar-active')
 
@@ -248,6 +252,7 @@ function displayChanges(){
                 else
                     orderByName(true);
             }
+            // If we are not at /products we store the cached list in sessionStorage and redirect
             else{
                 window.sessionStorage.setItem('productList', JSON.stringify(productList));
                 if(searchText)
@@ -300,6 +305,7 @@ function getProductHTML(product){
                         </div>`;
 }
 
+// Send which product was clicked to the server to store in search history
 function onDetailClick(productId){
     const clickedProducts = sessionStorage.getItem('clickedProducts');
 
@@ -337,6 +343,7 @@ function flipArrow(){
 }
 
 function orderByName(jsOrder=false){
+    // If a click resulted in this function call and the items aren't done loading
     if(!jsOrder && !doneFetchingMissingProducts){
         toastr.info('Er enn að sækja vörurnar, prófaðu að smella aftur innan skamms');
         return;
@@ -359,6 +366,7 @@ function orderByName(jsOrder=false){
 }
 
 function orderByPrice(jsOrder=false){
+    // If a click resulted in this function call and the items aren't done loading
     if(!jsOrder && !doneFetchingMissingProducts){
         toastr.info('Er enn að sækja vörurnar, prófaðu að smella aftur innan skamms');
         return;
