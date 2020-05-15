@@ -41,3 +41,11 @@ Now the server should be responding to http://127.0.0.1:8000/
 
 Due note when using PyCharm make sure you have the Project Interpreter set under:
 File -> Settings -> Project:captain_console -> Python Interpreter
+
+**Screenshots**
+![Homepage](screenshots/homepage.PNG)
+![All Products](screenshots/all-products.PNG)
+![Nintendo Products](screenshots/nintendo-products.PNG)
+![Product Details](screenshots/product-details.PNG)
+![Sign Up](screenshots/sign-up.PNG)
+![Search History](screenshots/search-history.PNG)
